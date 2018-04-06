@@ -3,3 +3,10 @@ html, body, .container{
 	background: #000000;
 	color: #ffffff;
 }
+#userLogin input, #userLogin a{
+	width: 100%;
+}
+
+hr{	
+	background: yellow;
+}
