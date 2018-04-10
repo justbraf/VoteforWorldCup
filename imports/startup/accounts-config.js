@@ -8,11 +8,13 @@ Accounts.ui.config({
 // 	service: "facebook"
 // });
 
-ServiceConfiguration.configurations.insert({
-    service: "facebook",
-    appId: '1854362404634690',
-    // secret: 'a1cba5e2c395babe75de58bf8a146e64'
-    secret: '005952e8e231a93e6b04eb4c668d7a8f'
+ServiceConfiguration.configurations.upsert({
+		service: "facebook"
+	},
+	{$set:{
+		appId: '360794574436579',		
+		secret: '005952e8e231a93e6b04eb4c668d7a8f'
+	}
 });
 
 // if (ServiceConfiguration.configurations.find({service: 'facebook'}).count()===0) {
