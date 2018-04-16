@@ -1,3 +1,15 @@
+Template.userLogin.helpers({
+	noUser: function(){
+		if (!Meteor.userId())
+			return true;
+		else
+			return false;
+	}
+});
+
+Template.userLogin.events({
+	
+});
 // Template.login.events({
 //     'click .login-facebook': function(e) {
 //         e.preventDefault();

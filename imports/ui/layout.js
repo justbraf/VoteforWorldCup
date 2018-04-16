@@ -6,3 +6,4 @@ import './intro.html';
 import './login.html';
 
 import '../api/login.js';
+import '../api/admin.js';

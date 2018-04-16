@@ -11,7 +11,8 @@ hr{
 	background: yellow;
 }
 
-#login-sign-in-link{
+/*#login-sign-in-link*/
+.login-link-text{
 	text-decoration: none !important;
   display: inline-block;
   font-weight: 400;
