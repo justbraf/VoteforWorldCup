@@ -1,2 +1,2 @@
 import '../imports/startup/accounts-config.js';
-import '../imports/ui/landing.js';
+import '../imports/ui/layout.js';

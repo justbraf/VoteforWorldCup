@@ -10,3 +10,9 @@
 //     }
 // });
 console.log("login js found");
+
+// Template.userLogin.onRendered(function() {
+// 	// $('login-sign-in-link').addClass('btn');
+// 	$('#login-sign-in-link').addClass('btn-primary');
+// 	console.log("classes added");
+// });
