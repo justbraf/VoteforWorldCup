@@ -21,7 +21,7 @@ Template.userLogin.events({
 //         });
 //     }
 // });
-console.log("login js found");
+// console.log("login js found");
 
 // Template.userLogin.onRendered(function() {
 // 	// $('login-sign-in-link').addClass('btn');
