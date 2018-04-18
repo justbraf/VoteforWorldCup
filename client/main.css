@@ -33,3 +33,7 @@ hr{
   background-color: #007bff;
   border-color: #007bff;
 }
+
+#teamFlagImage{
+	height: 100px;
+}

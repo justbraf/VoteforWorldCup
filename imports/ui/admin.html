@@ -18,9 +18,50 @@
 			<h3>Team Management</h3>	
 		</div>		
 	</div>
-	<!-- <div class="row mt-3">
-		<div class="col-lg-4">
-			<a href="" class="btn btn-info js-teams">Team Management</a>
-		</div>
-	</div> -->
+	<div class="row justify-content-center mt-3">
+		<div class="col-lg-4">			
+			<form>
+				<div class="input-group mb-3">
+					<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
+				</div>
+				<div class="input-group mb-3">
+						<!-- <div class="input-group-append">
+							<span class="input-group-text">Team Flag</span>
+						</div> -->
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="teamFlagFile">
+							<label class="custom-file-label" for="teamFlagFile">Choose Team flag image file</label>
+						</div>				
+					</div>
+				<div class="form-group">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Team Name</span>
+						</div>
+						<input type="text" id="teamNameField" class="form-control" aria-label="teamName" aria-describedby="basic-addon1">
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">							
+					    <label class="input-group-text" for="inputGroupSelect01">Group</label>
+					  </div>
+					  <select class="custom-select" id="inputGroupSelect01">
+					    <option selected>Choose...</option>
+					    <option value="A">Group A</option>
+					    <option value="B">Group B</option>
+					    <option value="C">Group C</option>
+					    <option value="D">Group D</option>
+					    <option value="E">Group E</option>
+					    <option value="F">Group F</option>
+					    <option value="G">Group G</option>
+					    <option value="H">Group H</option>
+					  </select>
+					</div>
+
+					<button class="btn btn-outline-secondary js-saveTeam" type="button">Save</button>
+				</div>
+			</form>
+
+		</div> <!-- /col-->
+	</div>
 </template>
