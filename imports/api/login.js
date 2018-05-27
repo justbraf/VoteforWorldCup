@@ -5,25 +5,13 @@ Template.userLogin.helpers({
 		else
 			return false;
 	},
-	usersname: function(){
-		if (!Meteor.userId())
-			return "not logged in";
-		else {
-			// if (user.hasOwnProperty('services') && user.services.hasOwnProperty('facebook')  ) {
-	 //      var result = Meteor.http.get('https://graph.facebook.com/v2.4/' + user.services.facebook.id + '?access_token=' + user.services.facebook.accessToken + '&fields=first_name, last_name, birthday, email, gender, location, link, friends');
-
-	 //      console.log(result.data.first_name);
-	 //      console.log(result.data.last_name);
-	 //      console.log(result.data.birthday);
-	 //      console.log(result.data.email);
-	 //      console.log(result.data.gender);
-	 //      console.log(result.data.location);
-	 //      console.log(result.data.link);
-	 //      console.log(result.data.friends);
-			// }
-			return Meteor.user().services.facebook.email;
-		}
-	}
+	// usersname: function(){
+	// 	if (!Meteor.userId())
+	// 		return "not logged in";
+	// 	else {		
+	// 		return Meteor.user().services.facebook.email;
+	// 	}
+	// }
 });
 
 Template.userLogin.events({
