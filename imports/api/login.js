@@ -9,7 +9,7 @@ Template.userLogin.helpers({
 		if (!Meteor.userId())
 			return "not logged in";
 		else
-			return Meteor.user().emails[0].address;
+			return Meteor.user().services.facebook.email;
 	}
 });
 
