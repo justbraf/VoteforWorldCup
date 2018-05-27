@@ -36,4 +36,17 @@ hr{
 
 #teamFlagImage{
 	height: 100px;
+  border: 2px solid grey;
+}
+
+.WCFileInput {
+  display: none !important;
+}
+
+.modal-title, #delModal{
+  color: black;
+}
+
+#delModal{
+  /*width: 245px;*/
 }

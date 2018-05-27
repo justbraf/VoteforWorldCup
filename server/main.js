@@ -1,17 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
-  // code to run on server at startup
-  
-  import '../imports/startup/accounts-external.js';
+	// code to run on server at startup
+	
+	import '../imports/startup/accounts-external.js';
 
-  Meteor.publish('teams', function () {
-  return teamsdb.find({
+	Meteor.publish('teams', function () {
+		return teamsdb.find({
 
-  // }, {
-  //   fields: { secretInfo: 0 }
-  });
-});
-  // Meteor.subscribe('teams');
-
+		// }, {
+		//   fields: { secretInfo: 0 }
+		});
+	});
 });
