@@ -15,7 +15,8 @@ Template.userLogin.events({
 						console.log('Handle errors here: ', err);
 				}
 				else {
-					Route.go('/Welcome');
+					console.log('redirect to Welcome');
+					Router.go('welcome');
 				}
 		});
 	}
