@@ -4,12 +4,19 @@ Template.userLogin.helpers({
 			return true;
 		else
 			return false;
+	},
+	usersname: function(){
+		if (!Meteor.userId())
+			return "not logged in";
+		else
+			return Meteor.user().emails[0].address;
 	}
 });
 
 Template.userLogin.events({
-	'click .login-facebook': function(e) {
+	'click #login-buttons-facebook': function(e) {
 		e.preventDefault();
+		console.log('attempting login');
 		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
 				if (err) {
 						console.log('Handle errors here: ', err);
