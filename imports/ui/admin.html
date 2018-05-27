@@ -253,3 +253,128 @@
 	{{> teamList}}
 	{{> groupList}}
 </template>
+
+<template name="matchList">
+	<div class="modal" id="delMatchModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="delMatchModalLabel"></h5>
+			</div> 
+			<div class="modal-body">
+				<p>Are you sure you want to delete this?</p>
+				<input type="hidden" name="del_idTeam">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+				<button type="button" class="btn btn-primary js-delTeamConfirm" data-dismiss="modal">Yes</button>
+			</div>
+		</div>
+	</div>
+</div> <!-- /modal -->
+	<div class="row justify-content-center">
+		{{#each WCMatches}}
+		<div class="col-md-3 text-center mt-5" id={{_id}}>
+			<!-- <div class="row"> -->
+				<!-- <div class="col-md-8"> -->
+					<!-- <img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage"> -->
+					<h4>{{matchNum}}</h4>
+					<h4>{{teamOne}}</h4>
+					<h4>{{teamTwo}}</h4>
+					<h4>{{matchDateTime}}</h4>
+					<!-- <h5>{{teamGroup}}</h5> -->
+				<!-- </div> -->
+				<!-- <div class="col-md-3"> -->
+					<!-- <a class="btn btn-danger js-delTeam"><span aria-hidden="true">&times;</span></a> -->
+			<!-- </div> -->
+			<!-- </div>	 -->
+		</div>
+		{{/each}}
+	</div>
+</template>
+
+<template name="matchConsole">
+	<div class="row justify-content-center">
+		<div class="col-md-3 text-center">
+			<h3>Match Management</h3>	
+		</div>		
+	</div>
+	<div class="row justify-content-center mb-2">
+		<div class="col-md-6">
+			<!-- Button trigger modal -->
+			<a href="" class="btn btn-success js-addMatch" data-toggle="modal" data-target="#addMatchModal">Add Match</a>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="addMatchModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addMatchModalLabel">Add Match</h5>
+					<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button> -->
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="container-fluid">
+							<div class="row justify-content-center mt-3">
+								<div class="form-group">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">Match Number</span>
+										</div>
+										<input type="text" id="matchNumField" class="form-control" aria-label="teamName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+							</div>
+							<div class="row justify-content-center mt-3">
+						<div class="col-lg-5">
+							<div class="input-group mb-3">
+								<img src="../../{{teamFlag1}}" alt="Team Flag" id="teamFlagImage" class="js-teamFlagImage">
+								<input type="text" id="teamName1">
+							</div>
+						</div>
+						<div class="col-lg-2 blackText">
+							<h1>VS</h1>
+						</div>
+						<div class="col-lg-5">
+							<div class="input-group mb-3">
+								<img src="../../{{teamFlag2}}" alt="Team Flag" id="teamFlagImage2" class="js-teamFlagImage2">
+								<input type="text" id="teamName2">
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="input-group mb-3">
+									<!-- <div class="input-group-append">
+										<span class="input-group-text">Team Flag</span>
+									</div> -->
+									<div class="custom-file WCFileInput">
+										<input type="file" class="custom-file-input" id="teamFlagFile">
+										<input type="file" class="custom-file-input" id="teamFlagFile2">
+									</div>
+								</div>
+							
+						</div></div>
+					<div class="row justify-content-center mt-3">
+								<div class="form-group">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon1">Match Date</span>
+										</div>
+										<input type="text" id="matchDateField" class="form-control" aria-label="teamName" aria-describedby="basic-addon1">
+									</div>
+								</div>
+							</div>
+						</div> <!-- /container -->
+					</form>	
+				</div> <!-- /modal-body -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary js-closeMatch" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary js-saveMatch" data-dismiss="modal">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>	<!-- /modal -->
+	{{> matchList}}
+</template>

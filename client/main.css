@@ -34,7 +34,7 @@ hr{
   border-color: #007bff;
 }
 
-#teamFlagImage{
+#teamFlagImage, #teamFlagImage2{
 	height: 100px;
   border: 2px solid grey;
 }
@@ -43,10 +43,14 @@ hr{
   display: none !important;
 }
 
-.modal-title, #delModal{
+.modal-title, #delModal, .blackText{
   color: black;
 }
 
 #delModal{
   /*width: 245px;*/
+}
+
+#teamName1, #teamName2{
+  border: none;
 }

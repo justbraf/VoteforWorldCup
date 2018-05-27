@@ -7,9 +7,11 @@ Meteor.startup(() => {
 
 	Meteor.publish('teams', function () {
 		return teamsdb.find({
+		});
+	});
 
-		// }, {
-		//   fields: { secretInfo: 0 }
+	Meteor.publish('matches', function () {
+		return matchesdb.find({
 		});
 	});
 });
