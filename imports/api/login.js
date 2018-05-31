@@ -22,6 +22,9 @@ Template.userLogin.events({
 				if (err) {
 						console.log('Handle errors here: ', err);
 				}
+				else if (Meteor.userId() == userID){
+					Router.go('adminConsole');
+				}
 				else {
 					// console.log('redirect to Welcome');
 					Router.go('welcome');
