@@ -17,13 +17,13 @@ Template.userLogin.helpers({
 Template.userLogin.events({
 	'click #login-buttons-facebook': function(e) {
 		e.preventDefault();
-		console.log('attempting login');
+		// console.log('attempting login');
 		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
 				if (err) {
 						console.log('Handle errors here: ', err);
 				}
 				else {
-					console.log('redirect to Welcome');
+					// console.log('redirect to Welcome');
 					Router.go('welcome');
 				}
 		});
