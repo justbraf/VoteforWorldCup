@@ -34,7 +34,7 @@ hr{
   border-color: #007bff;
 }
 
-#teamFlagImage, #teamFlagImage2{
+#teamFlagImage, #teamFlagImage2, .teamFlags{
 	height: 100px;
   border: 2px solid grey;
 }
@@ -53,4 +53,8 @@ hr{
 
 #teamName1, #teamName2{
   border: none;
+}
+
+.matches{
+  border: 2px solid white;
 }
