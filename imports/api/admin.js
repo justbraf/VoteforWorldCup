@@ -104,7 +104,7 @@ Template.groupList.helpers({
 
 Template.matchList.helpers({
 	WCMatches: function(){
-		return matchesdb.find();	
+		return matchesdb.find({}, {orderby:{matchNum:1}});	
 	},
 	teamOne: function(){		
 		return teamsdb.findOne({_id: this.teamID1}).teamFlag;
