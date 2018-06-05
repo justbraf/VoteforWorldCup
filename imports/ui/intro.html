@@ -20,14 +20,39 @@
 
 <template name="introduction">
 	<div class="row justify-content-center">
+		{{#if currentUser}}
+		<div class="col-sm-12">
+			<ul class="nav nav-pills nav-fill" id="menuTabs" role="tablist">
+			  <li class="nav-item">
+			    <a class="nav-link active" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming matches</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="matchLists-tab" data-toggle="tab" href="#matchLists" role="tab" aria-controls="matchLists" aria-selected="false">Match List</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="groups-tab" data-toggle="tab" href="#groups" role="tab" aria-controls="groups" aria-selected="false">Groups</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="teams-tab" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="false">Teams</a>
+			  </li>
+			</ul>
+			<div class="tab-content" id="menuTabContent">
+			  <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">Upcoming Matches</div>
+			  <div class="tab-pane fade" id="matchLists" role="tabpanel" aria-labelledby="matchLists-tab">{{> matchList}}</div>
+			  <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">{{> groupList}}</div>
+			  <div class="tab-pane fade" id="teams" role="tabpanel" aria-labelledby="teams-tab">{{> teamList}}</div>
+			</div>
+		</div>
+		{{else}}
 		<div class="col-md-8 col-12">
 			<h4>Show your FIFA World Cup prowess by predicting which teams will win their matches.</h4>
 			<h5>Select your picks from the teams playing for supremacy in the various upcoming matches.</h5>
 			<h5>Each time your pick wins you get points!</h5>
-			<h5>Vote now! Earn the most points and you get the bragging rights and become a..</h5>			
+			<h5>Vote now! Earn the most points and you get the bragging rights and become a...</h5>			
 		</div>
+		{{/if}}
 	</div>
-	<div class="row justify-content-center">
+	<div class="row justify-content-center mt-5">
 		<div class="col-md-4">
 			<h3>FIFA World Cup Legend!!!</h3>
 		</div>

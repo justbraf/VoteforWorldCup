@@ -34,7 +34,7 @@
 </div> <!-- /modal -->
 	<div class="row justify-content-center">
 		{{#each WCTeams}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>
+		<div class="col-8 col-sm-6 col-md-3 text-center mt-5" id={{_id}}>
 			<!-- <div class="row"> -->
 				<!-- <div class="col-md-8"> -->
 					<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
@@ -50,6 +50,13 @@
 	</div>
 </template>
 
+<template name="groupListSection">
+	<div class="col-8 col-sm-6 col-md-3 text-center mt-5" id={{_id}}>
+		<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
+		<h4>{{teamName}}</h4>
+	</div>	
+</template>
+
 <template name="groupList">
 	<div class="row mt-5">
 		<div class="col-md-11">
@@ -59,10 +66,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupA}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -74,10 +78,7 @@
 	</div>
 	<div class="row justify-content-center">	
 		{{#each GroupB}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -89,10 +90,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupC}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -104,10 +102,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupD}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -119,10 +114,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupE}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -134,10 +126,7 @@
 	</div>
 	<div class="row justify-content-center">
 		{{#each GroupF}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -149,10 +138,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupG}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 
@@ -164,10 +150,7 @@
 	</div>
 	<div class="row justify-content-center">		
 		{{#each GroupH}}
-		<div class="col-md-3 text-center mt-5" id={{_id}}>			
-			<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-			<h4>{{teamName}}</h4>			
-		</div>
+			{{> groupListSection}}
 		{{/each}}
 	</div>
 </template>
@@ -274,7 +257,7 @@
 </div> <!-- /modal -->
 	<div class="row justify-content-around">
 		{{#each WCMatches}}
-		<div class="col-md-5 text-center mt-5 matches" id={{_id}}>
+		<div class="col-8 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches" id={{_id}}>
 			<h4>Match #{{matchNum}}</h4>
 			<div class="row justify-content-center mb-3">
 				<div class="col-md-4">

@@ -21,10 +21,11 @@ Template.userLogin.events({
 		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
 				if (err) {
 						console.log('Handle errors here: ', err);
+						return;
 				}
 				else {
 					// console.log('redirect to Welcome');
-					Router.go('welcome');
+					return Router.go('welcome');
 				}
 		});
 	}
