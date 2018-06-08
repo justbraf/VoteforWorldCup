@@ -1,0 +1,104 @@
+<template name="groupListSection">
+	<div class="col-8 col-sm-6 col-md-3 text-center mt-5" id={{_id}}>
+		<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
+		<h4>{{teamName}}</h4>
+	</div>	
+</template>
+
+<template name="groupList">
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group A</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupA}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+			<div class="col-md-11">
+			<h2>Group B</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">	
+		{{#each GroupB}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group C</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupC}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group D</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupD}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group E</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupE}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group F</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		{{#each GroupF}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group G</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupG}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-md-11">
+			<h2>Group H</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="row justify-content-center">		
+		{{#each GroupH}}
+			{{> groupListSection}}
+		{{/each}}
+	</div>
+</template>

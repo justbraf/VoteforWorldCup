@@ -57,24 +57,6 @@ Template.teamConsole.events({
 	}
 });
 
-Template.teamList.helpers({
-	WCTeams: function() {
-		return teamsdb.find({}, {sort: {teamName: 1}});
-	}
-});
-
-Template.teamList.events({
-	'click .js-delTeam': function(){		
-		$('#delModal input[name="del_idTeam"]').val(this._id);
-		$('#delModal #delModalLabel').text(this.teamName);
-		$('#delModal').modal('show');		
-	},
-	'click .js-delTeamConfirm': function(){
-		// console.log($('#delModal input[name="del_idTeam"]').val());
-		teamsdb.remove({_id:$('#delModal input[name="del_idTeam"]').val()});
-	}
-});
-
 Template.groupList.helpers({
 	GroupA: function(){
 		return teamsdb.find({teamGroup:{$eq: "Group A"}}, {sort: {teamName: 1}});

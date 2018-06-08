@@ -14,147 +14,6 @@
 	</div>
 </template>
 
-<template name="teamList">
-	<div class="modal" id="delModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="delModalLabel"></h5>
-			</div> 
-			<div class="modal-body">
-				<p>Are you sure you want to delete this?</p>
-				<input type="hidden" name="del_idTeam">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-				<button type="button" class="btn btn-primary js-delTeamConfirm" data-dismiss="modal">Yes</button>
-			</div>
-		</div>
-	</div>
-</div> <!-- /modal -->
-	<div class="row justify-content-center">
-		{{#each WCTeams}}
-		<div class="col-8 col-sm-6 col-md-3 text-center mt-5" id={{_id}}>
-			<!-- <div class="row"> -->
-				<!-- <div class="col-md-8"> -->
-					<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-					<h4>{{teamName}}</h4>
-					<!-- <h5>{{teamGroup}}</h5> -->
-				<!-- </div> -->
-				<!-- <div class="col-md-3"> -->
-					<!-- <a class="btn btn-danger js-delTeam"><span aria-hidden="true">&times;</span></a> -->
-			<!-- </div> -->
-			<!-- </div>	 -->
-		</div>
-		{{/each}}
-	</div>
-</template>
-
-<template name="groupListSection">
-	<div class="col-8 col-sm-6 col-md-3 text-center mt-5" id={{_id}}>
-		<img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
-		<h4>{{teamName}}</h4>
-	</div>	
-</template>
-
-<template name="groupList">
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group A</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupA}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-			<div class="col-md-11">
-			<h2>Group B</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">	
-		{{#each GroupB}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group C</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupC}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group D</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupD}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group E</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupE}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group F</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupF}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group G</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupG}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-
-	<div class="row mt-5">
-		<div class="col-md-11">
-			<h2>Group H</h2>
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center">		
-		{{#each GroupH}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
-</template>
-
 <template name="teamConsole">
 	<div class="row justify-content-center">
 		<div class="col-md-3 text-center">
@@ -178,9 +37,6 @@
 					</button> -->
 				</div>
 				<div class="modal-body">
-					
-						
-							
 							<form><div class="container-fluid"><div class="row justify-content-center mt-3">
 								<div class="col-lg-5">
 									<div class="input-group mb-3">
@@ -235,47 +91,6 @@
 	</div>	<!-- /modal -->
 	{{> teamList}}
 	{{> groupList}}
-</template>
-
-<template name="matchList">
-	<div class="modal" id="delMatchModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="delMatchModalLabel"></h5>
-			</div> 
-			<div class="modal-body">
-				<p>Are you sure you want to delete this?</p>
-				<input type="hidden" name="del_idTeam">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-				<button type="button" class="btn btn-primary js-delTeamConfirm" data-dismiss="modal">Yes</button>
-			</div>
-		</div>
-	</div>
-</div> <!-- /modal -->
-	<div class="row justify-content-around">
-		{{#each WCMatches}}
-		<div class="col-8 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches" id={{_id}}>
-			<h4>Match #{{matchNum}}</h4>
-			<div class="row justify-content-center mb-3">
-				<div class="col-md-4">
-					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags">
-					<h5>{{teamOneName}}</h5>
-				</div>
-				<div class="col-md-3">
-					<h2 class="display-3">VS</h2>
-				</div>
-				<div class="col-md-4">
-					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags">
-					<h5>{{teamTwoName}}</h5>
-				</div>
-			</div>
-			<h4>{{matchDateTime}}</h4>
-		</div>
-		{{/each}}
-	</div>
 </template>
 
 <template name="matchConsole">
