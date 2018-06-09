@@ -27,5 +27,9 @@ Template.teamList.events({
 Template.teamStats.helpers({
 	Stats: function(){		
 		return matchesdb.find({ $or: [{teamID1: Session.get("WCTeamID")}, {teamID2: Session.get("WCTeamID")}] });
+	},
+	tDay: function(){
+		var theDate = new Date;
+		return theDate; //.format("MM/DD/YYYY");
 	}
 });

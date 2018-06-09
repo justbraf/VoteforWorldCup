@@ -86,7 +86,8 @@ Template.groupList.helpers({
 
 Template.matchList.helpers({
 	WCMatches: function(){
-		return matchesdb.find({}, {orderby:{matchNum:1}});	
+		return matchesdb.find({}, {sort: {matchNum: 1}});
+		// return matchesdb.find({}, {orderby:{matchNum:1}});
 	},
 	teamOne: function(){		
 		return teamsdb.findOne({_id: this.teamID1}).teamFlag;
@@ -150,9 +151,15 @@ Template.matchConsole.events({
 		$("#teamName1").val("");
 		$("#teamName2").val("");
 		$("#matchDateField").val("");
+		// ------------------------ update multiple fields - code failed
+		// matchesdb.find({matchNum: {$type: 2}}).forEach( function(x){   
+		//   x.matchNum = new Number(x.matchNum);
+		//   matchesdb.save(x);
+		//    // console.log(x._id,x.matchNum);
+		// });		
 	},
 	'click .js-saveMatch': function(){
-		var mNum = $("#matchNumField").val();
+		var mNum = parseInt($("#matchNumField").val());
 		var tID1 = teamsdb.findOne({teamName:$("#teamName1").val()})._id;
 		var tID2 = teamsdb.findOne({teamName:$("#teamName2").val()})._id;
 		var mDate = $("#matchDateField").val(); //new Date ($("#matchDateField").val());
