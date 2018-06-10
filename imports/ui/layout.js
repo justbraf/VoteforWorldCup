@@ -13,3 +13,5 @@ import './matches.html';
 import '../api/login.js';
 import '../api/admin.js';
 import '../api/teams.js';
+import '../api/vote.js';
+import '../api/matches.js';

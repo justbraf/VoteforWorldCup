@@ -4,7 +4,7 @@
 
 Template.teamList.helpers({
 	WCTeams: function() {
-		return teamsdb.find({}, {sort: {teamName: 1}});
+		return teamsdb.find({teamFlag: {$ne: "flag_white.png"}}, {sort: {teamName: 1}});
 	}
 });
 
@@ -27,6 +27,12 @@ Template.teamList.events({
 Template.teamStats.helpers({
 	Stats: function(){		
 		return matchesdb.find({ $or: [{teamID1: Session.get("WCTeamID")}, {teamID2: Session.get("WCTeamID")}] });
+		// var xDates = [];
+		// matchesdb.find({ $or: [{teamID1: Session.get("WCTeamID")}, {teamID2: Session.get("WCTeamID")}] }).forEach( function(allTheDates){		   
+		// 	allTheDates.matchDateTime = Date(allTheDates.matchDateTime);
+		// 	xDates.push(allTheDates);
+		// });
+		// return xDates;
 	},
 	tDay: function(){
 		var theDate = new Date;

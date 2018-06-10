@@ -84,25 +84,6 @@ Template.groupList.helpers({
 	}
 });
 
-Template.matchList.helpers({
-	WCMatches: function(){
-		return matchesdb.find({}, {sort: {matchNum: 1}});
-		// return matchesdb.find({}, {orderby:{matchNum:1}});
-	},
-	teamOne: function(){		
-		return teamsdb.findOne({_id: this.teamID1}).teamFlag;
-	},
-	teamTwo: function(){
-		return teamsdb.findOne({_id: this.teamID2}).teamFlag;
-	},
-	teamOneName: function(){		
-		return teamsdb.findOne({_id: this.teamID1}).teamName;
-	},
-	teamTwoName: function(){
-		return teamsdb.findOne({_id: this.teamID2}).teamName;
-	}
-});
-
 Template.matchConsole.helpers({
 	teamFlag1: function(){
 		return Template.instance().teamFlag1.get();
@@ -156,7 +137,7 @@ Template.matchConsole.events({
 		//   x.matchNum = new Number(x.matchNum);
 		//   matchesdb.save(x);
 		//    // console.log(x._id,x.matchNum);
-		// });		
+		// });
 	},
 	'click .js-saveMatch': function(){
 		var mNum = parseInt($("#matchNumField").val());
