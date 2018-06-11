@@ -22,8 +22,10 @@ Template.matchList.events({
 		var matchId = e.currentTarget.id;
 		$('#voteModal input[name="matchID"]').val(matchId);
 		var teamData = matchesdb.findOne({_id: matchId});
-		$('#voteModal input[name="team1"]').val(teamData.teamID1);
-		$('#voteModal input[name="team2"]').val(teamData.teamID2);
+		// $('#voteModal input[name="team1"]').val(teamData.teamID1);
+		// $('#voteModal input[name="team2"]').val(teamData.teamID2);
+		$('#voteModal #teamName1Vote').attr("data-id", teamData.teamID1);
+		$('#voteModal #teamName2Vote').attr("data-id", teamData.teamID2);		
 		$('#voteModal input[name="matchnum"]').val(teamData.matchNum);
 		$('#teamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
 		$('#teamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);

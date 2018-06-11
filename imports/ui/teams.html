@@ -58,27 +58,27 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	<input type="text" name="matchID">
-	      	<input type="text" name="team1">
-	      	<input type="text" name="team2">
+	      	<input type="hidden" name="matchID">
+	      	<!-- <input type="text" name="team1">
+	      	<input type="text" name="team2"> -->
 	      	<input type="text" name="matchnum">
 					<div class="row justify-content-center mb-3">
 						<div class="col-md-4 text-center">
 							<img src="../" alt="#" class="teamFlags" id="teamFlag1">
-							<button class="btn btn-warning mt-3" id="teamName1Vote">Vote for&nbsp;<h5 id="teamName1" class="blackText"></h5></button>
+							<button class="js-voteTeam btn btn-warning mt-3" id="teamName1Vote">Vote for&nbsp;<h5 id="teamName1" class="blackText"></h5></button>
 						</div>
 						<div class="col-md-3 text-center">
 							<h2 class="blackText display-3">VS</h2>
 						</div>
 						<div class="col-md-4 text-center">
 							<img src="../" alt="#" class="teamFlags" id="teamFlag2">
-							<button class="btn btn-warning mt-3" id="teamName1Vote">Vote for&nbsp;<h5 class="blackText" id="teamName2"></h5></button>
+							<button class="js-voteTeam btn btn-warning mt-3" id="teamName2Vote">Vote for&nbsp;<h5 class="blackText" id="teamName2"></h5></button>
 						</div>
 					</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary js-voteTeam">Vote Now!</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	        <!-- <button type="button" class="btn btn-primary js-voteTeam">Vote Now!</button> -->
 	      </div>
 	    </div>
 	  </div>
