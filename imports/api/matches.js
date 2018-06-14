@@ -14,11 +14,31 @@ Template.matchList.helpers({
 	},
 	teamTwoName: function(){
 		return teamsdb.findOne({_id: this.teamID2}).teamName;
-	}
-	// set the color of team columns based on user's vote
-	,	
+	},	
 	matchDateTimeFull: function(){
 		return new Date(matchesdb.findOne({_id: this._id}).matchDateTime);
+	},
+	userVoted1: function(){
+		// set the color of team columns based on user's vote
+		var result = votesdb.find({$and: [{matchID: this._id}, {userID: Meteor.userId()}]});
+		if (result.count() > 0){
+			if (result.fetch()[0].teamID == this.teamID1){
+				return 1;
+			} else{
+				return 0;
+			}
+		}
+	},
+	userVoted2: function(){
+		// set the color of team columns based on user's vote
+		var result = votesdb.find({$and: [{matchID: this._id}, {userID: Meteor.userId()}]});
+		if (result.count() > 0){
+			if (result.fetch()[0].teamID == this.teamID2){
+				return 1;
+			} else{
+				return 0;
+			}
+		}
 	}
 });
 
