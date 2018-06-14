@@ -6,7 +6,7 @@
 </template>
 
 <template name="matchList">
-	{{>editMatch}}
+	<!-- {{>editMatch}} -->
 	{{> voteForm}}
 	<div class="modal" id="delMatchModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -47,13 +47,13 @@
 					<h5>{{teamTwoName}}</h5>
 				</div>
 			</div>
-			<h4>{{matchDateTime}}</h4>
+			<h4>{{matchDateTimeFull}}</h4>
 		</div>
 		{{/each}}
 	</div>
 </template>
 
-<template name="editMatch">
+<!-- <template name="editMatch">
 	Temp edit
 	<div class="row">
 		{{#each allMatches}}
@@ -63,4 +63,4 @@
 			</div>
 		{{/each}}
 	</div>
-</template>
+</template> -->
