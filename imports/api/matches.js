@@ -15,6 +15,7 @@ Template.matchList.helpers({
 	teamTwoName: function(){
 		return teamsdb.findOne({_id: this.teamID2}).teamName;
 	}
+	// set the color of team columns based on user's vote
 });
 
 Template.matchList.events({
@@ -34,5 +35,21 @@ Template.matchList.events({
 		$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
 		$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
 		$('#voteModal').modal('show');
+	}
+});
+
+Template.editMatch.helpers({
+	allMatches: function(){
+		return matchesdb.find();
+	}
+});
+
+Template.editMatch.events({
+	'dblclick .js-editMatch': function(event){
+		var mId = $(event.currentTarget).data('id');
+		var mData = $(event.currentTarget).val();
+		console.log(mId);
+		console.log(mData);
+		matchesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 	}
 });

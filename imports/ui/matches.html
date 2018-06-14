@@ -6,43 +6,61 @@
 </template>
 
 <template name="matchList">
+	{{>editMatch}}
 	{{> voteForm}}
 	<div class="modal" id="delMatchModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="delMatchModalLabel"></h5>
-			</div> 
-			<div class="modal-body">
-				<p>Are you sure you want to delete this?</p>
-				<input type="hidden" name="del_idTeam">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-				<button type="button" class="btn btn-primary js-delTeamConfirm" data-dismiss="modal">Yes</button>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="delMatchModalLabel"></h5>
+				</div> 
+				<div class="modal-body">
+					<p>Are you sure you want to delete this?</p>
+					<input type="hidden" name="del_idTeam">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-primary js-delTeamConfirm" data-dismiss="modal">Yes</button>
+				</div>
 			</div>
 		</div>
+	</div> <!-- /modal -->
+	<div class="row mt-5">
+		<div class="col-sm-8">
+			<p>Click on a match to vote for your winning team.</p>
+		</div>
 	</div>
-</div> <!-- /modal -->
 	<div class="row justify-content-around">
 		{{#each WCMatches}}
 		<div class="col-8 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
 			<h4>Match #{{matchNum}}</h4>
 			<div class="row justify-content-center mb-3">
 				<div class="col-md-4 text-center">
-					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags">
+					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags mt-3">
 					<h5>{{teamOneName}}</h5>
 				</div>
 				<div class="col-md-3 text-center">
 					<h2 class="display-3">VS</h2>
 				</div>
 				<div class="col-md-4 text-center">
-					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags">
+					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags mt-3">
 					<h5>{{teamTwoName}}</h5>
 				</div>
 			</div>
 			<h4>{{matchDateTime}}</h4>
 		</div>
+		{{/each}}
+	</div>
+</template>
+
+<template name="editMatch">
+	Temp edit
+	<div class="row">
+		{{#each allMatches}}
+			<div class="col-3">
+				{{matchNum}}
+				<input type="text" class="js-editMatch" data-id={{_id}} value={{matchDateTime}}>		
+			</div>
 		{{/each}}
 	</div>
 </template>

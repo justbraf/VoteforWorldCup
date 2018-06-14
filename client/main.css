@@ -58,3 +58,8 @@ hr{
 .matches{
   border: 2px solid white;
 }
+
+.matches .teamFlags{
+  width: 100% !important;
+  height: auto !important;
+}
