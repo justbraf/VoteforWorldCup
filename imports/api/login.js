@@ -1,10 +1,10 @@
-Template.userLogin.helpers({
-	noUser: function(){
-		if (!Meteor.userId())
-			return true;
-		else
-			return false;
-	},
+// Template.userLogin.helpers({
+// 	noUser: function(){
+// 		if (!Meteor.userId())
+// 			return true;
+// 		else
+// 			return false;
+// 	},
 	// usersname: function(){
 	// 	if (!Meteor.userId())
 	// 		return "not logged in";
@@ -12,7 +12,7 @@ Template.userLogin.helpers({
 	// 		return Meteor.user().services.facebook.email;
 	// 	}
 	// }
-});
+// });
 
 Template.userLogin.events({
 	'click #login-buttons-facebook': function(e) {
@@ -23,10 +23,10 @@ Template.userLogin.events({
 						console.log('Handle errors here: ', err);
 						return;
 				}
-				else {
-					// console.log('redirect to Welcome');
-					return Router.go('welcome');
-				}
+				// else {
+				// 	// console.log('redirect to Welcome');
+				// 	return Router.go('welcome');
+				// }
 		});
 	}
 });

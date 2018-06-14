@@ -77,3 +77,9 @@ Template.matchList.events({
 // 		matchesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 // 	}
 // });
+
+// Template.matchesPlayed.helpers({
+// 	matchPlayed: function(){
+// 		return matchesdb.find({}, {sort: {matchNum: 1}});		
+// 	},
+// });
