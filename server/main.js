@@ -6,13 +6,23 @@ Meteor.startup(() => {
 	import '../imports/startup/accounts-external.js';
 
 	Meteor.publish('teams', function () {
-		return teamsdb.find({
-		});
+		return teamsdb.find({});
 	});
 
 	Meteor.publish('matches', function () {
-		return matchesdb.find({
-		});
+		return matchesdb.find({});
+	});
+
+	Meteor.publish('score', function () {
+		return scoredb.find({});
+	});
+
+	Meteor.publish('votes', function () {
+		return votesdb.find({});
+	});
+
+	Meteor.publish('goals', function () {
+		return goalsdb.find({});
 	});
 });
 
