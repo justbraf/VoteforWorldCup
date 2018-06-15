@@ -87,18 +87,20 @@ Template.matchList.events({
 			$('#sgteamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
 			$('#sgteamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
 			$('#setGoalsModal').modal('show');
-		} else{			
-			$('#voteModal input[name="matchID"]').val(matchId);
-			$('#voteModal #teamName1Vote').attr("data-id", teamData.teamID1);
-			$('#voteModal #teamName2Vote').attr("data-id", teamData.teamID2);		
-			$('#voteModal input[name="matchnum"]').val(teamData.matchNum);
-			$('#teamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
-			$('#teamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);
-			$('#teamFlag2').attr("src",teamsdb.findOne({_id: teamData.teamID2}).teamFlag);
-			$('#teamFlag2').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID2}).teamName);
-			$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
-			$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
-			$('#voteModal').modal('show');
+		} else {
+			if (new Date() < new Date(matchesdb.findOne({_id: matchId}).matchDateTime)){
+				$('#voteModal input[name="matchID"]').val(matchId);
+				$('#voteModal #teamName1Vote').attr("data-id", teamData.teamID1);
+				$('#voteModal #teamName2Vote').attr("data-id", teamData.teamID2);		
+				$('#voteModal input[name="matchnum"]').val(teamData.matchNum);
+				$('#teamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
+				$('#teamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);
+				$('#teamFlag2').attr("src",teamsdb.findOne({_id: teamData.teamID2}).teamFlag);
+				$('#teamFlag2').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID2}).teamName);
+				$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
+				$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
+				$('#voteModal').modal('show');
+			}
 		}
 	}
 });
