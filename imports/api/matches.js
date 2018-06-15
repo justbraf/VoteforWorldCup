@@ -48,30 +48,58 @@ Template.matchList.helpers({
 		}
 	},
 	teamOneGoals: function(){
-		return 5;
+		var goals = goalsdb.find({$and: [{teamID:this.teamID1}, {matchID: this._id}]});
+		if (goals.count() > 0){
+			return goals.fetch()[0].score;
+		}
 	},
 	teamTwoGoals: function(){
-		return 0;
+		var goals = goalsdb.find({$and: [{teamID:this.teamID2}, {matchID: this._id}]});
+		if (goals.count() > 0){
+			return goals.fetch()[0].score;
+		}
 	}
 });
+
+var userAdmID = 'dzLsoejG8sQWPrrG6';
 
 Template.matchList.events({
 	'click .js-matchVote': function(e){
 		var matchId = e.currentTarget.id;
-		$('#voteModal input[name="matchID"]').val(matchId);
 		var teamData = matchesdb.findOne({_id: matchId});
-		// $('#voteModal input[name="team1"]').val(teamData.teamID1);
-		// $('#voteModal input[name="team2"]').val(teamData.teamID2);
-		$('#voteModal #teamName1Vote').attr("data-id", teamData.teamID1);
-		$('#voteModal #teamName2Vote').attr("data-id", teamData.teamID2);		
-		$('#voteModal input[name="matchnum"]').val(teamData.matchNum);
-		$('#teamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
-		$('#teamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);
-		$('#teamFlag2').attr("src",teamsdb.findOne({_id: teamData.teamID2}).teamFlag);
-		$('#teamFlag2').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID2}).teamName);
-		$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
-		$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
-		$('#voteModal').modal('show');
+		if (Meteor.userId() == userAdmID){
+			var result = goalsdb.find({'matchID': matchId});
+			if (result.count() > 0) {				
+				result.forEach(function(goalDocs){					
+					if (goalDocs.teamID == teamData.teamID1){
+						Number($('#teamGoals1').val(goalDocs.score));
+					}
+					if (goalDocs.teamID == teamData.teamID2){
+						Number($('#teamGoals2').val(goalDocs.score));
+					}
+				});
+			}
+			$('#setGoalsModal input[name="matchID"]').val(matchId);						
+			$('#sgteamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
+			$('#sgteamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);
+			$('#sgteamFlag2').attr("src",teamsdb.findOne({_id: teamData.teamID2}).teamFlag);
+			$('#sgteamFlag2').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID2}).teamName);
+			$('#sgteamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
+			$('#sgteamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
+			$('#setGoalsModal').modal('show');
+		} else{			
+			$('#voteModal input[name="matchID"]').val(matchId);
+			$('#voteModal #teamName1Vote').attr("data-id", teamData.teamID1);
+			$('#voteModal #teamName2Vote').attr("data-id", teamData.teamID2);		
+			$('#voteModal input[name="matchnum"]').val(teamData.matchNum);
+			$('#teamFlag1').attr("src", teamsdb.findOne({_id: teamData.teamID1}).teamFlag);
+			$('#teamFlag1').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID1}).teamName);
+			$('#teamFlag2').attr("src",teamsdb.findOne({_id: teamData.teamID2}).teamFlag);
+			$('#teamFlag2').attr("alt", "Flag of " + teamsdb.findOne({_id: teamData.teamID2}).teamName);
+			$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
+			$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
+			$('#voteModal').modal('show');
+		}
 	}
 });
 
@@ -90,3 +118,28 @@ Template.matchList.events({
 // 		matchesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 // 	}
 // });
+
+Template.setGoals.events({
+	'click .js-setGoals': function(){
+		var mId = $('#setGoalsModal input[name="matchID"]').val();
+		var tg1 = Number($('#teamGoals1').val());
+		var tg2 = Number($('#teamGoals2').val());
+		var teamData = matchesdb.findOne({_id: mId});		
+		var result = goalsdb.find({'matchID': mId});
+		if (result.count() < 1) {
+			goalsdb.insert({'matchID': mId, 'teamID': teamData.teamID1, 'score': tg1});
+			goalsdb.insert({'matchID': mId, 'teamID': teamData.teamID2, 'score': tg2});
+		} else {			
+			result.forEach(function(goalDocs){				
+				if (goalDocs.teamID == teamData.teamID1){
+					goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg1}});
+				}
+				if (goalDocs.teamID == teamData.teamID2){
+					goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg2}});
+				}
+			});
+		}
+		$('#teamGoals1').val(0);
+		$('#teamGoals2').val(0);
+	}
+});

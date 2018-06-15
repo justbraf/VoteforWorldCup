@@ -74,13 +74,27 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="setGoalsModalLabel">Match Goals</h5>
 				</div> 
-				<div class="modal-body">
-					
-					<input type="text" name="matchID">
+				<div class="modal-body">					
+					<input type="hidden" name="matchID">      	
+					<div class="row justify-content-center mb-3">
+						<div class="col-md-4 text-center">
+							<img src="../" alt="#" class="teamFlags" id="sgteamFlag1">
+							<h5 id="sgteamName1" class="blackText"></h5>
+							<input type="text" id="teamGoals1" value=0>
+						</div>
+						<div class="col-md-3 text-center">
+							<h2 class="blackText display-3">VS</h2>
+						</div>
+						<div class="col-md-4 text-center">
+							<img src="../" alt="#" class="teamFlags" id="sgteamFlag2">
+							<h5 class="blackText" id="sgteamName2"></h5>
+							<input type="text" id="teamGoals2" value=0>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-					<button type="button" class="btn btn-primary js-setGoals" data-dismiss="modal">Yes</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary js-setGoals" data-dismiss="modal">Save</button>
 				</div>
 			</div>
 		</div>
