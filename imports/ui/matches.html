@@ -1,31 +1,7 @@
-<template name="matchesPlayed">
-	<div class="row justify-content-around">
-		<!--{{ #each matchPlayed}}
-		<div class="col-8 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
-			<h4>Match #{{matchNum}}</h4>
-			<div class="row justify-content-center mb-3">
-				<div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
-					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags mt-3">
-					<h5>{{teamOneName}}</h5>
-				</div>
-				<div class="col-md-3 text-center">
-					<h2 class="display-3">VS</h2>
-				</div>
-				<div class="col-md-4 text-center {{#if userVoted2}}votedForTeam{{/if}}">
-					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags mt-3">
-					<h5>{{teamTwoName}}</h5>
-				</div>
-			</div>
-			<h4>{{matchDateTimeFull}}</h4>
-		</div>
-		{{/each}} -->
-	</div>
-</template>
-
 <template name="matchList">
 	<!-- {{>editMatch}} -->
 	{{> voteForm}}
-	<!-- {{> matchesPlayed}} -->
+	{{> setGoals}}
 	<div class="modal" id="delMatchModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -60,15 +36,17 @@
 			<h4>Match #{{matchNum}}</h4>
 			<div class="row justify-content-center mb-3">
 				<div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
+					{{#if showGoals}}<h3>{{teamOneGoals}}</h3>{{/if}}
 					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags mt-3">
-					<h5>{{teamOneName}}</h5>
+					<h5>{{teamOneName}}</h5>					
 				</div>
 				<div class="col-md-3 text-center">
 					<h2 class="display-3">VS</h2>
 				</div>
 				<div class="col-md-4 text-center {{#if userVoted2}}votedForTeam{{/if}}">
+					{{#if showGoals}}<h3>{{teamTwoGoals}}</h3>{{/if}}
 					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags mt-3">
-					<h5>{{teamTwoName}}</h5>
+					<h5>{{teamTwoName}}</h5>					
 				</div>
 			</div>
 			<h4>{{matchDateTimeFull}}</h4>
@@ -88,3 +66,23 @@
 		{{/each}}
 	</div>
 </template> -->
+
+<template name="setGoals">
+	<div class="modal" id="setGoalsModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="setGoalsModalLabel">Match Goals</h5>
+				</div> 
+				<div class="modal-body">
+					
+					<input type="text" name="matchID">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-primary js-setGoals" data-dismiss="modal">Yes</button>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /modal -->
+</template>

@@ -39,6 +39,19 @@ Template.matchList.helpers({
 				return 0;
 			}
 		}
+	},
+	showGoals: function(){
+		if (new Date() > new Date(matchesdb.findOne({_id: this._id}).matchDateTime)){
+			return true;
+		} else{
+			return false;
+		}
+	},
+	teamOneGoals: function(){
+		return 5;
+	},
+	teamTwoGoals: function(){
+		return 0;
 	}
 });
 
@@ -76,10 +89,4 @@ Template.matchList.events({
 // 		console.log(mData);
 // 		matchesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 // 	}
-// });
-
-// Template.matchesPlayed.helpers({
-// 	matchPlayed: function(){
-// 		return matchesdb.find({}, {sort: {matchNum: 1}});		
-// 	},
 // });
