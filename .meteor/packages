@@ -25,4 +25,3 @@ service-configuration@1.0.11
 iron:router
 drewy:datetimepicker
 session@1.1.7
-accounts-password
