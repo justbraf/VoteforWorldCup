@@ -100,6 +100,8 @@ Template.matchList.events({
 				$('#teamName1').html(teamsdb.findOne({_id: teamData.teamID1}).teamName);
 				$('#teamName2').html(teamsdb.findOne({_id: teamData.teamID2}).teamName);
 				$('#voteModal').modal('show');
+			} else {
+				alert("Predicting for this match is closed.");
 			}
 		}
 	}
