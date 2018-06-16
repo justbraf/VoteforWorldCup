@@ -39,19 +39,24 @@ Template.predictor.helpers({
 		predictions.forEach(function(preDocs){
 			var goals = goalsdb.find({'matchID': preDocs.matchID});
 			if (goals.count() > 1){
-				if (goals.fetch()[0].score > goals.fetch()[1].score){
-					// console.log("win:",goals.fetch()[0].teamID);
+				if (goals.fetch()[0].score == goals.fetch()[1].score){
+					console.log("match tie");
+					console.log("vote team id",preDocs.teamID);
+					console.log("team one",goals.fetch()[0].teamID);
+					console.log("team two",goals.fetch()[1].teamID);
+					console.log("or",(preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID));
+					console.log("and",(preDocs.teamID == goals.fetch()[0].teamID) && (preDocs.teamID == goals.fetch()[1].teamID));
+					if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
+						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
+					}
+				} else if (goals.fetch()[0].score > goals.fetch()[1].score){
+					console.log("team 1 win:",goals.fetch()[0].teamID);
 					if (preDocs.teamID == goals.fetch()[0].teamID){
 						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
 					}
 				} else {
-					// console.log("win:",goals.fetch()[1].teamID);
+					console.log("team 2 win:",goals.fetch()[1].teamID);
 					if (preDocs.teamID == goals.fetch()[1].teamID){
-						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
-					}
-				}
-				if (goals.fetch()[0].score == goals.fetch()[1].score){
-					if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
 						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
 					}
 				}
