@@ -31,7 +31,7 @@ Template.predictor.helpers({
 			var prediPoints = 0;
 			var mNum = matchesdb.findOne({'_id': mId}).matchNum;
 			if (mNum < 49){
-				prediPoints = prediPoints + 1;
+				prediPoints = prediPoints + 2;
 			} else if (mNum < 57){
 				prediPoints = prediPoints + 3;
 			} else if (mNum < 61){
@@ -52,7 +52,7 @@ Template.predictor.helpers({
 			if (goals.count() > 1){
 				if (goals.fetch()[0].score == goals.fetch()[1].score){					
 					if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
-						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
+						votesdb.update({'_id': preDocs._id}, {$set:{'points': (totalIt(preDocs.matchID)-1)}});
 					}
 				} else if (goals.fetch()[0].score > goals.fetch()[1].score){
 					if (preDocs.teamID == goals.fetch()[0].teamID){

@@ -20,7 +20,7 @@
 		</div>
 	</div> <!-- /modal -->
 	<div class="row mt-5">
-		<div class="col-sm-12">
+		<div class="col-sm-8">
 			<h4>How to use:</h4>		
 			<ul>
 				<li>Click on a match to predict your winning team.</li>
@@ -28,6 +28,18 @@
 				<li>You can predict a match up to one day before the match is scheduled to play.</li>
 				<li>In the event of a match draw you will still be awarded your points.</li>
 			</ul>
+		</div>
+		<div class="col-sm-4">
+			<h4>Points System</h4>
+			<ul>
+				<li>Group Matches: 2 points</li>				
+				<li>Round of 16: 3 points</li>
+				<li>Quarter-finals: 5 points</li>
+				<li>Semi-finals: 8 points</li>
+				<li>Third place play-off: 11 points</li>
+				<li>Final: 14 points</li>
+
+			</ul><h6>Points earned for matches ending in a draw will be one point less</h6>
 		</div>
 	</div>
 	<div class="row justify-content-around">
@@ -50,6 +62,37 @@
 				</div>
 			</div>
 			<h4>{{matchDateTimeFull}}</h4>
+		</div>
+		{{/each}}
+	</div>
+</template>
+
+<template name="matchResults">
+	{{> setGoals2}}
+	<div class="row justify-content-around">
+		{{#each WCMatches}}
+		<div class="col-8 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
+			<h4>Match #{{matchNum}}</h4>
+			<div class="row justify-content-center mb-3">
+				<div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
+					{{#if showGoals}}
+						<h3>{{teamOneGoals}}</h3>
+					{{/if}}
+					<img src="../{{teamOne}}" alt="{{teamOne}}" class="teamFlags mt-3">
+					<h5>{{teamOneName}}</h5>					
+				</div>
+				<div class="col-md-3 text-center">
+					<h2 class="display-3">VS</h2>
+				</div>
+				<div class="col-md-4 text-center {{#if userVoted2}}votedForTeam{{/if}}">
+					{{#if showGoals}}
+						<h3>{{teamTwoGoals}}</h3>
+					{{/if}}
+					<img src="../{{teamTwo}}" alt="{{teamTwo}}" class="teamFlags mt-3">
+					<h5>{{teamTwoName}}</h5>					
+				</div>
+			</div>
+			<!-- <h4>{{matchDateTimeFull}}</h4> -->
 		</div>
 		{{/each}}
 	</div>
@@ -89,6 +132,40 @@
 							<img src="../" alt="#" class="teamFlags" id="sgteamFlag2">
 							<h5 class="blackText" id="sgteamName2"></h5>
 							<input type="text" id="teamGoals2" value=0>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary js-setGoals" data-dismiss="modal">Save</button>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /modal -->
+</template>
+
+<template name="setGoals2">
+	<div class="modal" id="setGoalsModal2" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="setGoalsModalLabel2">Match Goals</h5>
+				</div> 
+				<div class="modal-body">					
+					<input type="hidden" name="matchID">      	
+					<div class="row justify-content-center mb-3">
+						<div class="col-md-4 text-center">
+							<img src="../" alt="#" class="teamFlags" id="sgteamFlag12">
+							<h5 id="sgteamName12" class="blackText"></h5>
+							<input type="text" id="teamGoals12" value=0>
+						</div>
+						<div class="col-md-3 text-center">
+							<h2 class="blackText display-3">VS</h2>
+						</div>
+						<div class="col-md-4 text-center">
+							<img src="../" alt="#" class="teamFlags" id="sgteamFlag22">
+							<h5 class="blackText" id="sgteamName22"></h5>
+							<input type="text" id="teamGoals22" value=0>
 						</div>
 					</div>
 				</div>
