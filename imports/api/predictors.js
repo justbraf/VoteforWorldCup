@@ -1,12 +1,23 @@
-Template.predictor.onCreated(function(){
-	this.prePoints = new ReactiveVar(0);	
-});
-
 Template.predictor.helpers({
 	userPoints: function(){
-		return Template.instance().prePoints.get();;
+		var results = votesdb.find({'userID': Meteor.userId()});
+		// console.log("num votes",results.count());
+		if (results.count() > 0){
+			var myPoints = 0;
+			results.forEach(function(myVotes){
+				// console.log("saved points",Number(myVotes.points)?Number(myVotes.points):0);
+				myPoints = myPoints + (Number(myVotes.points)?Number(myVotes.points):0);
+			});
+		}
+		return myPoints;
 	},
 	allPredictions: function(){
+		// ****use a collection instead???****
+		// retrieve all votes sorted by userID
+		// running total of points
+		// push results into array everytime userID changes
+		// sort array by totals
+		// display rank to users
 		return 0;
 	},
 	predictionsCounted: function(){
@@ -14,8 +25,7 @@ Template.predictor.helpers({
 		return predictions.count();
 	},
 	predictionsCorrect: function(){
-		var preTotal = 0;
-		var predictionPoints = Template.instance().prePoints.get();
+		var preTotal = 0;		
 		function totalIt(mId){
 			preTotal++;
 			var prediPoints = 0;
@@ -32,38 +42,29 @@ Template.predictor.helpers({
 				prediPoints = prediPoints + 11;
 			} else if (mNum < 65){
 				prediPoints = prediPoints + 14;
-			}console.log("mNum",mNum,"points",prediPoints);
+			}
+			// console.log("mNum",mNum,"points",prediPoints);
 			return prediPoints;
 		}
 		var predictions = votesdb.find({'userID': Meteor.userId()});
 		predictions.forEach(function(preDocs){
 			var goals = goalsdb.find({'matchID': preDocs.matchID});
 			if (goals.count() > 1){
-				if (goals.fetch()[0].score == goals.fetch()[1].score){
-					console.log("match tie");
-					console.log("vote team id",preDocs.teamID);
-					console.log("team one",goals.fetch()[0].teamID);
-					console.log("team two",goals.fetch()[1].teamID);
-					console.log("or",(preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID));
-					console.log("and",(preDocs.teamID == goals.fetch()[0].teamID) && (preDocs.teamID == goals.fetch()[1].teamID));
+				if (goals.fetch()[0].score == goals.fetch()[1].score){					
 					if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
-						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
+						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
 					}
 				} else if (goals.fetch()[0].score > goals.fetch()[1].score){
-					console.log("team 1 win:",goals.fetch()[0].teamID);
 					if (preDocs.teamID == goals.fetch()[0].teamID){
-						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
+						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
 					}
 				} else {
-					console.log("team 2 win:",goals.fetch()[1].teamID);
 					if (preDocs.teamID == goals.fetch()[1].teamID){
-						predictionPoints = predictionPoints + totalIt(preDocs.matchID);
+						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
 					}
 				}
 			}
-		});
-		console.log(predictionPoints);
-		// Template.instance().prePoints.set(predictionPoints);
+		});		
 		return preTotal;
 	}
 });
