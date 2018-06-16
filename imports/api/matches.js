@@ -110,7 +110,6 @@ Template.matchList.events({
 Template.matchResults.helpers({
 	WCMatches: function(){
 		return matchesdb.find({}, {sort: {matchNum: 1}, limit: (goalsdb.find().count()/2)});
-		// return matchesdb.find({}, {orderby:{matchNum:1}});
 	},
 	teamOne: function(){		
 		return teamsdb.findOne({_id: this.teamID1}).teamFlag;

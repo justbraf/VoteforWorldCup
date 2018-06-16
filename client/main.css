@@ -67,3 +67,11 @@ hr{
 .votedForTeam{
   background: sandybrown;
 }
+
+.versus{
+  margin-top: 40%;
+}
+
+.boxedIn{
+  border: 2px solid white;
+}

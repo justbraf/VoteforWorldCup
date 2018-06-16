@@ -11,14 +11,14 @@ Template.predictor.helpers({
 		}
 		return myPoints;
 	},
-	allPredictions: function(){
+	usersRank: function(){
 		// ****use a collection instead???****
 		// retrieve all votes sorted by userID
 		// running total of points
 		// push results into array everytime userID changes
 		// sort array by totals
 		// display rank to users
-		return 0;
+		return 100;
 	},
 	predictionsCounted: function(){
 		var predictions = votesdb.find({'userID': Meteor.userId()});
