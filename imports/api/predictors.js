@@ -22,7 +22,7 @@ Template.predictor.onRendered(function(){
 	allUsers.forEach((oneUser)=>{
 		if (oneUser.userID != lastUserId){
 			lastUserId=oneUser.userID;
-			var predictions = votesdb.find({$and: [{'userID': oneUser.userID}, {'points': {$exists: true}}]});
+			var predictions = votesdb.find({$and: [{'userID': oneUser.userID}, {'points': {$exists: false}}]});
 			predictions.forEach(function(preDocs){
 				var goals = goalsdb.find({'matchID': preDocs.matchID});
 				if (goals.count() > 1){
