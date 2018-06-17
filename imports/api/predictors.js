@@ -1,7 +1,5 @@
-Template.predictor.onRendered(function(){
-	// var preTotal = 0;		
+Template.predictor.onRendered(function(){			
 		function totalIt(mId){
-			// preTotal++;
 			var prediPoints = 0;
 			var mNum = matchesdb.findOne({'_id': mId}).matchNum;
 			if (mNum < 49){
@@ -20,6 +18,14 @@ Template.predictor.onRendered(function(){
 			// console.log("mNum",mNum,"points",prediPoints);
 			return prediPoints;
 		}
+		var lastUserId = "first";
+		var allUsers = votesdb.find({}, {fields: {'userID':1}, sort: {'userID':1}});
+		allUsers.forEach((oneUser)=>{
+			if (oneUser.userID != lastUserId){
+				console.log(oneUser.userID);
+				lastUserId=oneUser.userID;
+			}
+		});
 		var predictions = votesdb.find({'userID': Meteor.userId()});
 		predictions.forEach(function(preDocs){
 			var goals = goalsdb.find({'matchID': preDocs.matchID});
