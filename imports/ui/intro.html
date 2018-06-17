@@ -19,9 +19,7 @@
 </template>
 
 <template name="introduction">
-	<div class="row justify-content-center">
-		{{> topRankers}}
-	</div>
+	{{> topRankers}}
 	<div class="row justify-content-center">
 		{{#if currentUser}}
 		<div class="col-sm-12">
@@ -68,10 +66,17 @@
 </template>
 
 <template name="topRankers">
-	<div class="col-sm-5 justify-content-center mb-3">
-		<h2 class="display-5">Top Ranking Predictors</h2>		
+	<div class="row justify-content-center">
+		<div class="col-sm-5 justify-content-center mb-3">
+			<h2 class="display-5">Top Ranking Predictors</h2>		
+		</div>
+	</div>
+	<div class="row justify-content-center mb-5">		
 		{{#each theRankers}}
-			<h5 class="display-6">#{{ranked}} {{predictorsName}}</h5>
+			<div class="col-sm-2">
+				<h5 class="display-6 text-center">#{{ranked}}</h5>
+				<h5 class="display-6 text-center">{{predictorsName}}</h5>
+			</div>
 		{{/each}}		
 	</div>
 </template>
