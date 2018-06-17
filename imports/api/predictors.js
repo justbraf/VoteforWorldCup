@@ -22,29 +22,28 @@ Template.predictor.onRendered(function(){
 		var allUsers = votesdb.find({}, {fields: {'userID':1}, sort: {'userID':1}});
 		allUsers.forEach((oneUser)=>{
 			if (oneUser.userID != lastUserId){
-				console.log(oneUser.userID);
 				lastUserId=oneUser.userID;
+				var predictions = votesdb.find({'userID': oneUser.userID});
+				predictions.forEach(function(preDocs){
+					var goals = goalsdb.find({'matchID': preDocs.matchID});
+					if (goals.count() > 1){
+						if (goals.fetch()[0].score == goals.fetch()[1].score){					
+							if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
+								votesdb.update({'_id': preDocs._id}, {$set:{'points': (totalIt(preDocs.matchID)-1)}});
+							}
+						} else if (goals.fetch()[0].score > goals.fetch()[1].score){
+							if (preDocs.teamID == goals.fetch()[0].teamID){
+								votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
+							}
+						} else {
+							if (preDocs.teamID == goals.fetch()[1].teamID){
+								votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
+							}
+						}
+					}
+				});
 			}
-		});
-		var predictions = votesdb.find({'userID': Meteor.userId()});
-		predictions.forEach(function(preDocs){
-			var goals = goalsdb.find({'matchID': preDocs.matchID});
-			if (goals.count() > 1){
-				if (goals.fetch()[0].score == goals.fetch()[1].score){					
-					if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)){
-						votesdb.update({'_id': preDocs._id}, {$set:{'points': (totalIt(preDocs.matchID)-1)}});
-					}
-				} else if (goals.fetch()[0].score > goals.fetch()[1].score){
-					if (preDocs.teamID == goals.fetch()[0].teamID){
-						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
-					}
-				} else {
-					if (preDocs.teamID == goals.fetch()[1].teamID){
-						votesdb.update({'_id': preDocs._id}, {$set:{'points': totalIt(preDocs.matchID)}});
-					}
-				}
-			}
-		});		
+		});	
 
 	var rankPos = 0, lastPoints = 1000;
 		var results = ranksdb.find({},{sort:{totalPoints:-1}});
@@ -53,7 +52,7 @@ Template.predictor.onRendered(function(){
 				rankPos++;
 				lastPoints = ranking.totalPoints;
 			}
-			console.log(rankPos);
+			// console.log(rankPos);
 			ranksdb.update({'_id': ranking._id}, {$set: {'ranked': rankPos}});
 		});		
 });
@@ -70,10 +69,10 @@ Template.predictor.helpers({
 		var userRankID = ranksdb.find({'userID': Meteor.userId()});		
 		if (userRankID.count()<1){
 			ranksdb.insert({'userID': Meteor.userId(), 'totalPoints': myPoints});
-			console.log("insert rank",Meteor.userId());
+			// console.log("insert rank",Meteor.userId());
 		} else {
 			ranksdb.update({'_id': userRankID.fetch()[0]._id},{$set: {'totalPoints': myPoints}});
-			console.log("update rank",Meteor.userId());
+			// console.log("update rank",Meteor.userId());
 		}
 		return myPoints;
 	},
