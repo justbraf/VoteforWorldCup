@@ -19,7 +19,9 @@
 </template>
 
 <template name="introduction">
-	{{> topRankers}}
+	{{#if currentUser}}
+		{{> topRankers}}
+	{{/if}}
 	<div class="row justify-content-center">
 		{{#if currentUser}}
 		<div class="col-sm-12">
