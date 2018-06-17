@@ -28,8 +28,8 @@ Meteor.startup(() => {
 
 Meteor.publish('userData', function () {
   if (this.userId) {
-    return Meteor.users.find({ _id: this.userId }, {
-      fields: { services: 1}
+    return Meteor.users.find({}, { //_id: this.userId
+      fields: { services: 1, "profile.name": 1}
     });
   } else {
     this.ready();
