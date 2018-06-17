@@ -13,8 +13,8 @@ Meteor.startup(() => {
 		return matchesdb.find({});
 	});
 
-	Meteor.publish('score', function () {
-		return scoredb.find({});
+	Meteor.publish('ranks', function () {
+		return ranksdb.find({});
 	});
 
 	Meteor.publish('votes', function () {

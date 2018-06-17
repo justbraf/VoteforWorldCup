@@ -1,33 +1,7 @@
-Template.predictor.helpers({
-	userPoints: function(){
-		var results = votesdb.find({'userID': Meteor.userId()});
-		// console.log("num votes",results.count());
-		if (results.count() > 0){
-			var myPoints = 0;
-			results.forEach(function(myVotes){
-				// console.log("saved points",Number(myVotes.points)?Number(myVotes.points):0);
-				myPoints = myPoints + (Number(myVotes.points)?Number(myVotes.points):0);
-			});
-		}
-		return myPoints;
-	},
-	usersRank: function(){
-		// ****use a collection instead???****
-		// retrieve all votes sorted by userID
-		// running total of points
-		// push results into array everytime userID changes
-		// sort array by totals
-		// display rank to users
-		return 100;
-	},
-	predictionsCounted: function(){
-		var predictions = votesdb.find({'userID': Meteor.userId()});
-		return predictions.count();
-	},
-	predictionsCorrect: function(){
-		var preTotal = 0;		
+Template.predictor.onRendered(function(){
+	// var preTotal = 0;		
 		function totalIt(mId){
-			preTotal++;
+			// preTotal++;
 			var prediPoints = 0;
 			var mNum = matchesdb.findOne({'_id': mId}).matchNum;
 			if (mNum < 49){
@@ -65,6 +39,46 @@ Template.predictor.helpers({
 				}
 			}
 		});		
-		return preTotal;
+
+	var rankPos = 0, lastPoints = 1000;
+		var results = ranksdb.find({},{sort:{totalPoints:-1}});
+		results.forEach((ranking) => {			
+			if (lastPoints > ranking.totalPoints){
+				rankPos++;
+				lastPoints = ranking.totalPoints;
+			}
+			console.log(rankPos);
+			ranksdb.update({'_id': ranking._id}, {$set: {'ranked': rankPos}});
+		});		
+});
+
+Template.predictor.helpers({
+	userPoints: function(){
+		var myPoints = 0;
+		var results = votesdb.find({'userID': Meteor.userId()});		
+		if (results.count() > 0){
+			results.forEach(function(myVotes){
+				myPoints = myPoints + (Number(myVotes.points)?Number(myVotes.points):0);
+			});
+		}
+		var userRankID = ranksdb.find({'userID': Meteor.userId()});		
+		if (userRankID.count()<1){
+			ranksdb.insert({'userID': Meteor.userId(), 'totalPoints': myPoints});
+			console.log("insert rank",Meteor.userId());
+		} else {
+			ranksdb.update({'_id': userRankID.fetch()[0]._id},{$set: {'totalPoints': myPoints}});
+			console.log("update rank",Meteor.userId());
+		}
+		return myPoints;
+	},
+	usersRank: function(){
+		return ranksdb.find({'userID': Meteor.userId()}).fetch()[0].ranked;
+	},
+	predictionsCounted: function(){
+		var predictions = votesdb.find({'userID': Meteor.userId()});
+		return predictions.count();
+	},
+	predictionsCorrect: function(){
+		return votesdb.find({$and: [{'userID': Meteor.userId()}, {'points': { $exists : true }}]}).count();
 	}
 });
