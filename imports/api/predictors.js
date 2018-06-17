@@ -48,7 +48,7 @@ Template.predictor.onRendered(function(){
 	var allUsers = votesdb.find({}, {fields: {'userID':1}, sort: {'userID':1}});
 	allUsers.forEach((oneUser)=>{
 		if (oneUser.userID != lastUserId){
-			lastUserId=oneUser.userID; // must close
+			lastUserId=oneUser.userID;
 			var myPoints = 0;
 			var results = votesdb.find({$and: [{'userID': oneUser.userID}, {'points': { $exists : true }}]});		
 			if (results.count() > 0){

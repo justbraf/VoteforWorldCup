@@ -68,16 +68,19 @@
 </template>
 
 <template name="topRankers">
-	<div class="row justify-content-center">
-		<div class="col-sm-5 justify-content-center mb-3">
+	<div class="row justify-content-center mb-3">
+		<div class="col-auto">
 			<h2 class="display-5">Top Ranking Predictors</h2>		
 		</div>
 	</div>
 	<div class="row justify-content-center mb-5">		
 		{{#each theRankers}}
-			<div class="col-sm-2">
+			<div class="col-sm-2 d-none d-sm-block">
 				<h5 class="display-6 text-center">#{{ranked}}</h5>
 				<h5 class="display-6 text-center">{{predictorsName}}</h5>
+			</div>
+			<div class="col-10 d-block d-sm-none">
+				<h5 class="display-6 text-left">#{{ranked}}&nbsp;{{predictorsName}}</h5>
 			</div>
 		{{/each}}		
 	</div>
