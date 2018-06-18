@@ -1,4 +1,18 @@
-Template.predictor.onRendered(function(){			
+// function computes correct number of predictions made
+	function checkCorrectPredictions(uId){
+		var predCorrect = 0;
+		var results = votesdb.find({$and: [{'userID': uId}, {'points': { $exists : true }}]});
+		results.forEach((preds)=>{
+			var goalCheck = goalsdb.find({'matchID': preds.matchID});
+			if (goalCheck.fetch()[0].score != goalCheck.fetch()[1].score){
+				predCorrect++;
+			}
+		});
+		return predCorrect;
+	}
+
+Template.predictor.onRendered(function(){
+	//function scores points for each prediction for all users
 	function totalIt(mId){
 		var prediPoints = 0;
 		var mNum = matchesdb.findOne({'_id': mId}).matchNum;
@@ -44,6 +58,7 @@ Template.predictor.onRendered(function(){
 		}
 	});
 
+	//function computes total points for each user that voted
 	var lastUserId = "first";
 	var allUsers = votesdb.find({}, {fields: {'userID':1}, sort: {'userID':1}});
 	allUsers.forEach((oneUser)=>{
@@ -58,23 +73,24 @@ Template.predictor.onRendered(function(){
 			}
 			var userRankID = ranksdb.find({'userID': oneUser.userID});		
 			if (userRankID.count()<1){
-				ranksdb.insert({'userID': oneUser.userID, 'totalPoints': myPoints});
+				ranksdb.insert({'userID': oneUser.userID, 'totalPoints': myPoints, 'predictions': checkCorrectPredictions(oneUser.userID)});
 				// console.log("insert rank",Meteor.userId());
 			} else {
-				ranksdb.update({'_id': userRankID.fetch()[0]._id},{$set: {'totalPoints': myPoints}});
+				ranksdb.update({'_id': userRankID.fetch()[0]._id},{$set: {'totalPoints': myPoints, 'predictions': checkCorrectPredictions(oneUser.userID)}});
 				// console.log("update rank",Meteor.userId());
 			}
 		}
-	});
+	});	
 
-	var rankPos = 0, lastPoints = 1000;
-		var results = ranksdb.find({},{sort:{totalPoints:-1}});
+	// function ranks users based on the total points and their correct predictions
+	var rankPos = 0, lastPoints = 1000, lastPredicts = 0;
+		var results = ranksdb.find({},{sort:{'totalPoints':-1, 'predictions': -1}});
 		results.forEach((ranking) => {			
-			if (lastPoints > ranking.totalPoints){
+			if ((lastPoints > ranking.totalPoints) || (lastPredicts > ranking.predictions)){
 				rankPos++;
 				lastPoints = ranking.totalPoints;
+				lastPredicts = ranking.predictions;
 			}
-			// console.log(rankPos);
 			ranksdb.update({'_id': ranking._id}, {$set: {'ranked': rankPos}});
 		});		
 });
@@ -86,11 +102,10 @@ Template.predictor.helpers({
 	usersRank: function(){
 		return ranksdb.find({'userID': Meteor.userId()}).fetch()[0].ranked;
 	},
-	predictionsCounted: function(){
-		var predictions = votesdb.find({'userID': Meteor.userId()});
-		return predictions.count();
+	predictionsCounted: function(){		
+		return votesdb.find({'userID': Meteor.userId()}).count();
 	},
-	predictionsCorrect: function(){
-		return votesdb.find({$and: [{'userID': Meteor.userId()}, {'points': { $exists : true }}]}).count();
+	predictionsCorrect: function(){		
+		return ranksdb.findOne({'userID': Meteor.userId()}).predictions;
 	}
 });
