@@ -8,7 +8,7 @@ Template.adminConsole.events({
 		Router.go('matches.manager');
 	},
 	'click .js-matchAvail': function(){
-		$('#matchAvailField').val(VFWC.findOne({}).matchesAvailable);
+		$('#matchAvailField').val(VFWCdb.findOne({}).matchesAvailable);
 	},
 	'click .js-saveAvail': function(){
 		// console.log($('#matchAvailField').val());

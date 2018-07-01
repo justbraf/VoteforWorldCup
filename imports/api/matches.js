@@ -1,6 +1,6 @@
 Template.matchList.helpers({
 	WCMatches: function(){
-		return matchesdb.find({}, {sort: {matchNum: 1}, limit: (Number(VFWC.findOne({}).matchesAvailable)-(goalsdb.find().count()/2)), skip: (goalsdb.find().count()/2)});
+		return matchesdb.find({}, {sort: {matchNum: 1}, limit: (Number(VFWCdb.findOne({}).matchesAvailable)-(goalsdb.find().count()/2)), skip: (goalsdb.find().count()/2)});
 		// return matchesdb.find({}, {orderby:{matchNum:1}});
 	},
 	teamOne: function(){		
