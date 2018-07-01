@@ -6,6 +6,15 @@ Template.adminConsole.events({
 	},
 	'click .js-matches'	:function(){
 		Router.go('matches.manager');
+	},
+	'click .js-matchAvail': function(){
+		$('#matchAvailField').val(VFWC.findOne({}).matchesAvailable);
+	},
+	'click .js-saveAvail': function(){
+		// console.log($('#matchAvailField').val());
+		// var settings_id = VFWCdb.findOne();
+		// console.log(VFWCdb.find({"_id" : "NHQRvLpuLqvobE8cg"}).count());
+		VFWCdb.update({_id: "NHQRvLpuLqvobE8cg"}, {$set: {matchesAvailable: Number($('#matchAvailField').val())}});
 	}
 });
 

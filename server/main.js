@@ -24,6 +24,10 @@ Meteor.startup(() => {
 	Meteor.publish('goals', function () {
 		return goalsdb.find({});
 	});
+
+	Meteor.publish('VFWC', function () {
+		return VFWCdb.find({});
+	});
 });
 
 Meteor.publish('userData', function () {
