@@ -11,7 +11,7 @@
 		return predCorrect;
 	}
 
-Template.predictor.onRendered(function(){
+systemRankings = function (){
 	//function scores points for each prediction for all users
 	function totalIt(mId){
 		var prediPoints = 0;
@@ -84,15 +84,19 @@ Template.predictor.onRendered(function(){
 
 	// function ranks users based on the total points and their correct predictions
 	var rankPos = 0, lastPoints = 1000, lastPredicts = 0;
-		var results = ranksdb.find({},{sort:{'totalPoints':-1, 'predictions': -1}});
-		results.forEach((ranking) => {			
-			if ((lastPoints > ranking.totalPoints) || (lastPredicts > ranking.predictions)){
-				rankPos++;
-				lastPoints = ranking.totalPoints;
-				lastPredicts = ranking.predictions;
-			}
-			ranksdb.update({'_id': ranking._id}, {$set: {'ranked': rankPos}});
-		});		
+	var results = ranksdb.find({},{sort:{'totalPoints':-1, 'predictions': -1}});
+	results.forEach((ranking) => {			
+		if ((lastPoints > ranking.totalPoints) || (lastPredicts > ranking.predictions)){
+			rankPos++;
+			lastPoints = ranking.totalPoints;
+			lastPredicts = ranking.predictions;
+		}
+		ranksdb.update({'_id': ranking._id}, {$set: {'ranked': rankPos}});
+	});		
+}
+
+Template.predictor.onRendered(function(){
+	systemRankings();
 });
 
 Template.predictor.helpers({
