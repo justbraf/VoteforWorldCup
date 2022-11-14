@@ -1,0 +1,20 @@
+<template name="teamList">
+  <!-- {{> delTeamModal}} -->
+  <div class="row justify-content-center">
+    {{#each WCTeams}}
+    <div class="col-6 col-sm-6 col-md-3 text-center mt-5 WCTeam" id={{_id}}>
+      <!-- <div class="row"> -->
+      <!-- <div class="col-md-8"> -->
+      <img src="../../{{teamFlag}}" alt="Team Flag" id="teamFlagImage">
+      <h4>{{teamName}}</h4>
+      <!-- <h5>{{teamGroup}}</h5> -->
+      <!-- </div> -->
+      <!-- <div class="col-md-3"> -->
+      <!-- <a class="btn btn-danger js-delTeam"><span aria-hidden="true">&times;</span></a> -->
+      <!-- </div> -->
+      <!-- </div>	 -->
+    </div>
+    {{/each}}
+  </div>
+  <!-- {{> teamStats}} -->
+</template>

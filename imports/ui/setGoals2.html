@@ -1,0 +1,33 @@
+<template name="setGoals2">
+  <div class="modal" id="setGoalsModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="setGoalsModalLabel2">Match Goals</h5>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="matchID">
+          <div class="row justify-content-center mb-3">
+            <div class="col-md-4 text-center">
+              <img src="../" alt="#" class="teamFlags" id="sgteamFlag12">
+              <h5 id="sgteamName12" class="blackText"></h5>
+              <input type="text" id="teamGoals12" value=0>
+            </div>
+            <div class="col-md-3 text-center">
+              <h2 class="blackText display-3">VS</h2>
+            </div>
+            <div class="col-md-4 text-center">
+              <img src="../" alt="#" class="teamFlags" id="sgteamFlag22">
+              <h5 class="blackText" id="sgteamName22"></h5>
+              <input type="text" id="teamGoals22" value=0>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary js-setGoals" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /modal -->
+</template>
