@@ -1,18 +1,22 @@
 /* CSS declarations go here */
-html, body, .container{
-	background: #000000;
+html,
+body,
+.container {
+	background: #000000 !important;
 	color: #ffffff;
 }
-#userLogin input, #userLogin a{
+
+#userLogin input,
+#userLogin a {
 	width: 100%;
 }
 
-hr{	
+hr {
 	background: yellow;
 }
 
 /*#login-sign-in-link*/
-.login-link-text{
+.login-link-text {
 	text-decoration: none !important;
 	display: inline-block;
 	font-weight: 400;
@@ -34,7 +38,9 @@ hr{
 	border-color: #007bff;
 }
 
-#teamFlagImage, #teamFlagImage2, .teamFlags{
+#teamFlagImage,
+#teamFlagImage2,
+.teamFlags {
 	height: 100px;
 	border: 2px solid grey;
 }
@@ -43,37 +49,40 @@ hr{
 	display: none !important;
 }
 
-.modal-title, #delModal, .blackText{
+.modal-title,
+#delModal,
+.blackText {
 	color: black;
 }
 
-#delModal{
+#delModal {
 	/*width: 245px;*/
 }
 
-#teamName1, #teamName2{
+#teamName1,
+#teamName2 {
 	border: none;
 }
 
-.matches{
+.matches {
 	border: 2px solid white;
 }
 
-.matches .teamFlags{
+.matches .teamFlags {
 	width: 100% !important;
 	height: auto !important;
 }
 
-.votedForTeam{
+.votedForTeam {
 	background: sandybrown;
 }
 
-.versus{
+.versus {
 	margin-top: 40%;
 }
 
-.boxedIn{
-	border: 2px solid white;  
+.boxedIn {
+	border: 2px solid white;
 }
 
 .display-5 {
@@ -85,10 +94,10 @@ hr{
 .display-6 {
 	font-size: 1.2rem;
 	font-weight: 300;
-	line-height: 1.2;	
+	line-height: 1.2;
 }
 
-.legends{
+.legends {
 	font-family: 'Gaegu', cursive !important;
 	font-size: 4rem !important;
 }

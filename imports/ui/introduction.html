@@ -1,28 +1,3 @@
-<template name="TitleBar">
-	<div class="row justify-content-center mb-5 mt-5">
-		<div class="col-md-3 col-lg-2">
-			<img src="\254645_w.png" alt="World Cup">
-		</div>
-		<div class="col-md-7 col-lg-5 mt-2">
-			<div class="row mt-3">
-				<div class="col">
-					<h1>World Cup 2018</h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<h1>Predictor Challenge</h1>
-				</div>
-			</div>
-		</div>
-		<div class="col-10 mt-5 mb-5 text-center">
-			<h2 class="display-5 legends">Congrats {{legend}}!!!</h2>			
-			<img src="giphy.gif" alt="">
-			<h2 class="display-5 legends">FIFA World Cup 2018 Legend!!!</h2>
-		</div>
-	</div>
-</template>
-
 <template name="introduction">
 	{{#if currentUser}}
 		{{> topRankers}}
@@ -69,24 +44,5 @@
 		<div class="col-md-4">
 			<h3>FIFA World Cup Legend!!!</h3>
 		</div>
-	</div>
-</template>
-
-<template name="topRankers">
-	<div class="row justify-content-center mb-3">
-		<div class="col-auto">
-			<h2 class="display-5">Top Ranking Predictors</h2>		
-		</div>
-	</div>
-	<div class="row justify-content-center mb-5">		
-		{{#each theRankers}}
-			<div class="col-sm-2 d-none d-sm-block">
-				<h5 class="display-6 text-center">#{{ranked}}</h5>
-				<h5 class="display-6 text-center">{{predictorsName}}</h5>
-			</div>
-			<div class="col-10 d-block d-sm-none">
-				<h5 class="display-6 text-left">#{{ranked}}&nbsp;{{predictorsName}}</h5>
-			</div>
-		{{/each}}		
 	</div>
 </template>
