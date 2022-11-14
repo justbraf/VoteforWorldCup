@@ -1,9 +1,10 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+
 
 import './layout.html';
-import './intro.html';
+import './error404.html'
+import './introduction.html';
+import './winner.html'
+import './topRankers.html'
 import './login.html';
 import './admin.html';
 import './groups.html';

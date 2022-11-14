@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
+import '../lib/collections.js';
+import '../imports/startup/accounts-external.js';
 
 Meteor.startup(() => {
-	// code to run on server at startup
-	
-	import '../imports/startup/accounts-external.js';
+	// code to run on server at startup	
 
 	Meteor.publish('teams', function () {
 		return teamsdb.find({});
