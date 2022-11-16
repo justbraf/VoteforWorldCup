@@ -171,10 +171,10 @@ Groups = [
 
 // ===============================================
 
-Groups.forEach(el => {
-  console.log(el.grpName)
-  // console.log(el.group)
-  el.group.forEach(k => {
-    console.log(k)
-  })
-});
+// Groups.forEach(el => {
+//   console.log(el.grpName)
+//   // console.log(el.group)
+//   el.group.forEach(k => {
+//     console.log(k)
+//   })
+// });
