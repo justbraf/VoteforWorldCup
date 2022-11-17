@@ -5,9 +5,10 @@
     </div>
   </div>
   <div class="row justify-content-center mb-2">
-    <div class="col-md-6">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
       <!-- Button trigger modal -->
-      <a href="" class="btn btn-success js-addTeam" data-toggle="modal" data-target="#addModal">Add Team</a>
+      <!-- <a href="" class="btn btn-success js-addTeam" data-bs-toggle="modal" data-bs-target="#addModal">Add Team</a> -->
     </div>
   </div>
   <!-- Modal -->
@@ -16,9 +17,6 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="addModalLabel">Add Team</h5>
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button> -->
         </div>
         <div class="modal-body">
           <form>
@@ -53,7 +51,7 @@
                         <label class="input-group-text" for="teamGroupSelect">Group</label>
                       </div>
                       <select class="custom-select" id="teamGroupSelect">
-                        <option selected value="A">Group A</option>
+                        <option value="A" selected>Group A</option>
                         <option value="B">Group B</option>
                         <option value="C">Group C</option>
                         <option value="D">Group D</option>
@@ -72,8 +70,8 @@
 
         </div> <!-- /modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary js-closeTeam" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary js-saveTeam" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-secondary js-closeTeam" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary js-saveTeam" data-bs-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>

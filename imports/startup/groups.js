@@ -1,171 +1,163 @@
-Groups = [
+groups = [
   {
     grpName: "A",
-    group: [
-      {
-        groupId: 1,
-        team: "Qatar"
-      },
-      {
-        groupId: 2,
-        team: "Ecuador"
-      },
-      {
-        groupId: 3,
-        team: "Senegal"
-      },
-      {
-        groupId: 4,
-        team: "Netherlands"
-      }
-    ]
+    groupId: 1,
+    team: "Qatar"
+  },
+  {
+    grpName: "A",
+    groupId: 2,
+    team: "Ecuador"
+  },
+  {
+    grpName: "A",
+    groupId: 3,
+    team: "Senegal"
+  },
+  {
+    grpName: "A",
+    groupId: 4,
+    team: "Netherlands"
   },
   {
     grpName: "B",
-    group: [
-      {
-        groupId: 1,
-        team: "England"
-      },
-      {
-        groupId: 2,
-        team: "IR Iran"
-      },
-      {
-        groupId: 3,
-        team: "USA"
-      },
-      {
-        groupId: 4,
-        team: "Wales"
-      }
-    ]
+    groupId: 1,
+    team: "England"
+  },
+  {
+    grpName: "B",
+    groupId: 2,
+    team: "IR Iran"
+  },
+  {
+    grpName: "B",
+    groupId: 3,
+    team: "USA"
+  },
+  {
+    grpName: "B",
+    groupId: 4,
+    team: "Wales"
   },
   {
     grpName: "C",
-    group: [
-      {
-        groupId: 1,
-        team: "Argentina"
-      },
-      {
-        groupId: 2,
-        team: "Saudi Arabia"
-      },
-      {
-        groupId: 3,
-        team: "Mexico"
-      },
-      {
-        groupId: 4,
-        team: "Poland"
-      }
-    ]
+    groupId: 1,
+    team: "Argentina"
+  },
+  {
+    grpName: "C",
+    groupId: 2,
+    team: "Saudi Arabia"
+  },
+  {
+    grpName: "C",
+    groupId: 3,
+    team: "Mexico"
+  },
+  {
+    grpName: "C",
+    groupId: 4,
+    team: "Poland"
   },
   {
     grpName: "D",
-    group: [
-      {
-        groupId: 1,
-        team: "France"
-      },
-      {
-        groupId: 2,
-        team: "Denmark"
-      },
-      {
-        groupId: 3,
-        team: "Tunisia"
-      },
-      {
-        groupId: 4,
-        team: "Australia"
-      }
-    ]
+    groupId: 1,
+    team: "France"
+  },
+  {
+    grpName: "D",
+    groupId: 2,
+    team: "Denmark"
+  },
+  {
+    grpName: "D",
+    groupId: 3,
+    team: "Tunisia"
+  },
+  {
+    grpName: "D",
+    groupId: 4,
+    team: "Australia"
   },
   {
     grpName: "E",
-    group: [
-      {
-        groupId: 1,
-        team: "Spain"
-      },
-      {
-        groupId: 2,
-        team: "Germany"
-      },
-      {
-        groupId: 3,
-        team: "Japan"
-      },
-      {
-        groupId: 4,
-        team: "Costa Rica"
-      }
-    ]
+    groupId: 1,
+    team: "Spain"
+  },
+  {
+    grpName: "E",
+    groupId: 2,
+    team: "Germany"
+  },
+  {
+    grpName: "E",
+    groupId: 3,
+    team: "Japan"
+  },
+  {
+    grpName: "E",
+    groupId: 4,
+    team: "Costa Rica"
   },
   {
     grpName: "F",
-    group: [
-      {
-        groupId: 1,
-        team: "Belgium"
-      },
-      {
-        groupId: 2,
-        team: "Canada"
-      },
-      {
-        groupId: 3,
-        team: "Morocco"
-      },
-      {
-        groupId: 4,
-        team: "Croatia"
-      }
-    ]
+    groupId: 1,
+    team: "Belgium"
+  },
+  {
+    grpName: "F",
+    groupId: 2,
+    team: "Canada"
+  },
+  {
+    grpName: "F",
+    groupId: 3,
+    team: "Morocco"
+  },
+  {
+    grpName: "F",
+    groupId: 4,
+    team: "Croatia"
   },
   {
     grpName: "G",
-    group: [
-      {
-        groupId: 1,
-        team: "Brazil"
-      },
-      {
-        groupId: 2,
-        team: "Serbia"
-      },
-      {
-        groupId: 3,
-        team: "Switzerland"
-      },
-      {
-        groupId: 4,
-        team: "Cameroon"
-      }
-    ]
+    groupId: 1,
+    team: "Brazil"
+  },
+  {
+    grpName: "G",
+    groupId: 2,
+    team: "Serbia"
+  },
+  {
+    grpName: "G",
+    groupId: 3,
+    team: "Switzerland"
+  },
+  {
+    grpName: "G",
+    groupId: 4,
+    team: "Cameroon"
   },
   {
     grpName: "H",
-    group: [
-      {
-        groupId: 1,
-        team: "Portugal"
-      },
-      {
-        groupId: 2,
-        team: "Ghana"
-      },
-      {
-        groupId: 3,
-        team: "Uruguay"
-      },
-      {
-        groupId: 4,
-        team: "Korea Republic"
-      }
-    ]
+    groupId: 1,
+    team: "Portugal"
+  },
+  {
+    grpName: "H",
+    groupId: 2,
+    team: "Ghana"
+  },
+  {
+    grpName: "H",
+    groupId: 3,
+    team: "Uruguay"
+  },
+  {
+    grpName: "H",
+    groupId: 4,
+    team: "Korea Republic"
   }
 ]
 

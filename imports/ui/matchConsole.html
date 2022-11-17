@@ -5,9 +5,10 @@
     </div>
   </div>
   <div class="row justify-content-center mb-2">
-    <div class="col-md-6">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
       <!-- Button trigger modal -->
-      <a href="" class="btn btn-success js-addMatch" data-toggle="modal" data-target="#addMatchModal">Add Match</a>
+      <!-- <a href="" class="btn btn-success js-addMatch" data-bs-toggle="modal" data-bs-target="#addMatchModal">Add Match</a> -->
     </div>
   </div>
   <!-- Modal -->
@@ -17,7 +18,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="addMatchModalLabel">Add Match</h5>
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button> -->
         </div>
@@ -79,11 +80,11 @@
           </form>
         </div> <!-- /modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary js-closeMatch" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary js-saveMatch" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-secondary js-closeMatch" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary js-saveMatch" data-bs-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
   </div> <!-- /modal -->
-  {{> matchList}}
+  {{> fixtures}}
 </template>
