@@ -118,6 +118,174 @@ groupMatches = [
     matchDate: 1669402800000, // 11/25 15:00
     teamOne: 1,
     teamTwo: 3
+  },
+  {
+    group: "D",
+    matchDate: 1669456800000, // 11/26 06:00
+    teamOne: 3,
+    teamTwo: 4
+  },
+  {
+    group: "C",
+    matchDate: 1669467600000, // 11/26 09:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "D",
+    matchDate: 1669478400000, // 11/26 12:00
+    teamOne: 1,
+    teamTwo: 2
+  },
+  {
+    group: "C",
+    matchDate: 1669489200000, // 11/26 15:00
+    teamOne: 1,
+    teamTwo: 3
+  },
+  {
+    group: "E",
+    matchDate: 1669543200000, // 11/27 06:00
+    teamOne: 3,
+    teamTwo: 4
+  },
+  {
+    group: "F",
+    matchDate: 1669554000000, // 11/27 09:00
+    teamOne: 1,
+    teamTwo: 3
+  },
+  {
+    group: "F",
+    matchDate: 1669564800000, // 11/27 12:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "E",
+    matchDate: 1669575600000, // 11/27 15:00
+    teamOne: 1,
+    teamTwo: 2
+  },
+  {
+    group: "G",
+    matchDate: 1669629600000, // 11/28 06:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "H",
+    matchDate: 1669640400000, // 11/28 09:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "G",
+    matchDate: 1669651200000, // 11/28 12:00
+    teamOne: 1,
+    teamTwo: 3
+  },
+  {
+    group: "H",
+    matchDate: 1669662000000, // 11/28 15:00
+    teamOne: 1,
+    teamTwo: 3
+  },
+  {
+    group: "A",
+    matchDate: 1669734000000, // 11/29 11:00
+    teamOne: 4,
+    teamTwo: 1
+  },
+  {
+    group: "A",
+    matchDate: 1669734000000, // 11/29 11:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "B",
+    matchDate: 1669748400000, // 11/29 15:00
+    teamOne: 4,
+    teamTwo: 1
+  },
+  {
+    group: "B",
+    matchDate: 1669748400000, // 11/29 15:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "D",
+    matchDate: 1669820400000, // 11/30 11:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "D",
+    matchDate: 1669820400000, // 11/30 11:00
+    teamOne: 3,
+    teamTwo: 1
+  },
+  {
+    group: "C",
+    matchDate: 1669834800000, // 11/30 15:00
+    teamOne: 4,
+    teamTwo: 1
+  },
+  {
+    group: "C",
+    matchDate: 1669834800000, // 11/30 15:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "F",
+    matchDate: 1669906800000, // 12/1 11:00
+    teamOne: 4,
+    teamTwo: 1
+  },
+  {
+    group: "F",
+    matchDate: 1669906800000, // 12/1 11:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "E",
+    matchDate: 1669921200000, // 12/1 15:00
+    teamOne: 3,
+    teamTwo: 1
+  },
+  {
+    group: "E",
+    matchDate: 1669921200000, // 12/1 15:00
+    teamOne: 4,
+    teamTwo: 2
+  },
+  {
+    group: "H",
+    matchDate: 1669993200000, // 12/2 11:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "H",
+    matchDate: 1669993200000, // 12/2 11:00
+    teamOne: 4,
+    teamTwo: 1
+  },
+  {
+    group: "G",
+    matchDate: 1670007600000, // 12/2 15:00
+    teamOne: 2,
+    teamTwo: 3
+  },
+  {
+    group: "G",
+    matchDate: 1670007600000, // 12/2 15:00
+    teamOne: 4,
+    teamTwo: 2
   }
 ]
 
