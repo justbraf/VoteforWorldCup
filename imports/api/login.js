@@ -14,22 +14,22 @@
 	// }
 // });
 
-Template.userLogin.events({
-	'click #login-buttons-facebook': function(e) {
-		e.preventDefault();
-		// console.log('attempting login');
-		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
-				if (err) {
-						console.log('Handle errors here: ', err);
-						return;
-				}
-				// else {
-				// 	// console.log('redirect to Welcome');
-				// 	return Router.go('welcome');
-				// }
-		});
-	}
-});
+// Template.userLogin.events({
+// 	'click #login-buttons-facebook': function(e) {
+// 		e.preventDefault();
+// 		// console.log('attempting login');
+// 		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
+// 				if (err) {
+// 						console.log('Handle errors here: ', err);
+// 						return;
+// 				}
+// 				// else {
+// 				// 	// console.log('redirect to Welcome');
+// 				// 	return Router.go('welcome');
+// 				// }
+// 		});
+// 	}
+// });
 
 // Template.login.events({
 // 		'click .login-facebook': function(e) {
