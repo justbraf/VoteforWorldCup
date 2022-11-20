@@ -1,14 +1,15 @@
 <template name="userLogin">
 	<div class="row justify-content-end mt-2">
 		<div class="col-lg text-end">
+			{{> loginButtons}}
 			<h5>
 				{{#if currentUser}}
-				May the odds be with you!
+				{{ username }}, May the odds be with you!
+				<buttton class="btn btn-danger js-signOut">Sign Out</buttton>
 				{{else}}
 				Login to earn your bragging rights!!!
 				{{/if}}
 			</h5>
-			{{> loginButtons}}
 		</div>
 	</div>
 </template>

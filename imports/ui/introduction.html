@@ -54,12 +54,11 @@
 
 		</div>
 		<div class="col-4">
+			{{> userLogin}}
 			{{#if currentUser}}
 			{{> topRankers}}
 			{{else}}
-			{{> userLogin}}
 			{{/if}}
-
 		</div>
 	</div>
 </template>
