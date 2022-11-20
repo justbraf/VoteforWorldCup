@@ -71,8 +71,8 @@ Template.fixtures.events({
     if (teamData.includes(fixtureData.group)) {
       teamData = teamsdb.find({ grpName: fixtureData.group }).fetch()
     }
-    let teamOne = teamData.find(el => el.groupId == fixtureData.teamOne).team
-    let teamTwo = teamData.find(el => el.groupId == fixtureData.teamTwo).team
+    let teamOne = teamData.find(el => el.groupId == fixtureData.teamOne)
+    let teamTwo = teamData.find(el => el.groupId == fixtureData.teamTwo)
     // console.table(teamData)
     if (Meteor.userId() == userAdmID) {
       let result = goalsdb.find({ 'matchID': matchId });
@@ -97,15 +97,15 @@ Template.fixtures.events({
     } else {
       if (new Date() < new Date(fixtureData.matchDate)) {
         $('#voteModal input[name="matchID"]').val(matchId);
-        $('#voteModal #teamName1Vote').attr("data-id", teamOne);
-        $('#voteModal #teamName2Vote').attr("data-id", teamTwo);
+        $('#voteModal #teamName1Vote').attr("data-id", teamOne._id);
+        $('#voteModal #teamName2Vote').attr("data-id", teamTwo._id);
         // $('#voteModal input[name="matchnum"]').val(teamData.matchNum);
-        $('#teamFlag1').attr("src", "../" + teamOne + ".png");
-        $('#teamFlag1').attr("alt", "Flag of " + teamOne);
-        $('#teamFlag2').attr("src", "../" + teamTwo + ".png");
-        $('#teamFlag2').attr("alt", "Flag of " + teamTwo);
-        $('#teamName1Show').html(teamOne);
-        $('#teamName2Show').html(teamTwo);
+        $('#teamFlag1').attr("src", "../" + teamOne.team + ".png");
+        $('#teamFlag1').attr("alt", "Flag of " + teamOne.team);
+        $('#teamFlag2').attr("src", "../" + teamTwo.team + ".png");
+        $('#teamFlag2').attr("alt", "Flag of " + teamTwo.team);
+        $('#teamName1Show').html(teamOne.team);
+        $('#teamName2Show').html(teamTwo.team);
         $('#voteModal').modal('show');
       } else {
         alert("Predicting for this match is closed.");

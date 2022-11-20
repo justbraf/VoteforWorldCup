@@ -22,16 +22,6 @@ Template.userLogin.helpers({
 
 Template.userLogin.events({
 	'click .js-signOut': () => {
-		teamsdb.insert({
-			grpName: "A",
-			groupId: 2,
-			team: "Ecuador"
-		});
-		teamsdb.insert({
-			grpName: "A",
-			groupId: 4,
-			team: "Netherlands"
-		});
 		Accounts.logout()
 	}
 	// 	'click #login-buttons-facebook': function(e) {
