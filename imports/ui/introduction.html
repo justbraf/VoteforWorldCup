@@ -1,6 +1,6 @@
 <template name="introduction">
 	<div class="row">
-		<div class="col-8">
+		<div class="col-9">
 			<div class="row justify-content-center">
 				{{#if currentUser}}
 				<div class="col-sm-12">
@@ -9,9 +9,10 @@
 							<a class="nav-link active" id="predictor-tab" data-bs-toggle="tab" href="#predictor" role="tab"
 								aria-controls="predictor" aria-selected="false">Predictor Stats</a>
 						</li>
-						<!-- <li class="nav-item">
-							<a class="nav-link active" id="matchLists-tab" data-bs-toggle="tab" href="#matchLists" role="tab" aria-controls="matchLists" aria-selected="true">Match List</a>
-						</li> -->
+						<li class="nav-item">
+							<a class="nav-link" id="matchLists-tab" data-bs-toggle="tab" href="#matchLists" role="tab"
+								aria-controls="matchLists" aria-selected="true">Match List</a>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link" id="matchResults-tab" data-bs-toggle="tab" href="#matchResults" role="tab"
 								aria-controls="matchResults" aria-selected="false">Match Results</a>
@@ -28,7 +29,8 @@
 						<!-- <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">Upcoming Matches</div> -->
 						<div class="tab-pane fade show active" id="predictor" role="tabpanel" aria-labelledby="predictor-tab">{{>
 							predictor}}</div>
-						<!-- <div class="tab-pane fade show active" id="matchLists" role="tabpanel" aria-labelledby="matchLists-tab">{{> fixtures}}</div> -->
+						<div class="tab-pane fade show" id="matchLists" role="tabpanel" aria-labelledby="matchLists-tab">{{>
+							fixtures}}</div>
 						<div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">{{> groupList}}</div>
 						<!-- <div class="tab-pane fade" id="teams" role="tabpanel" aria-labelledby="teams-tab">{{> teamList}}</div> -->
 						<div class="tab-pane fade" id="matchResults" role="tabpanel" aria-labelledby="matchResults-tab">{{>
@@ -46,14 +48,15 @@
 				</div>
 				{{/if}}
 			</div>
+			{{#unless currentUser}}
 			<div class="row justify-content-center mt-1">
 				<div class="col-md-4 mt-3 text-center">
 					<h3>FIFA World Cup Legend!!!</h3>
 				</div>
 			</div>
-
+			{{/unless}}
 		</div>
-		<div class="col-4">
+		<div class="col-3">
 			{{> userLogin}}
 			{{#if currentUser}}
 			{{> topRankers}}

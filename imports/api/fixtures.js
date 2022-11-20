@@ -24,22 +24,20 @@ Template.fixtures.helpers({
     // set the color of team columns based on user's vote
     let result = votesdb.find({ $and: [{ matchID: this._id }, { userID: Meteor.userId() }] });
     if (result.count() > 0) {
-      if (result.fetch()[0].teamID == this.teamOne) {
+      if (result.fetch()[0].teamID == teamsdb.findOne({ grpName: this.group, groupId: this.teamOne })._id) {
         return 1;
-      } else {
-        return 0;
       }
+      return 0;
     }
   },
   userVoted2: function () {
     // set the color of team columns based on user's vote
     let result = votesdb.find({ $and: [{ matchID: this._id }, { userID: Meteor.userId() }] });
     if (result.count() > 0) {
-      if (result.fetch()[0].teamID == this.teamTwo) {
+      if (result.fetch()[0].teamID == teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo })._id) {
         return 1;
-      } else {
-        return 0;
       }
+      return 0;
     }
   },
   showGoals: function () {
