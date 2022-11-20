@@ -9,9 +9,9 @@ Template.userLogin.helpers({
 		if (!Meteor.userId())
 			return "not logged in"
 		let userData
-		if (Meteor.user().services)
-			//  || Meteor.user().services.facebook || Meteor.user().services.facebook.email)
-			userData = Meteor.user().services.facebook.email
+		if (Meteor.user().profile)
+			if (Meteor.user().profile.name)
+			userData = Meteor.user().profile.name
 		if (!userData)
 			userData = Meteor.user().emails[0].address
 		if (!userData)
