@@ -24,8 +24,8 @@ ServiceConfiguration.configurations.upsert({
 },
 	{
 		$set: {
-			clientId: "365846407960-th0j8enbhg6t4s1f7k8mkam0opav7h1t.apps.googleusercontent.com",
-			secret: "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"
+			clientId: "671901475784-cug5hp06gg634551c2qmtupsd6im0gh2.apps.googleusercontent.com",
+			secret: "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"
 		}
 	}
 )

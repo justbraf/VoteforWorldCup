@@ -1,0 +1,14 @@
+<template name="userLogin">
+	<div class="row justify-content-end mt-2">
+		<div class="col-lg text-end">
+			<h5>
+				{{#if currentUser}}
+				May the odds be with you!
+				{{else}}
+				Login to earn your bragging rights!!!
+				{{/if}}
+			</h5>
+			{{> loginButtons}}
+		</div>
+	</div>
+</template>

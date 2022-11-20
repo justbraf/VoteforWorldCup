@@ -30,7 +30,7 @@ Meteor.startup(() => {
 		return teamsdb.find({});
 	});
 
-	Meteor.publish('matches', function () {
+	Meteor.publish('fixtures', function () {
 		return fixturesdb.find({});
 	});
 

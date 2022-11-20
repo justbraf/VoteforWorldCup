@@ -5,7 +5,6 @@ import './error404.html'
 import './introduction.html';
 import './winner.html'
 import './topRankers.html'
-import './login.html';
 import './allRankers.html'
 import './matchResults.html'
 import './setGoals.html'
@@ -38,6 +37,8 @@ import '../api/fixtures.js';
 import './voteForm.html'
 import '../api/voteForm.js';
 
-import '../api/login.js';
+import './userLogin.html';
+import '../api/userLogin.js';
+
 import '../api/predictors.js';
 import '../api/winner.js'

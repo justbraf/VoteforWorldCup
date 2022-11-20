@@ -1,48 +1,65 @@
 <template name="introduction">
-	{{#if currentUser}}
-		{{> topRankers}}
-	{{/if}}
-	<div class="row justify-content-center">
-		{{#if currentUser}}
-		<div class="col-sm-12">
-			<ul class="nav nav-pills nav-fill" id="menuTabs" role="tablist">		
-				<li class="nav-item">
-			    <a class="nav-link active" id="predictor-tab" data-toggle="tab" href="#predictor" role="tab" aria-controls="predictor" aria-selected="false">Predictor Stats</a>
-			  </li>	  
-			  <!-- <li class="nav-item">
-			    <a class="nav-link active" id="matchLists-tab" data-toggle="tab" href="#matchLists" role="tab" aria-controls="matchLists" aria-selected="true">Match List</a>
-			  </li> -->
-			  <li class="nav-item">
-			    <a class="nav-link" id="matchResults-tab" data-toggle="tab" href="#matchResults" role="tab" aria-controls="matchResults" aria-selected="false">Match Results</a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" id="groups-tab" data-toggle="tab" href="#groups" role="tab" aria-controls="groups" aria-selected="false">Groups</a>
-			  </li>
-			  <!-- <li class="nav-item">
-			    <a class="nav-link" id="teams-tab" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="false">Teams</a>
-			  </li>	 -->		  
-			</ul>
-			<div class="tab-content" id="menuTabContent">
-			  <!-- <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">Upcoming Matches</div> -->
-			  <div class="tab-pane fade show active" id="predictor" role="tabpanel" aria-labelledby="predictor-tab">{{> predictor}}</div>
-			  <!-- <div class="tab-pane fade show active" id="matchLists" role="tabpanel" aria-labelledby="matchLists-tab">{{> fixtures}}</div> -->
-			  <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">{{> groupList}}</div>
-			  <!-- <div class="tab-pane fade" id="teams" role="tabpanel" aria-labelledby="teams-tab">{{> teamList}}</div> -->
-			  <div class="tab-pane fade" id="matchResults" role="tabpanel" aria-labelledby="matchResults-tab">{{> matchResults}}</div>
+	<div class="row">
+		<div class="col-8">
+			<div class="row justify-content-center">
+				{{#if currentUser}}
+				<div class="col-sm-12">
+					<ul class="nav nav-pills nav-fill" id="menuTabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="predictor-tab" data-bs-toggle="tab" href="#predictor" role="tab"
+								aria-controls="predictor" aria-selected="false">Predictor Stats</a>
+						</li>
+						<!-- <li class="nav-item">
+							<a class="nav-link active" id="matchLists-tab" data-bs-toggle="tab" href="#matchLists" role="tab" aria-controls="matchLists" aria-selected="true">Match List</a>
+						</li> -->
+						<li class="nav-item">
+							<a class="nav-link" id="matchResults-tab" data-bs-toggle="tab" href="#matchResults" role="tab"
+								aria-controls="matchResults" aria-selected="false">Match Results</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="groups-tab" data-bs-toggle="tab" href="#groups" role="tab" aria-controls="groups"
+								aria-selected="false">Groups</a>
+						</li>
+						<!-- <li class="nav-item">
+							<a class="nav-link" id="teams-tab" data-bs-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="false">Teams</a>
+						</li>	 -->
+					</ul>
+					<div class="tab-content" id="menuTabContent">
+						<!-- <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">Upcoming Matches</div> -->
+						<div class="tab-pane fade show active" id="predictor" role="tabpanel" aria-labelledby="predictor-tab">{{>
+							predictor}}</div>
+						<!-- <div class="tab-pane fade show active" id="matchLists" role="tabpanel" aria-labelledby="matchLists-tab">{{> fixtures}}</div> -->
+						<div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">{{> groupList}}</div>
+						<!-- <div class="tab-pane fade" id="teams" role="tabpanel" aria-labelledby="teams-tab">{{> teamList}}</div> -->
+						<div class="tab-pane fade" id="matchResults" role="tabpanel" aria-labelledby="matchResults-tab">{{>
+							matchResults}}</div>
+					</div>
+				</div>
+				{{else}}
+				<div class="col-xl-10">
+					<h4 class="my-3">Show your FIFA World Cup prowess!</h4>
+					<h4 class="mb-5">Predict which teams will win their matches before they are even played.</h4>
+					<h5>Select your picks from the fixtures for teams playing for supremacy. <br>You have until match time to make
+						your choice.</h5>
+					<h5>Each time your pick wins you get points!</h5>
+					<h5>Vote now! Earn the most points and you get the bragging rights and become a...</h5>
+				</div>
+				{{/if}}
 			</div>
+			<div class="row justify-content-center mt-1">
+				<div class="col-md-4 mt-3 text-center">
+					<h3>FIFA World Cup Legend!!!</h3>
+				</div>
+			</div>
+
 		</div>
-		{{else}}
-		<div class="col-md-8 col-12">
-			<h4>Show your FIFA World Cup prowess by predicting which teams will win their matches.</h4>
-			<h5>Select your picks from the teams playing for supremacy in the various upcoming matches.</h5>
-			<h5>Each time your pick wins you get points!</h5>
-			<h5>Vote now! Earn the most points and you get the bragging rights and become a</h5>			
-		</div>
-		{{/if}}
-	</div>
-	<div class="row justify-content-center mt-1">
-		<div class="col-md-4">
-			<h3>FIFA World Cup Legend!!!</h3>
+		<div class="col-4">
+			{{#if currentUser}}
+			{{> topRankers}}
+			{{else}}
+			{{> userLogin}}
+			{{/if}}
+
 		</div>
 	</div>
 </template>

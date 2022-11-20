@@ -103,15 +103,24 @@ Template.predictor.onRendered(function () {
 
 Template.predictor.helpers({
 	userPoints: function () {
-		return ranksdb.findOne({ 'userID': Meteor.userId() }).totalPoints;
+		let totPoints = "" //ranksdb.findOne({ 'userID': Meteor.userId() }).totalPoints;
+		if (!totPoints)
+			totPoints = 0
+		return totPoints
 	},
 	usersRank: function () {
-		return ranksdb.find({ 'userID': Meteor.userId() }).fetch()[0].ranked;
+		let rank = "" // ranksdb.find({ 'userID': Meteor.userId() }).fetch()[0].ranked;
+		if (!rank)
+			rank = "?"
+		return rank
 	},
 	predictionsCounted: function () {
 		return votesdb.find({ 'userID': Meteor.userId() }).count();
 	},
 	predictionsCorrect: function () {
-		return ranksdb.findOne({ 'userID': Meteor.userId() }).predictions;
+		let preCorrect = "" //ranksdb.findOne({ 'userID': Meteor.userId() }).predictions;
+		if (preCorrect <= 0)
+			preCorrect = "?"
+		return preCorrect
 	}
 });
