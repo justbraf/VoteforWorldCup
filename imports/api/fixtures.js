@@ -1,7 +1,5 @@
 import date from 'date-and-time';
 
-let userAdmID = 'dzLsoejG8sQWPrrG6';
-
 Template.fixtures.helpers({
   WCMatches: function () {
     // return fixturesdb.find({}, { sort: { matchDate: 1 }, limit: (Number(VFWCdb.findOne({}).matchesAvailable) - (goalsdb.find().count() / 2)), skip: (goalsdb.find().count() / 2) });
@@ -48,16 +46,20 @@ Template.fixtures.helpers({
     }
   },
   teamOneGoals: function () {
-    let goals = goalsdb.find({ $and: [{ teamID: this.teamOne }, { matchID: this._id }] });
+    let teamOne = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamOne }] })
+    let goals = goalsdb.find({ $and: [{ teamID: teamOne._id }, { matchID: this._id }] });
     if (goals.count() > 0) {
       return goals.fetch()[0].score;
     }
+    return "?"
   },
   teamTwoGoals: function () {
-    let goals = goalsdb.find({ $and: [{ teamID: this.teamTwo }, { matchID: this._id }] });
+    let teamTwo = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamTwo }] })
+    let goals = goalsdb.find({ $and: [{ teamID: teamTwo._id }, { matchID: this._id }] });
     if (goals.count() > 0) {
       return goals.fetch()[0].score;
     }
+    return "?"
   }
 });
 
@@ -71,28 +73,33 @@ Template.fixtures.events({
     }
     let teamOne = teamData.find(el => el.groupId == fixtureData.teamOne)
     let teamTwo = teamData.find(el => el.groupId == fixtureData.teamTwo)
-    // console.table(teamData)
-    if (Meteor.userId() == userAdmID) {
-      let result = goalsdb.find({ 'matchID': matchId });
-      if (result.count() > 0) {
-        result.forEach(function (goalDocs) {
-          if (goalDocs.teamID == teamData.teamOne) {
-            Number($('#teamGoals1').val(goalDocs.score));
-          }
-          if (goalDocs.teamID == teamData.teamTwo) {
-            Number($('#teamGoals2').val(goalDocs.score));
-          }
-        });
+    let adm
+    if (Meteor.user().profile && Meteor.user().profile.isAdmin)
+      adm = Meteor.user().profile.isAdmin
+    if (adm) {
+      if (new Date() > new Date(fixtureData.matchDate)) {
+        let result = goalsdb.find({ 'matchID': matchId });
+        if (result.count() > 0) {
+          result.forEach(function (goalDocs) {
+            if (goalDocs.teamID == teamOne._id) {
+              Number($('#teamGoals1').val(goalDocs.score));
+            }
+            if (goalDocs.teamID == teamTwo._id) {
+              Number($('#teamGoals2').val(goalDocs.score));
+            }
+          });
+        }
+        $('#setGoalsModal input[name="matchID"]').val(matchId);
+        $('#sgteamFlag1').attr("src", teamOne.team + ".png")
+        $('#sgteamFlag1').attr("alt", "Flag of " + teamOne.team)
+        $('#sgteamFlag2').attr("src", teamTwo.team + ".png")
+        $('#sgteamFlag2').attr("alt", "Flag of " + teamTwo.team)
+        $('#sgteamName1').html(teamOne.team)
+        $('#sgteamName2').html(teamTwo.team)
+        $('#setGoalsModal').modal('show');
       }
-      $('#setGoalsModal input[name="matchID"]').val(matchId);
-      $('#sgteamFlag1').attr("src", teamsdb.findOne({ _id: teamData.teamOne }).teamFlag);
-      $('#sgteamFlag1').attr("alt", "Flag of " + teamsdb.findOne({ _id: teamData.teamOne }).teamName);
-      $('#sgteamFlag2').attr("src", teamsdb.findOne({ _id: teamData.teamTwo }).teamFlag);
-      $('#sgteamFlag2').attr("alt", "Flag of " + teamsdb.findOne({ _id: teamData.teamTwo }).teamName);
-      $('#sgteamName1').html(teamsdb.findOne({ _id: teamData.teamOne }).teamName);
-      $('#sgteamName2').html(teamsdb.findOne({ _id: teamData.teamTwo }).teamName);
-      $('#setGoalsModal').modal('show');
-    } else {
+    }
+    else {
       if (new Date() < new Date(fixtureData.matchDate)) {
         $('#voteModal input[name="matchID"]').val(matchId);
         $('#voteModal #teamName1Vote').attr("data-id", teamOne._id);

@@ -7,8 +7,6 @@ import './winner.html'
 import './topRankers.html'
 import './allRankers.html'
 import './matchResults.html'
-import './setGoals.html'
-import './setGoals2.html'
 import './predictors.html';
 import './delTeamModal.html'
 
@@ -39,6 +37,10 @@ import '../api/voteForm.js';
 
 import './userLogin.html';
 import '../api/userLogin.js';
+
+import './setGoals.html'
+import './setGoals2.html'
+import '../api/setGoals.js'
 
 import '../api/predictors.js';
 import '../api/winner.js'

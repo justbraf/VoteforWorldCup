@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check'
 import '../lib/collections.js';
 import '../imports/startup/accounts-external.js';
 import '../imports/startup/groups.js'
@@ -60,3 +61,19 @@ Meteor.publish('userData', function () {
 		this.ready();
 	}
 });
+
+Meteor.methods({
+	'user.makeAdmin'() {
+		// check(uId, String)
+		if (!this.userId) {
+			throw new Meteor.Error("Not Authorized")
+		}
+		Meteor.users.update(
+			{ _id: Meteor.userId() },
+			{
+				$set: {
+					"profile.isAdmin": true
+				}
+			})
+	}
+})

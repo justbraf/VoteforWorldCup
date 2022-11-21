@@ -64,7 +64,7 @@ Template.matchResults.events({
 	'click .js-matchVote': function(e){
 		let matchId = e.currentTarget.id;
 		let teamData = fixturesdb.findOne({_id: matchId});
-		if (Meteor.userId() == userAdmID){
+		if (Meteor.userId() == "userAdmID"){
 			let result = goalsdb.find({'matchID': matchId});
 			if (result.count() > 0) {				
 				result.forEach(function(goalDocs){					
@@ -103,50 +103,3 @@ Template.matchResults.events({
 // 		fixturesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 // 	}
 // });
-
-Template.setGoals.events({
-	'click .js-setGoals': function(){
-		let mId = $('#setGoalsModal input[name="matchID"]').val();
-		let tg1 = Number($('#teamGoals1').val());
-		let tg2 = Number($('#teamGoals2').val());
-		let teamData = fixturesdb.findOne({_id: mId});		
-		let result = goalsdb.find({'matchID': mId});
-		if (result.count() < 1) {
-			goalsdb.insert({'matchID': mId, 'teamID': teamData.teamID1, 'score': tg1});
-			goalsdb.insert({'matchID': mId, 'teamID': teamData.teamID2, 'score': tg2});
-		} else {			
-			result.forEach(function(goalDocs){				
-				if (goalDocs.teamID == teamData.teamID1){
-					goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg1}});
-				}
-				if (goalDocs.teamID == teamData.teamID2){
-					goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg2}});
-				}
-			});
-		}
-		$('#teamGoals1').val(0);
-		$('#teamGoals2').val(0);
-		systemRankings();
-	}
-});
-
-Template.setGoals2.events({
-	'click .js-setGoals': function(){
-		let mId = $('#setGoalsModal2 input[name="matchID"]').val();
-		let tg1 = Number($('#teamGoals12').val());
-		let tg2 = Number($('#teamGoals22').val());
-		let teamData = fixturesdb.findOne({_id: mId});		
-		let result = goalsdb.find({'matchID': mId});
-		result.forEach(function(goalDocs){				
-			if (goalDocs.teamID == teamData.teamID1){
-				goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg1}});
-			}
-			if (goalDocs.teamID == teamData.teamID2){
-				goalsdb.update({_id: goalDocs._id}, {$set: {'score': tg2}});
-			}
-		});
-		$('#teamGoals12').val(0);
-		$('#teamGoals22').val(0);
-		systemRankings();
-	}
-});

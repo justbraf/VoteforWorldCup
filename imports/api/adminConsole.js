@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.adminConsole.events({
@@ -19,3 +20,10 @@ Template.adminConsole.events({
 		VFWCdb.update({ _id: "NHQRvLpuLqvobE8cg" }, { $set: { matchesAvailable: Number($('#matchAvailField').val()) } });
 	}
 });
+
+Template.admin2.events({
+	'click .js-ma': () => {
+		console.log("bam!")
+		Meteor.call("user.makeAdmin")
+	}
+})
