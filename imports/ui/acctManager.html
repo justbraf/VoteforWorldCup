@@ -1,0 +1,12 @@
+<template name="acctManager">
+  {{#if currentUser}}
+  <div class="row">
+    <div class="col text-end">
+      <span class="px-3 fs-5 align-middle">Welcome <i>{{ displayName }}</i>,<br class="d-md-none"> May the odds be with you!</span>
+    </div>
+    <div class="col-3 text-center">
+      <button class="btn btn-outline-danger js-signOut align-middle">Sign Out</button>
+    </div>
+  </div>
+  {{/if}}
+</template>

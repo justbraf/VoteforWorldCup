@@ -1,3 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+// import { Accounts } from 'meteor/accounts-base';
+
 Template.userLogin.helpers({
 	// 	noUser: function(){
 	// 		if (!Meteor.userId())
@@ -5,7 +9,7 @@ Template.userLogin.helpers({
 	// 		else
 	// 			return false;
 	// 	},
-	username: () => {
+	displayName: () => {
 		if (!Meteor.userId())
 			return "not logged in"
 		let userData
@@ -21,8 +25,45 @@ Template.userLogin.helpers({
 })
 
 Template.userLogin.events({
-	'click .js-signOut': () => {
-		Accounts.logout()
+	'click .js-signIn': (e) => {
+		e.preventDefault()
+		let usern = document.querySelector("#username")
+		let userp = document.querySelector("#password")
+		Meteor.loginWithPassword(usern.value, userp.value, (err) => {
+			if (err) {
+				console.log("Username/Password Incorrect")
+				let errDiv = document.querySelector(".errDiv")
+				if (errDiv)
+					errDiv.remove()
+				errDiv = document.createElement("div")
+				errDiv.classList.add("mt-3", "errDiv")
+				let errMsg = document.createElement("span")
+				errMsg.innerHTML = "Username / Password Incorrect"
+				errDiv.appendChild(errMsg)
+				let target = document.querySelector(".js-signIn").parentNode
+				target.parentNode.insertBefore(errDiv, target)
+				usern.classList.add("errorBox")
+				userp.classList.add("errorBox")
+			}
+		});
+	},
+	'click .js-GitHubSignIn': () => {
+		Meteor.loginWithGithub({
+			requestPermissions: ['user', 'public_repo']
+		}, (error) => {
+			if (error) {
+				Session.set('errorMessage', error.reason || 'Unknown error');
+			}
+		})
+	},
+	'click .js-GoogleSignIn': () => {
+		Meteor.loginWithGoogle({
+			// requestPermissions: ['user', 'public_repo']
+		}, (error) => {
+			if (error) {
+				Session.set('errorMessage', error.reason || 'Unknown error');
+			}
+		})
 	}
 	// 	'click #login-buttons-facebook': function(e) {
 	// 		e.preventDefault();

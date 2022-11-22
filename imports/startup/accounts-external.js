@@ -1,24 +1,5 @@
-// if (ServiceConfiguration.configurations.find({ service: 'facebook' }).count() > 0) {
-// 	ServiceConfiguration.configurations.remove({
-// 		_id: ServiceConfiguration.configurations.findOne({ service: "facebook" })['_id']
-// 	});
-// }
-// ServiceConfiguration.configurations.upsert({
-// 	service: 'facebook'
-// },
-// 	{
-// 		$set: {
-// 			appId: '360794574436579',
-// 			secret: '005952e8e231a93e6b04eb4c668d7a8f'
-// 		}
-// 	}
-// )
+import { ServiceConfiguration } from 'meteor/service-configuration'
 
-// if (ServiceConfiguration.configurations.find({ service: 'google' }).count() > 0) {
-// 	ServiceConfiguration.configurations.remove({
-// 		_id: ServiceConfiguration.configurations.findOne({ service: "google" })['_id']
-// 	});
-// }
 ServiceConfiguration.configurations.upsert({
 	service: "google"
 },
@@ -41,3 +22,19 @@ ServiceConfiguration.configurations.upsert({
 		}
 	}
 )
+
+// if (ServiceConfiguration.configurations.find({ service: 'facebook' }).count() > 0) {
+// 	ServiceConfiguration.configurations.remove({
+// 		_id: ServiceConfiguration.configurations.findOne({ service: "facebook" })['_id']
+// 	});
+// }
+// ServiceConfiguration.configurations.upsert({
+// 	service: 'facebook'
+// },
+// 	{
+// 		$set: {
+// 			appId: '360794574436579',
+// 			secret: '005952e8e231a93e6b04eb4c668d7a8f'
+// 		}
+// 	}
+// )

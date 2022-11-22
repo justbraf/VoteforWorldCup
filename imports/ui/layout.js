@@ -44,3 +44,6 @@ import '../api/setGoals.js'
 
 import '../api/predictors.js';
 import '../api/winner.js'
+
+import "./acctManager.html"
+import "../api/acctManager.js"

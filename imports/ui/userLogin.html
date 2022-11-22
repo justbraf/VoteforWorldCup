@@ -1,16 +1,31 @@
 <template name="userLogin">
 	<div class="row justify-content-end mt-2">
-		<div class="col-lg text-end">
-			<h5>
-				{{#if currentUser}}
-				Welcome {{ username }},<br>May the odds be with you!
-				<br>
-				<buttton class="btn btn-danger js-signOut mt-3">Sign Out</buttton>
-				{{else}}
-				Login to earn your bragging rights!!!
-				{{> loginButtons}}
-				{{/if}}
-			</h5>
+		<div class="col-lg">
+			{{#unless currentUser}}
+			<div class="border border-1 myCorner">
+				<form class="loginForm px-2 pt-4">
+					<div class="m-2">
+						<label class="fw-bold" htmlFor="username">Username</label>
+						<input type="text" placeholder="Username" id="username" required />
+					</div>
+					<div class="m-2">
+						<label class="fw-bold" htmlFor="password">Password</label>
+						<input type="password" placeholder="Password" id="password" required />
+					</div>
+					<div class="mt-3">
+						<button class="btn btn-outline-info js-signIn" type='submit'>Sign In</button>
+					</div>
+				</form>
+				<div class="mt-3">
+					<button class="btn btn-outline-info js-GitHubSignIn"><i class="bi bi-github"></i> Sign in with
+						GitHub</button>
+				</div>
+				<div class="mt-3 pb-4">
+					<button class="btn btn-outline-info js-GoogleSignIn"><i class="bi bi-google"></i> Sign in with
+						Google</button>
+				</div>
+			</div>
+			{{/unless}}
 		</div>
 	</div>
 </template>

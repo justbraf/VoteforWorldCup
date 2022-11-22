@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check'
+// import { check } from 'meteor/check'
 import '../lib/collections.js';
 import '../imports/startup/accounts-external.js';
 import '../imports/startup/groups.js'
@@ -75,5 +75,8 @@ Meteor.methods({
 					"profile.isAdmin": true
 				}
 			})
+	},
+	'usersRegistered'() {
+		return "None"
 	}
 })

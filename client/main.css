@@ -6,17 +6,12 @@ body,
 	color: #ffffff !important;
 }
 
-#userLogin input,
-#userLogin a {
-	width: 100%;
-}
-
 hr {
 	background: yellow;
 }
 
 /*#login-sign-in-link*/
-.login-link-text {
+/* .login-link-text {
 	text-decoration: none !important;
 	display: inline-block;
 	font-weight: 400;
@@ -36,7 +31,7 @@ hr {
 	color: #fff;
 	background-color: #007bff;
 	border-color: #007bff;
-}
+} */
 
 .teamFlagImage,
 .teamFlags {
@@ -52,10 +47,6 @@ hr {
 #delModal,
 .blackText {
 	color: black;
-}
-
-#delModal {
-	/*width: 245px;*/
 }
 
 #teamName1,
@@ -88,19 +79,39 @@ hr {
 	border: 2px solid white;
 }
 
-.display-5 {
-	font-size: 2.5rem;
-	font-weight: 300;
-	line-height: 1.2;
-}
-
-.display-6 {
-	font-size: 1.2rem;
-	font-weight: 300;
-	line-height: 1.2;
-}
-
 .legends {
 	font-family: 'Gaegu', cursive !important;
 	font-size: 4rem !important;
+}
+
+.loginForm {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	/* justify-content: center; */
+	/* align-items: center; */
+	border-radius: 15px;
+}
+
+.loginForm>div>input {
+	flex-grow: 1;
+	box-sizing: border-box;
+	padding: 6px 10px;
+	background: white;
+	border: 1px solid #aaa;
+	width: 100%;
+	font-size: 1.1em;
+	margin-top: 4px;
+}
+
+.loginForm>div>input:focus {
+	outline: 0;
+}
+
+.errorBox {
+	border: 5px solid red !important;
+}
+
+.myCorner {
+	border-radius: 15px;
 }
