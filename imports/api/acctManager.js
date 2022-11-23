@@ -6,14 +6,16 @@ Template.acctManager.helpers({
   displayName: () => {
     if (!Meteor.userId())
       return "not logged in"
-    let userData
-    if (Meteor.user().profile)
-      if (Meteor.user().profile.name)
-        userData = Meteor.user().profile.name
-    if (!userData)
-      userData = Meteor.user().emails[0].address
-    if (!userData)
-      userData = "Anonymous"
+    let userData = "Anonymous"
+    let result = Meteor.user()
+    if (result.profile) {
+      if (result.profile.name)
+        userData = result.profile.name
+    }
+    else if (result.username)
+      userData = result.username
+    else if (result.emails)
+      userData = result.emails[0].address
     return userData
   }
 })
