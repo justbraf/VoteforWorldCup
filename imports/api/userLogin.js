@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-// import { Accounts } from 'meteor/accounts-base';
+import { Accounts } from 'meteor/accounts-base';
+// import { Session } from 'meteor/session'
 
 Template.userLogin.helpers({
 	// 	noUser: function(){
@@ -31,7 +32,6 @@ Template.userLogin.events({
 		let userp = document.querySelector("#password")
 		Meteor.loginWithPassword(usern.value, userp.value, (err) => {
 			if (err) {
-				console.log("Username/Password Incorrect")
 				let errDiv = document.querySelector(".errDiv")
 				if (errDiv)
 					errDiv.remove()
@@ -44,6 +44,31 @@ Template.userLogin.events({
 				target.parentNode.insertBefore(errDiv, target)
 				usern.classList.add("errorBox")
 				userp.classList.add("errorBox")
+			}
+		});
+	},
+	'click .js-register': (e) => {
+		e.preventDefault()
+		let usern = document.querySelector("#username")
+		let userp = document.querySelector("#password")
+		let options = { 
+			username: usern.value,
+			password: userp.value
+		}
+		Accounts.createUser(options, (err) => {
+			if (err) {
+				// let errDiv = document.querySelector(".errDiv")
+				// if (errDiv)
+				// 	errDiv.remove()
+				// errDiv = document.createElement("div")
+				// errDiv.classList.add("mt-3", "errDiv")
+				// let errMsg = document.createElement("span")
+				// errMsg.innerHTML = "Username / Password Incorrect"
+				// errDiv.appendChild(errMsg)
+				// let target = document.querySelector(".js-signIn").parentNode
+				// target.parentNode.insertBefore(errDiv, target)
+				// usern.classList.add("errorBox")
+				// userp.classList.add("errorBox")
 			}
 		});
 	},
@@ -65,37 +90,16 @@ Template.userLogin.events({
 			}
 		})
 	}
+	
 	// 	'click #login-buttons-facebook': function(e) {
 	// 		e.preventDefault();
-	// 		// console.log('attempting login');
 	// 		Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
 	// 				if (err) {
-	// 						console.log('Handle errors here: ', err);
 	// 						return;
 	// 				}
 	// 				// else {
-	// 				// 	// console.log('redirect to Welcome');
-	// 				// 	return Router.go('welcome');
+	// 				// 	return FlowRouter.go('welcome');
 	// 				// }
 	// 		});
 	// 	}
 })
-
-// Template.login.events({
-// 		'click .login-facebook': function(e) {
-// 				e.preventDefault();
-
-// 				Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err){
-// 						if (err) {
-// 								console.log('Handle errors here: ', err);
-// 						}
-// 				});
-// 		}
-// });
-// console.log("login js found");
-
-// Template.userLogin.onRendered(function() {
-// 	// $('login-sign-in-link').addClass('btn');
-// 	$('#login-sign-in-link').addClass('btn-primary');
-// 	console.log("classes added");
-// });

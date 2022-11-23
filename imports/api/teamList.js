@@ -11,7 +11,6 @@ Template.teamList.events({
 	// 	$('#delModal').modal('show');		
 	// },
 	// 'click .js-delTeamConfirm': function(){
-	// 	// console.log($('#delModal input[name="del_idTeam"]').val());
 	// 	teamsdb.remove({_id:$('#delModal input[name="del_idTeam"]').val()});
 	// },
 	// 'click .WCTeam': function(event, instance) {

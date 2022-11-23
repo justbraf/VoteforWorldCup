@@ -14,6 +14,8 @@ let fixturesInsert = (args) => {
 }
 
 Meteor.startup(() => {
+	// ranksdb.remove({ _id: "SQNQzm8MZ6gxvSBdp" })
+	// votesdb.remove({ "_id": "s8ycD4AcAkDTCgCoW" })
 	// inject data if db is new
 	if (teamsdb.find().count() == 0) {
 		groups.forEach(team => {
@@ -25,7 +27,6 @@ Meteor.startup(() => {
 			fixturesInsert(fixture)
 		});
 	}
-	// console.log("Fixtures Found", fixturesdb.find().count())
 
 	Meteor.publish('teams', function () {
 		return teamsdb.find({});
@@ -77,6 +78,15 @@ Meteor.methods({
 			})
 	},
 	'usersRegistered'() {
+		let numUsers = Meteor.users.find().count()
+		if (numUsers > 0)
+			return numUsers
 		return "None"
+	},
+	'wipeRanks'() {
+		let rankIds = ranksdb.find()
+		rankIds.forEach(rId => {
+			ranksdb.remove({ _id: rId._id })
+		})
 	}
 })

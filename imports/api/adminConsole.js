@@ -1,4 +1,6 @@
 import { Meteor } from 'meteor/meteor'
+import { Template } from 'meteor/templating'
+import { Session } from 'meteor/session'
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.adminConsole.events({
@@ -13,17 +15,26 @@ Template.adminConsole.events({
 	'click .js-matchAvail': function () {
 		$('#matchAvailField').val(VFWCdb.findOne({}).matchesAvailable);
 	},
-	'click .js-saveAvail': function () {
-		// console.log($('#matchAvailField').val());
+	// 'click .js-saveAvail': function () {
 		// let settings_id = VFWCdb.findOne();
-		// console.log(VFWCdb.find({"_id" : "NHQRvLpuLqvobE8cg"}).count());
-		VFWCdb.update({ _id: "NHQRvLpuLqvobE8cg" }, { $set: { matchesAvailable: Number($('#matchAvailField').val()) } });
+		// VFWCdb.update({ _id: "NHQRvLpuLqvobE8cg" }, { $set: { matchesAvailable: Number($('#matchAvailField').val()) } });
+	// },
+	'click .js-wipeRanks': () => {
+		Meteor.call("wipeRanks")
 	}
 });
 
+Template.adminConsole.helpers({
+	totalUsers: () => {
+		Meteor.call("usersRegistered", (error, result) => {
+			Session.set("numUsers", result)
+		})
+		return Session.get("numUsers")
+	}
+})
+
 Template.admin2.events({
 	'click .js-ma': () => {
-		console.log("bam!")
 		Meteor.call("user.makeAdmin")
 	}
 })

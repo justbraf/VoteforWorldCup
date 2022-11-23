@@ -48,29 +48,26 @@ Template.matchConsole.events({
     // fixturesdb.find({matchNum: {$type: 2}}).forEach( function(x){   
     //   x.matchNum = new Number(x.matchNum);
     //   fixturesdb.save(x);
-    //    // console.log(x._id,x.matchNum);
     // });
   },
-  'click .js-saveMatch': function () {
-    let mNum = parseInt($("#matchNumField").val());
-    let tID1 = teamsdb.findOne({ teamName: $("#teamName1").val() })._id;
-    let tID2 = teamsdb.findOne({ teamName: $("#teamName2").val() })._id;
-    let mDate = $("#matchDateField").val(); //new Date ($("#matchDateField").val());
-    console.log(mNum + " " + tID1 + " " + tID2 + " " + mDate);
-    let result = fixturesdb.find({ matchNum: mNum }).count();
+  // 'click .js-saveMatch': function () {
+  //   let mNum = parseInt($("#matchNumField").val());
+  //   let tID1 = teamsdb.findOne({ teamName: $("#teamName1").val() })._id;
+  //   let tID2 = teamsdb.findOne({ teamName: $("#teamName2").val() })._id;
+  //   let mDate = $("#matchDateField").val(); //new Date ($("#matchDateField").val());
+  //   let result = fixturesdb.find({ matchNum: mNum }).count();
 
-    if (result < 1) {
-      console.log(result + " Adding match.");
-      fixturesdb.insert({ "matchNum": mNum, "teamID1": tID1, "teamID2": tID2, "matchDateTime": mDate });
-    }
-    else {
-      alert("Match Already Exist!");
-    }
-    Template.instance().teamFlag1.set("flag_white2.png");
-    Template.instance().teamFlag2.set("flag_white2.png");
-    $("#matchNumField").val("");
-    $("#teamName1").val("");
-    $("#teamName2").val("");
-    $("#matchDateField").val("");
-  }
+  //   if (result < 1) {
+  //     fixturesdb.insert({ "matchNum": mNum, "teamID1": tID1, "teamID2": tID2, "matchDateTime": mDate });
+  //   }
+  //   else {
+  //     alert("Match Already Exist!");
+  //   }
+  //   Template.instance().teamFlag1.set("flag_white2.png");
+  //   Template.instance().teamFlag2.set("flag_white2.png");
+  //   $("#matchNumField").val("");
+  //   $("#teamName1").val("");
+  //   $("#teamName2").val("");
+  //   $("#matchDateField").val("");
+  // }
 });

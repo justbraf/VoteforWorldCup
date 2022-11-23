@@ -98,8 +98,6 @@ Template.matchResults.events({
 // 	'dblclick .js-editMatch': function(event){
 // 		let mId = $(event.currentTarget).data('id');
 // 		let mData = $(event.currentTarget).val();
-// 		console.log(mId);
-// 		console.log(mData);
 // 		fixturesdb.update({_id: mId}, {$set:{matchDateTime: mData}});
 // 	}
 // });

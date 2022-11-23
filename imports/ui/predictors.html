@@ -1,22 +1,9 @@
 <template name="predictor">
 	<div class="row mt-5 justify-content-center">
-		<div class="col-3 text-center">
-			<h4 class="display-4">Points</h4>
-			<div class="boxedIn">
-				<h5 class="display-2">{{userPoints}}</h5>
-			</div>
-		</div>
-		<div class="col-5 text-center">
-			<h4 class="display-4">Predictions</h4>
-			<div class="boxedIn">
-				<h5 class="display-2">{{predictionsCorrect}}/{{predictionsCounted}} </h5>
-			</div>
-		</div>
-		<div class="col-3 text-center">
-			<h4 class="display-4">Rank</h4>
-			<div class="boxedIn">
-				<h5 class="display-2">{{usersRank}}</h5>
-			</div>
+		<div class="col-8">
+			<p class="fs-3">You are ranked {{usersRank}}<span class="fs-6 align-top">{{superScript}}</span></p>
+			<p class="fs-3">You've earned {{userPoints}} points</p>
+			<p class="fs-3">You made {{predictionsCorrect}} correct predictions out of {{predictionsCounted}}</p>
 		</div>
 	</div>
 </template>
