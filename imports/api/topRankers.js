@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating'
+
 Template.topRankers.helpers({
   theRankers: function () {
     return ranksdb.find({}, { sort: { 'ranked': 1 }, limit: 3 });

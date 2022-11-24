@@ -1,13 +1,10 @@
-
-
 import './layout.html';
 import './error404.html'
-import './introduction.html';
-import './winner.html'
+
 import './topRankers.html'
+import '../api/topRankers.js'
+
 import './matchResults.html'
-import './predictors.html';
-import './delTeamModal.html'
 
 import './adminConsole.html';
 import '../api/adminConsole.js';
@@ -41,8 +38,8 @@ import './setGoals.html'
 import './setGoals2.html'
 import '../api/setGoals.js'
 
+import './predictors.html';
 import '../api/predictors.js';
-import '../api/winner.js'
 
 import "./acctManager.html"
 import "../api/acctManager.js"
@@ -52,3 +49,10 @@ import '../api/allRankers.js'
 
 import './viewVotes.html'
 import '../api/viewVotes.js'
+
+import './winner.html'
+import '../api/winner.js'
+
+import './navBar.html'
+import './introduction.html';
+// import './delTeamModal.html'

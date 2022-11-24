@@ -11,7 +11,6 @@ checkCorrectPredictions = (uId) => {
 }
 
 systemRankings = () => {
-	console.debug("executing System Rankings")
 	//function scores points for each prediction for all users
 	totalIt = (mId) => {
 		let prediPoints = 0;
