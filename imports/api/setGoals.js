@@ -1,3 +1,6 @@
+import { Template } from 'meteor/templating';
+// import "./predictors.js"
+
 Template.setGoals.events({
   'click .js-setGoals': function () {
     let mId = $('#setGoalsModal input[name="matchID"]').val();

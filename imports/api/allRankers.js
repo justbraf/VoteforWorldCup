@@ -3,9 +3,23 @@ Template.allRankers.helpers({
     return ranksdb.find({}, { sort: { 'ranked': 1 } });
   },
   predictorsName: function () {
-    return Meteor.users.findOne({ "_id": this.userID }, { fields: { "profile.name": 1 } }).profile.name;
+    let userData = "Anonymous"
+    let result = Meteor.users.findOne({ "_id": this.userID });
+    if (result.profile && result.profile.name) {
+      userData = result.profile.name
+    }
+    else if (result.username) {
+      userData = result.username
+    }
+    else if (result.emails) {
+      userData = result.emails[0].address
+    }
+    return userData
   },
   theirPoints: function () {
-    return ranksdb.findOne({ "_id": this.userID }).totalPoints;
+    let result = ranksdb.findOne({ "userID": this.userID })
+    if (result)
+      return result.totalPoints
+    return "?"
   }
 });

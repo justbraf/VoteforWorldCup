@@ -1,64 +1,69 @@
 <template name="adminConsole">
-	<div class="row justify-content-center">
-		<div class="col-md-3 text-center">
-			<h3>Admin Console</h3>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-6">
-			<p class="fs-6">Total Registered Users: {{totalUsers}}</p>
-			<button class="btn btn-danger js-wipeRanks">Wipe Ranks</button>
-		</div>
-	</div>
-	<div class="row mt-3 justify-content-center">
-		<div class="col-lg-4 text-center">
-			<a class="btn btn-info js-teams">Team Management</a>
-		</div>
-		<div class="col-lg-4 text-center">
-			<a class="btn btn-info js-matches">Match Management</a>
-		</div>
-		<div class="row justify-content-center mt-3">
-			<div class="col-lg-4 text-center">
-				<a href="" class="btn btn-info js-matchAvail" data-bs-toggle="modal" data-bs-target="#matchAvailModal">Set
-					Matches</a>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-3 text-center">
+				<h3>Admin Console</h3>
 			</div>
 		</div>
-		<!-- Modal -->
-		<div class="modal fade" id="matchAvailModal" tabindex="-1" role="dialog" aria-labelledby="matchAvailModalLabel"
-			aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="matchAvailModalLabel">Set Available Matches</h5>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="container-fluid">
-								<div class="row justify-content-center mt-3">
-									<div class="col-lg-7">
-										<div class="form-group">
-											<div class="input-group mb-3">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="basic-addon1">Matches Available</span>
+		<div class="row">
+			<div class="col-lg-6">
+				<p class="fs-3">Total Registered Users: {{totalUsers}}</p>
+				<button class="btn btn-danger js-wipeRanks">Wipe Ranks</button>
+				<button class="btn btn-danger js-wipePoints">Wipe Points</button>
+			</div>
+		</div>
+		<div class="row mt-3 justify-content-center">
+			<div class="col-lg-4 text-center">
+				<a class="btn btn-info js-teams">Team Management</a>
+			</div>
+			<div class="col-lg-4 text-center">
+				<a class="btn btn-info js-matches">Match Management</a>
+			</div>
+			<div class="row justify-content-center mt-3">
+				<div class="col-lg-4 text-center">
+					<a href="" class="btn btn-info js-matchAvail" data-bs-toggle="modal" data-bs-target="#matchAvailModal">Set
+						Matches</a>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="matchAvailModal" tabindex="-1" role="dialog" aria-labelledby="matchAvailModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="matchAvailModalLabel">Set Available Matches</h5>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="container-fluid">
+									<div class="row justify-content-center mt-3">
+										<div class="col-lg-7">
+											<div class="form-group">
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" id="basic-addon1">Matches Available</span>
+													</div>
+													<input type="text" id="matchAvailField" class="form-control" aria-label="matchAvail"
+														aria-describedby="basic-addon1">
 												</div>
-												<input type="text" id="matchAvailField" class="form-control" aria-label="matchAvail"
-													aria-describedby="basic-addon1">
 											</div>
 										</div>
 									</div>
-								</div>
-							</div> <!-- /container -->
-						</form>
-					</div> <!-- /modal-body -->
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary js-saveAvail" data-bs-dismiss="modal">Save changes</button>
+								</div> <!-- /container -->
+							</form>
+						</div> <!-- /modal-body -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary js-saveAvail" data-bs-dismiss="modal">Save changes</button>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div> <!-- /modal -->
+			</div> <!-- /modal -->
+		</div>
+		{{> allRankers}}
+		<hr>
+		{{> viewVotes}}
 	</div>
-	{{> allRankers}}
 </template>
 
 <template name="admin2">

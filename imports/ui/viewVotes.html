@@ -1,0 +1,37 @@
+<template name="viewVotes">
+  <div class="row">
+    <div class="col">
+      {{totalVotes}} Votes
+    </div>
+  </div>
+  {{#each allVotes}}
+  <div class="row js-delVote boxedIn mt-3" id="{{_id}}">
+    <div class="col-1">
+      {{@index}}
+    </div>
+    <div class="col-3">
+      <p>match: {{matchID}}</p>
+    </div>
+    <div class="col-3">
+      <p>user: {{userID}}</p>
+    </div>
+    <div class="col-3">
+      <p>team: {{teamName teamID}}</p>
+    </div>
+    <div class="col-2">
+      <p>points: {{points}}</p>
+    </div>
+    <div class="col">
+      votesdb.update({<br>
+        _id: "{{_id}}"<br>
+      },{<br>
+        $set:{<br>
+          matchID:"{{matchID}}",<br>
+          userID: "{{userID}}",<br>
+          teamID: "{{teamID}}"<br>
+        }<br>
+      }) 
+    </div>
+  </div>
+  {{/each}}
+</template>

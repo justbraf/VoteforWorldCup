@@ -1,7 +1,7 @@
 <template name="allRankers">
   <div class="row justify-content-center mt-5 mb-3">
-    <div class="col-5">
-      <h2 class="display-5">All Ranking Predictors</h2>
+    <div class="col-6 text-center">
+      <p class="fs-1">All Ranking Predictors</p>
     </div>
   </div>
   {{#each theRankers}}
@@ -10,16 +10,16 @@
 				<h5 class="display-6 text-center">#{{ranked}}</h5>
 				<h5 class="display-6 text-center">{{predictorsName}}</h5>
 			</div> -->
-    <div class="col-1">
+    <div class="col-2 text-center">
       <!-- d-block d-sm-none -->
-      <h5 class="display-6 text-left">#{{ranked}}</h5>
+      <p class="fs-3 text-left">#{{ranked}}</p>
     </div>
-    <div class="col-2">
-      <h5 class="display-6 text-left">{{predictorsName}}</h5>
+    <div class="col-4 text-center">
+      <p class="fs-3 text-left">{{predictorsName}}</p>
     </div>
-    <div class="col-1">
+    <div class="col-2 text-center">
       <!-- d-block d-sm-none -->
-      <h5 class="display-6 text-left">{{theirPoints}}&nbsp;points</h5>
+      <p class="fs-3 text-left">{{theirPoints}}&nbsp;points</p>
     </div>
   </div>
   {{/each}}

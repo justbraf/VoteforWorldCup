@@ -19,8 +19,11 @@ Template.adminConsole.events({
 		// let settings_id = VFWCdb.findOne();
 		// VFWCdb.update({ _id: "NHQRvLpuLqvobE8cg" }, { $set: { matchesAvailable: Number($('#matchAvailField').val()) } });
 	// },
-	'click .js-wipeRanks': () => {
+	'dblclick .js-wipeRanks': () => {
 		Meteor.call("wipeRanks")
+	},
+	'dblclick .js-wipePoints': () => {
+		Meteor.call("wipePoints")
 	}
 });
 

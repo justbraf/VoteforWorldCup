@@ -5,7 +5,6 @@ import './error404.html'
 import './introduction.html';
 import './winner.html'
 import './topRankers.html'
-import './allRankers.html'
 import './matchResults.html'
 import './predictors.html';
 import './delTeamModal.html'
@@ -47,3 +46,9 @@ import '../api/winner.js'
 
 import "./acctManager.html"
 import "../api/acctManager.js"
+
+import './allRankers.html'
+import '../api/allRankers.js'
+
+import './viewVotes.html'
+import '../api/viewVotes.js'

@@ -56,7 +56,7 @@ Meteor.startup(() => {
 Meteor.publish('userData', function () {
 	if (this.userId) {
 		return Meteor.users.find({}, { //_id: this.userId
-			fields: { services: 1, "profile.name": 1 }
+			fields: { username: 1, profile: 1, emails: 1 }
 		});
 	} else {
 		this.ready();
@@ -88,5 +88,19 @@ Meteor.methods({
 		rankIds.forEach(rId => {
 			ranksdb.remove({ _id: rId._id })
 		})
+	},
+	'wipePoints'() {
+		let votes = votesdb.find()
+		votes.forEach(vote => {
+			votesdb.update(
+				{ _id: vote._id },
+				{
+					$unset:
+						{ points: 1 }
+				})
+		})
+	},
+	"delVote"(vId) {
+		votesdb.remove({ _id: vId })
 	}
 })

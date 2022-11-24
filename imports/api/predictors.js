@@ -2,18 +2,16 @@ import { Template } from 'meteor/templating';
 
 // function computes correct number of predictions made
 checkCorrectPredictions = (uId) => {
-	let predCorrect = 0;
-	let results = votesdb.find({ $and: [{ 'userID': uId }, { 'points': { $exists: true } }] });
-	results.forEach((preds) => {
-		let goalCheck = goalsdb.find({ 'matchID': preds.matchID });
-		if (goalCheck.fetch()[0].score != goalCheck.fetch()[1].score) {
-			predCorrect++;
-		}
-	});
-	return predCorrect;
+	return votesdb.find({
+		$and: [
+			{ 'userID': uId },
+			{ 'points': { $exists: true } }
+		]
+	}).count()
 }
 
 systemRankings = () => {
+	console.debug("executing System Rankings")
 	//function scores points for each prediction for all users
 	totalIt = (mId) => {
 		let prediPoints = 0;
@@ -35,58 +33,81 @@ systemRankings = () => {
 		return prediPoints;
 	}
 
-	let lastUserId = "first";
-	let allUsers = votesdb.find({}, { fields: { 'userID': 1 }, sort: { 'userID': 1 } });
-	allUsers.forEach((oneUser) => {
-		if (oneUser.userID != lastUserId) {
-			lastUserId = oneUser.userID;
-			let predictions = votesdb.find({ $and: [{ 'userID': oneUser.userID }, { 'points': { $exists: false } }] });
-			predictions.forEach((preDocs) => {
-				let goals = goalsdb.find({ 'matchID': preDocs.matchID });
-				if (goals.count() > 1) {
-					if (goals.fetch()[0].score == goals.fetch()[1].score) {
-						if ((preDocs.teamID == goals.fetch()[0].teamID) || (preDocs.teamID == goals.fetch()[1].teamID)) {
-							votesdb.update({ '_id': preDocs._id }, { $set: { 'points': (totalIt(preDocs.matchID) - 1) } });
-						}
-					} else if (goals.fetch()[0].score > goals.fetch()[1].score) {
-						if (preDocs.teamID == goals.fetch()[0].teamID) {
-							votesdb.update({ '_id': preDocs._id }, { $set: { 'points': totalIt(preDocs.matchID) } });
-						}
-					} else {
-						if (preDocs.teamID == goals.fetch()[1].teamID) {
-							votesdb.update({ '_id': preDocs._id }, { $set: { 'points': totalIt(preDocs.matchID) } });
-						}
+	// Compute points for each vote
+	let allVotes = votesdb.find({
+		'points': { $exists: false }
+	})
+	allVotes.forEach((vote) => {
+		if (goalsdb.find({ matchID: vote.matchID }).count()) {
+			let goals = goalsdb.find({ matchID: vote.matchID }).fetch()
+			if (goals[0].score > goals[1].score) {
+				if (goals[0].teamID == vote.teamID)
+					votesdb.update({
+						'_id': vote._id
+					}, {
+						$set: { 'points': totalIt(vote.matchID) }
+					})
+			}
+			else if (goals[0].score < goals[1].score) {
+				if (goals[1].teamID == vote.teamID)
+					votesdb.update({
+						'_id': vote._id
+					}, {
+						$set: { 'points': totalIt(vote.matchID) }
+					})
+			}
+			else
+				votesdb.update({
+					'_id': vote._id
+				}, {
+					$set: { 'points': totalIt(vote.matchID) - 1 }
+				})
+		}
+	})
+
+	// Computes total points for each user that voted
+	allVotes = votesdb.find({
+		'points': { $exists: true }
+	}, {
+		fields: { userID: 1 }
+	}).fetch()
+	let uniqueVotes = []
+	allVotes.forEach(elem => {
+		uniqueVotes.push(elem.userID)
+	})
+	uniqueVotes = [...new Set(uniqueVotes)]
+	uniqueVotes.forEach((voteId) => {
+		let sumVotes = votesdb.find({
+			'points': { $exists: true },
+			userID: voteId
+		}, {
+			fields: { points: 1 }
+		}).fetch()
+		let total = 0
+		sumVotes.forEach(sum => {
+			total += sum.points
+		})
+		let userRank = ranksdb.findOne({ 'userID': voteId })
+		if (!userRank) {
+			ranksdb.insert({
+				userID: voteId,
+				totalPoints: total,
+				predictions: checkCorrectPredictions(voteId)
+			})
+		}
+		else {
+			ranksdb.update(
+				{ _id: userRank._id },
+				{
+					$set: {
+						totalPoints: total,
+						predictions: checkCorrectPredictions(voteId)
 					}
-				}
-			});
-		}
-	});
-
-	//function computes total points for each user that voted
-	// let 
-	lastUserId = "first";
-	// let 
-	allUsers = votesdb.find({}, { fields: { 'userID': 1 }, sort: { 'userID': 1 } });
-	allUsers.forEach((oneUser) => {
-		if (oneUser.userID != lastUserId) {
-			lastUserId = oneUser.userID;
-			let myPoints = 0;
-			let results = votesdb.find({ $and: [{ 'userID': oneUser.userID }, { 'points': { $exists: true } }] });
-			if (results.count() > 0) {
-				results.forEach((myVotes) => {
-					myPoints = myPoints + (Number(myVotes.points) ? Number(myVotes.points) : 0);
 				});
-			}
-			let userRankID = ranksdb.find({ 'userID': oneUser.userID });
-			if (userRankID.count() < 1) {
-				ranksdb.insert({ 'userID': oneUser.userID, 'totalPoints': myPoints, 'predictions': checkCorrectPredictions(oneUser.userID) });
-			} else {
-				ranksdb.update({ '_id': userRankID.fetch()[0]._id }, { $set: { 'totalPoints': myPoints, 'predictions': checkCorrectPredictions(oneUser.userID) } });
-			}
 		}
 	});
 
-	// function ranks users based on the total points and their correct predictions
+	// Compute users' rank based on the total points and their correct predictions
 	let rankPos = 0, lastPoints = 1000, lastPredicts = 0;
 	let results = ranksdb.find({}, { sort: { 'totalPoints': -1, 'predictions': -1 } });
 	results.forEach((ranking) => {
@@ -98,7 +119,7 @@ systemRankings = () => {
 			}
 			ranksdb.update({ '_id': ranking._id }, { $set: { 'ranked': rankPos } });
 		}
-	});
+	})
 }
 
 Template.predictor.onRendered(function () {

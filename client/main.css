@@ -76,7 +76,7 @@ hr {
 }
 
 .boxedIn {
-	border: 2px solid white;
+	border: 1px solid white;
 }
 
 .legends {
@@ -114,4 +114,8 @@ hr {
 
 .myCorner {
 	border-radius: 15px;
+}
+
+.js-delVote {
+	cursor: pointer;
 }

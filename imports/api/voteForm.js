@@ -4,11 +4,13 @@ Template.voteForm.events({
 		let mId = $('#voteModal input[name="matchID"]').val();
 		let uId = Meteor.userId();
 		let result = votesdb.find({ $and: [{ matchID: mId }, { userID: uId }] });
-		if (result.count()) {
-			let vId = result.fetch()[0]._id;	
-			votesdb.update({ _id: vId }, { $set: { "teamID": tId } });
-		} else {
+		console.error(result.count())
+		if (!result.count()) {
 			votesdb.insert({ "matchID": mId, "userID": uId, "teamID": tId });
+		} else {
+			let vId = result.fetch()[0]._id;	
+			console.info(tId)
+			votesdb.update({ _id: vId }, { $set: { "teamID": tId } });
 		}
 		$('#voteModal').modal('hide');
 	}
