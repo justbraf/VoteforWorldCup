@@ -59,7 +59,7 @@ systemRankings = () => {
 				votesdb.update({
 					'_id': vote._id
 				}, {
-					$set: { 'points': totalIt(vote.matchID) - 1 }
+					$set: { 'points': 1 }
 				})
 		}
 	})
