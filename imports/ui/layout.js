@@ -53,6 +53,6 @@ import '../api/viewVotes.js'
 import './winner.html'
 import '../api/winner.js'
 
-import './navBar.html'
+// import './navBar.html'
 import './introduction.html';
 // import './delTeamModal.html'
