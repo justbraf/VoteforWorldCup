@@ -5,6 +5,7 @@ import './topRankers.html'
 import '../api/topRankers.js'
 
 import './matchResults.html'
+import '../api/matchResults.js'
 
 import './adminConsole.html';
 import '../api/adminConsole.js';
@@ -26,7 +27,10 @@ import './matchConsole.html'
 import '../api/matchConsole.js'
 
 import './fixtures.html';
-import '../api/fixtures.js';
+// import '../api/fixtures.js';
+
+import './fixture.html'
+import '../api/fixture.js'
 
 import './voteForm.html'
 import '../api/voteForm.js';
@@ -53,6 +57,17 @@ import '../api/viewVotes.js'
 import './winner.html'
 import '../api/winner.js'
 
-// import './navBar.html'
+import './viewUsers.html'
+import '../api/viewUsers.js'
+
+import './viewRanks.html'
+import '../api/viewRanks.js'
+
+import './viewGoals.html'
+import '../api/viewGoals.js'
+
+import './navBar.html'
 import './introduction.html';
+import './stats.html'
+import './about.html'
 // import './delTeamModal.html'

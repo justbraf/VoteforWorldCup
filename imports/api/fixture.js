@@ -1,22 +1,43 @@
-import date from 'date-and-time';
+import { Template } from 'meteor/templating'
+import { Session } from 'meteor/session'
+import date from 'date-and-time'
 
-Template.fixtures.helpers({
+Template.fixture.helpers({
+  mode: (display) => {
+    if (display == "List")
+      Session.set("layout", "List")
+    else if (display == "Scores")
+      Session.set("layout", "Scores")
+  },
   WCMatches: function () {
     // return fixturesdb.find({}, { sort: { matchDate: 1 }, limit: (Number(VFWCdb.findOne({}).matchesAvailable) - (goalsdb.find().count() / 2)), skip: (goalsdb.find().count() / 2) });
-    return fixturesdb.find({}, { sort: { matchDate: 1 } });
-    // return fixturesdb.find({}, {orderby:{matchNum:1}});
+    let result
+    if (Session.get("layout") == "Scores")
+      result = fixturesdb.find({ matchDate: { $lt: Date.now() } }, { sort: { matchDate: -1 } });
+    else
+      result = fixturesdb.find({ matchDate: { $gte: Date.now() } }, { sort: { matchDate: 1 } });
+
+    return result
   },
   teamOneName: function () {
-    return teamsdb.findOne({ grpName: this.group, groupId: this.teamOne }).team;
+    if (teamsdb.findOne({ grpName: this.group, groupId: this.teamOne }))
+      return teamsdb.findOne({ grpName: this.group, groupId: this.teamOne }).team
+    return
   },
   teamTwoName: function () {
-    return teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo }).team;
+    if (teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo }))
+      return teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo }).team
+    return
   },
   matchDateFull: function () {
-    return date.format(new Date(fixturesdb.findOne({ _id: this._id }).matchDate), 'dddd, MMMM DD YYYY');
+    if (this.matchDate)
+      return date.format(new Date(this.matchDate), 'dddd, MMMM DD YYYY')
+    return
   },
   matchTimeFull: function () {
-    return date.format(new Date(fixturesdb.findOne({ _id: this._id }).matchDate), 'h:mm A');
+    if (this.matchDate)
+      return date.format(new Date(this.matchDate), 'h:mm A')
+    return
   },
   userVoted1: function () {
     // set the color of team columns based on user's vote
@@ -47,23 +68,27 @@ Template.fixtures.helpers({
   },
   teamOneGoals: function () {
     let teamOne = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamOne }] })
-    let goals = goalsdb.find({ $and: [{ teamID: teamOne._id }, { matchID: this._id }] });
-    if (goals.count() > 0) {
-      return goals.fetch()[0].score;
+    if (teamOne) {
+      let goals = goalsdb.find({ $and: [{ teamID: teamOne._id }, { matchID: this._id }] });
+      if (goals.count() > 0) {
+        return goals.fetch()[0].score;
+      }
     }
     return "?"
   },
   teamTwoGoals: function () {
     let teamTwo = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamTwo }] })
-    let goals = goalsdb.find({ $and: [{ teamID: teamTwo._id }, { matchID: this._id }] });
-    if (goals.count() > 0) {
-      return goals.fetch()[0].score;
+    if (teamTwo) {
+      let goals = goalsdb.find({ $and: [{ teamID: teamTwo._id }, { matchID: this._id }] });
+      if (goals.count() > 0) {
+        return goals.fetch()[0].score;
+      }
+      return "?"
     }
-    return "?"
   }
 });
 
-Template.fixtures.events({
+Template.fixture.events({
   'click .js-matchVote': function (e) {
     let matchId = e.currentTarget.id;
     let teamData = "ABCDEFGH"

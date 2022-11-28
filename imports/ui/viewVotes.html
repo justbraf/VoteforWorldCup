@@ -1,7 +1,21 @@
 <template name="viewVotes">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       {{totalVotes}} Votes
+    </div>
+    <div class="col">
+      <buttton class="btn btn-info js-byUser">Sort By User</buttton>
+    </div>
+    <div class="col">
+      <buttton class="btn btn-info js-byMatch">Sort By Match</buttton>
+    </div>
+    <div class="col">
+      <buttton class="btn btn-info js-byTeam">Sort By Team</buttton>
     </div>
   </div>
   {{#each allVotes}}
@@ -9,28 +23,28 @@
     <div class="col-1">
       {{@index}}
     </div>
-    <div class="col-3">
-      <p>match: {{matchID}}</p>
+    <div class="col-5">
+      <p>match: {{matchData}}</p>
     </div>
-    <div class="col-3">
-      <p>user: {{userID}}</p>
+    <div class="col-2">
+      <p>user: {{username}}</p>
     </div>
-    <div class="col-3">
-      <p>team: {{teamName teamID}}</p>
+    <div class="col-2">
+      <p>team: {{teamName}}</p>
     </div>
     <div class="col-2">
       <p>points: {{points}}</p>
     </div>
     <div class="col">
-      votesdb.update({<br>
-        _id: "{{_id}}"<br>
+      votesdb.update({
+      _id: "{{_id}}"
       },{<br>
-        $set:{<br>
-          matchID:"{{matchID}}",<br>
-          userID: "{{userID}}",<br>
-          teamID: "{{teamID}}"<br>
-        }<br>
-      }) 
+      $set:{<br>
+      matchID:"{{matchID}}",<br>
+      userID: "{{userID}}",<br>
+      teamID: "{{teamID}}"<br>
+      }
+      })
     </div>
   </div>
   {{/each}}

@@ -1,12 +1,12 @@
 <template name="topRankers">
-	<div class="row justify-content-center mb-3">
+	<div class="row justify-content-start mb-3">
 		<div class="col-auto">
-			<p class="fs-1">Top Ranking Predictors</p>
+			<p class="fs-2">Top Ranking Predictors</p>
 		</div>
 	</div>
-	<div class="row justify-content-center mb-5">
+	<div class="row justify-content-center">
 		{{#each theRankers}}
-		<div class="col-sm-2 d-none d-lg-block">
+		<div class="col-sm-4 d-none d-lg-block">
 			<p class="fs-4 text-center">#{{ranked}}</p>
 			<p class="fs-4 text-center">{{predictorsName}}</p>
 		</div>

@@ -13,20 +13,35 @@
 			</div>
 		</div>
 		<div class="row mt-3 justify-content-center">
-			<div class="col-lg-4 text-center">
+			<!-- <div class="col-lg-4 text-center">
 				<a class="btn btn-info js-teams">Team Management</a>
 			</div>
 			<div class="col-lg-4 text-center">
 				<a class="btn btn-info js-matches">Match Management</a>
+			</div> -->
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-warning js-rankings">Update Rankings</a>
 			</div>
-			<div class="row justify-content-center mt-3">
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-info js-viewUsers">View Users</a>
+			</div>
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-info js-viewVotes">View Votes</a>
+			</div>
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-info js-viewRanks">View Ranks</a>
+			</div>
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-info js-viewGoals">View Goals</a>
+			</div>
+			<!-- <div class="row justify-content-center mt-3">
 				<div class="col-lg-4 text-center">
 					<a href="" class="btn btn-info js-matchAvail" data-bs-toggle="modal" data-bs-target="#matchAvailModal">Set
 						Matches</a>
 				</div>
-			</div>
+			</div> -->
 			<!-- Modal -->
-			<div class="modal fade" id="matchAvailModal" tabindex="-1" role="dialog" aria-labelledby="matchAvailModalLabel"
+			<!-- <div class="modal fade" id="matchAvailModal" tabindex="-1" role="dialog" aria-labelledby="matchAvailModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -49,20 +64,19 @@
 											</div>
 										</div>
 									</div>
-								</div> <!-- /container -->
+								</div> 
 							</form>
-						</div> <!-- /modal-body -->
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<button type="button" class="btn btn-primary js-saveAvail" data-bs-dismiss="modal">Save changes</button>
 						</div>
 					</div>
 				</div>
-			</div> <!-- /modal -->
+			</div>  -->
+			<!-- /modal -->
 		</div>
 		{{> allRankers}}
-		<hr>
-		{{> viewVotes}}
 	</div>
 </template>
 

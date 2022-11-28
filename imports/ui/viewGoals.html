@@ -1,0 +1,35 @@
+<template name="viewGoals">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <p class="fs-4">
+        Matches Played: {{played}}
+      </p>
+    </div>
+    <div class="col">
+      <p class="fs-4">
+        Match Goals Updated: {{goalsSet}}
+      </p>
+    </div>
+  </div>
+  {{#each goals}}
+  <div class="row mb-1">
+    <div class="col">
+      {{_id}}
+    </div>
+    <div class="col">
+      {{matchData}}
+    </div>
+    <div class="col">
+      {{score}}
+    </div>
+    <div class="col">
+      {{teamName}}
+    </div>
+  </div>
+  {{/each}}
+</template>

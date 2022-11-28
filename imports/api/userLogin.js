@@ -1,7 +1,13 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor'
+import { Template } from 'meteor/templating'
+import { Accounts } from 'meteor/accounts-base'
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 // import { Session } from 'meteor/session'
+
+Tracker.autorun(() => {
+	if (!Meteor.userId())
+		FlowRouter.go("index");
+});
 
 showLoginErrorMsg = (eMsg, selector) => {
 	let errDiv = document.querySelector(".errDiv")

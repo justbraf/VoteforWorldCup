@@ -8,14 +8,16 @@ Template.acctManager.helpers({
       return "not logged in"
     let userData = "Anonymous"
     let result = Meteor.user()
-    if (result.profile && result.profile.name) {
-      userData = result.profile.name
-    }
-    else if (result.username) {
-      userData = result.username
-    }
-    else if (result.emails) {
-      userData = result.emails[0].address
+    if (!!result) {
+      if (!!result.profile && !!result.profile.name) {
+        userData = result.profile.name
+      }
+      else if (!!result.username) {
+        userData = result.username
+      }
+      else if (!!result.emails) {
+        userData = result.emails[0].address
+      }
     }
     return userData
   }

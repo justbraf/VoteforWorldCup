@@ -1,9 +1,8 @@
-<template name="matchResults">
-  {{> setGoals}}
-  <!-- 
-  <div class="row justify-content-around">
+<template name="fixture">
+  <div class="row justify-content-around" id="layout{{displayMode}}">
+    {{mode displayMode}}
     {{#each WCMatches}}
-    <div class="col-5 col-sm-5 col-md-8 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
+    <div class="col-5 col-sm-5 col-md-8 col-lg-5 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
       <h4>{{matchDateFull}}</h4>
       <div class="row justify-content-center mb-3">
         <div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
@@ -23,6 +22,5 @@
       <h4>{{matchTimeFull}}</h4>
     </div>
     {{/each}}
-  </div> -->
-  {{> fixture displayMode = "Scores"}}
+  </div>
 </template>

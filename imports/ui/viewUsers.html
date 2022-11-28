@@ -1,0 +1,43 @@
+<template name="viewUsers">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      id
+    </div>
+    <div class="col-2">
+      name
+    </div>
+    <div class="col-2">
+      username
+    </div>
+    <div class="col-3">
+      email
+    </div>
+    <div class="col-2">
+      correct predictions
+    </div>
+  </div>
+  {{#each users}}
+  <div class="row my-2 border-bottom p-2">
+    <div class="col-3">
+      {{_id}}
+    </div>
+    <div class="col-2">
+      {{name}}
+    </div>
+    <div class="col-2">
+      {{username}}
+    </div>
+    <div class="col-3">
+      {{email}}
+    </div>
+    <div class="col-2">
+      {{correctPredictions}}
+    </div>
+  </div>
+  {{/each}}
+</template>

@@ -1,0 +1,36 @@
+<template name="stats">
+  <div class="row">
+    <div class="col-lg-6 pt-5">
+      {{> predictor}}
+    </div>
+    <div class="col-lg-6 pt-5">
+      {{> topRankers}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row mt-5">
+        <div class="col-sm-8">
+          <h4>How to use:</h4>
+          <ul>
+            <li>Click on a match to predict your winning team.</li>
+            <li>Your selected team will be highlighted.</li>
+            <li>You can predict a match up to one day before the match is scheduled to play.</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h4>Points System</h4>
+          <ul>
+            <li>Group Matches: 2 points</li>
+            <li>Round of 16: 3 points</li>
+            <li>Quarter-finals: 5 points</li>
+            <li>Semi-finals: 8 points</li>
+            <li>Third place play-off: 11 points</li>
+            <li>Final: 14 points</li>
+          </ul>
+          <h6>Points earned for matches ending in a draw will be one point less</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

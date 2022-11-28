@@ -1,0 +1,43 @@
+<template name="viewRanks">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-6 text-end">
+      <a href="/adminConsole" class="btn btn-info">Return to Admin Console</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      _id
+    </div>
+    <div class="col-1">
+      predictions
+    </div>
+    <div class="col-1">
+      ranked
+    </div>
+    <div class="col-2">
+      totalPoints
+    </div>
+    <div class="col-2">
+      userID
+    </div>
+  </div>
+  {{#each ranks}}
+  <div class="row">
+    <div class="col-3">
+      {{_id}}
+    </div>
+    <div class="col-1">
+      {{predictions}}
+    </div>
+    <div class="col-1">
+      {{ranked}}
+    </div>
+    <div class="col-2">
+      {{totalPoints}}
+    </div>
+    <div class="col-2">
+      {{username}}
+    </div>
+  </div>
+  {{/each}}
+</template>
