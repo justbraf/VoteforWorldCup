@@ -48,15 +48,15 @@ Meteor.startup(() => {
 		return goalsdb.find({});
 	});
 
-	Meteor.publish('VFWC', function () {
-		return VFWCdb.find({});
-	});
+	// Meteor.publish('VFWC', function () {
+	// 	return VFWCdb.find({});
+	// });
 });
 
 Meteor.publish('userData', function () {
 	if (this.userId) {
 		return Meteor.users.find({}, { //_id: this.userId
-			fields: { username: 1, profile: 1, emails: 1 }
+			fields: { username: 1, profile: 1, services: 1, emails: 1 }
 		});
 	} else {
 		this.ready();
@@ -77,6 +77,14 @@ Meteor.methods({
 				}
 			})
 	},
+	// 'user.allData'() {
+	// 	// check(uId, String)
+	// 	if (!this.userId) {
+	// 		throw new Meteor.Error("Not Authorized")
+	// 	}
+	// 	// console.info(Meteor.users.find().fetch())
+	// 	return Meteor.users.find().fetch()
+	// },
 	'usersRegistered'() {
 		let numUsers = Meteor.users.find().count()
 		if (numUsers > 0)
@@ -102,5 +110,50 @@ Meteor.methods({
 	},
 	"delVote"(vId) {
 		votesdb.remove({ _id: vId })
+	},
+	'calcTeamPoints'() {
+		// How are FIFA World Cup points calculated ?
+		// Each nation gets three points for a win, one point for a draw and zero points for a defeat.In the event of two or more teams end the group stage with the same points, then the authorities will look at the second rule, which is the goal difference.
+
+		// if date less than dec 2nd
+		// if (Date.now() < 1670036400000){}
+		let teamGroups = "ABCDEFGH"
+		let teams = teamsdb.find().fetch()
+		if (!teams) {
+			throw new Meteor.Error("Error Retrieving Data")
+		}
+		teams.forEach(team => {
+			if (teamGroups.includes(team.grpName)) {
+				let goalDiff = 0
+				let points = 0
+				let goals = goalsdb.find({ teamID: team._id }).fetch()
+				if (!goals) {
+					throw new Meteor.Error("Error Retrieving Data")
+				}
+				goals.forEach(goal => {
+					let opponentGoals = goalsdb.findOne({
+						$and: [
+							{ matchID: goal.matchID },
+							{ teamID: { $ne: team._id } }
+						]
+					})
+					let gd = goal.score - opponentGoals.score
+					goalDiff += (gd)
+					if (gd > 0)
+						points += 3
+					else if (gd == 0)
+						points += 1
+				})
+				teamsdb.update(
+					{ _id: team._id },
+					{
+						$set: {
+							goalDiff: goalDiff,
+							points: points
+						}
+					}
+				)
+			}
+		})
 	}
 })

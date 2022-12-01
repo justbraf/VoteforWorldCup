@@ -33,6 +33,9 @@ Template.adminConsole.events({
 	'click .js-rankings': () => {
 		systemRankings()
 	},
+	'click .js-teamPoints': () => {
+		Meteor.call("calcTeamPoints")
+	},
 	'dblclick .js-wipeRanks': () => {
 		Meteor.call("wipeRanks")
 	},
@@ -89,7 +92,6 @@ matchPoints = (mId) => {
 }
 
 systemRankings = () => {
-
 	// Compute points for each vote
 	let allVotes = votesdb.find({
 		'points': { $exists: false }

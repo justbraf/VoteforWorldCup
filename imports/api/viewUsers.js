@@ -2,6 +2,20 @@ import { Template } from 'meteor/templating'
 
 Template.viewUsers.helpers({
   users: () => {
+    // 'click .js-allUserData': () => {
+    // let theUsers = []
+    // Meteor.call("user.allData", (err, result) => {
+    //   if (err)
+    //     console.error({ error: err.error })
+    //   else {
+    //     result.forEach(usr => {
+    //       theUsers.push(usr)
+    //     })
+    //   }
+    //   console.info({ userlist: theUsers })
+    //   return theUsers
+    // })
+    // },
     return Meteor.users.find()
   },
   email: function () {
@@ -15,7 +29,7 @@ Template.viewUsers.helpers({
     }
     return userData
   },
-  correctPredictions:function(){
+  correctPredictions: function () {
     return votesdb.find({
       $and: [
         { 'userID': this._id },

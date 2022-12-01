@@ -22,5 +22,11 @@ Template.groupList.helpers({
   },
   GroupH: function () {
     return teamsdb.find({ grpName: { $eq: "H" } }, { sort: { groupId: 1 } });
-  }
+  },
+  // showStats: function () {
+  //   console.warn({ this: this })
+  //   if (!!this.goalDiff || !!this.points)
+  //     return true
+  //   return false
+  // }
 });

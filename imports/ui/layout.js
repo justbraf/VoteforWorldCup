@@ -13,9 +13,6 @@ import '../api/adminConsole.js';
 import './teamConsole.html'
 import '../api/teamConsole.js'
 
-import './teamStats.html'
-import '../api/teamStats.js';
-
 import './teamList.html'
 import '../api/teamList.js';
 

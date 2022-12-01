@@ -1,20 +1,21 @@
 <template name="teamList">
-  <!-- {{> delTeamModal}} -->
+  <div class="row justify-content-evenly d-none">
+    <div class="col-md-3 text-center">
+      <button class="btn btn-outline-info">Sort Alphabetically</button>
+    </div>
+    <div class="col-md-3 text-center">
+      <button class="btn btn-outline-info">Sort by Points</button>
+    </div>
+  </div>
   <div class="row justify-content-center">
     {{#each WCTeams}}
     <div class="col-6 col-sm-6 col-md-3 text-center mt-5 WCTeam" id={{_id}}>
-      <!-- <div class="row"> -->
-      <!-- <div class="col-md-8"> -->
       <img src="../../{{team}}.png" alt="Flag of {{team}}" class="teamFlagImage">
-      <h4>{{team}}</h4>
-      <!-- <h5>{{teamGroup}}</h5> -->
-      <!-- </div> -->
-      <!-- <div class="col-md-3"> -->
-      <!-- <a class="btn btn-danger js-delTeam"><span aria-hidden="true">&times;</span></a> -->
-      <!-- </div> -->
-      <!-- </div>	 -->
+      <p class="fs-5 mb-0">{{team}}</p>
+      {{#if showStats}}
+      <p class="fs-6 mb-0">GD: {{goalDiff}}&nbsp;&nbsp;&nbsp;Points: {{points}}</p>
+      {{/if}}
     </div>
     {{/each}}
   </div>
-  <!-- {{> teamStats}} -->
 </template>

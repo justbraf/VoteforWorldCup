@@ -2,5 +2,8 @@
   <div class="col-md-6 col-lg-3 col-xl-3 text-center mt-3" id={{_id}}>
     <img src="../../{{team}}.png" alt="Flag of {{team}}" class="teamFlagImage">
     <h4>{{team}}</h4>
+    {{! #if showStats}}
+    <p class="fs-6 mb-0">GD: {{goalDiff}}&nbsp;&nbsp;&nbsp;Points: {{points}}</p>
+    {{! /if}}
   </div>
 </template>
