@@ -25,6 +25,7 @@ Template.setGoals.events({
     }
     $('#teamGoals1').val(0);
     $('#teamGoals2').val(0);
+    // systemRankings();
   }
 });
 
@@ -45,5 +46,6 @@ Template.setGoals2.events({
     });
     $('#teamGoals12').val(0);
     $('#teamGoals22').val(0);
+    // systemRankings();
   }
 });
