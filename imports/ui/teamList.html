@@ -7,10 +7,10 @@
       <button class="btn btn-outline-info">Sort by Points</button>
     </div>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-start">
     {{#each WCTeams}}
-    <div class="col-6 col-sm-6 col-md-3 text-center mt-5 WCTeam" id={{_id}}>
-      <img src="../../{{team}}.png" alt="Flag of {{team}}" class="teamFlagImage">
+    <div class="col-6 col-md-3 col-lg-2 text-center mt-5 WCTeam" id={{_id}}>
+      <img src="../../{{team}}.png" alt="Flag of {{team}}" class="w-100 border border-1">
       <p class="fs-5 mb-0">{{team}}</p>
       {{#if showStats}}
       <p class="fs-6 mb-0">GD: {{goalDiff}}&nbsp;&nbsp;&nbsp;Points: {{points}}</p>

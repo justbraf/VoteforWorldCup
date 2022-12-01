@@ -1,97 +1,83 @@
 <template name="groupList">
-	<div class="row mt-5">
-		<div class="col-md-11">
+	<div class="row">
+		<div class="col-xl-6 mb-5">
 			<h2>Group A</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupA}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupA}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group B</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupB}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupB}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group C</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupC}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupC}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group D</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupD}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupD}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group E</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupE}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupE}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group F</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupF}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupF}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group G</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupG}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupG}}
-			{{> groupListSection}}
-		{{/each}}
-	</div>
 
-	<div class="row mt-5">
-		<div class="col-md-11">
+		<div class="col-xl-6 mb-3">
 			<h2>Group H</h2>
 			<hr>
+			<div class="row justify-content-center">
+				{{#each GroupH}}
+				{{> groupListSection}}
+				{{/each}}
+			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		{{#each GroupH}}
-			{{> groupListSection}}
-		{{/each}}
 	</div>
 </template>
