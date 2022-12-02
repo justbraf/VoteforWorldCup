@@ -4,6 +4,7 @@ import '../lib/collections.js';
 import '../imports/startup/accounts-external.js';
 import '../imports/startup/groups.js'
 import '../imports/startup/groupMatches.js'
+import '../imports/startup/groupMatchesWinners.js'
 
 let teamInsert = (args) => {
 	teamsdb.insert(args);
@@ -17,6 +18,13 @@ Meteor.startup(() => {
 	// ranksdb.remove({ _id: "SQNQzm8MZ6gxvSBdp" })
 	// votesdb.remove({ "_id": "s8ycD4AcAkDTCgCoW" })
 	// inject data if db is new
+	fixturesdb.update(
+		{ "_id": "FcF8GXqy2evbwg9eD" },
+		{
+			$set:
+				{ "teamTwo": 1 }
+		})
+
 	if (teamsdb.find().count() == 0) {
 		groups.forEach(team => {
 			teamInsert(team)
@@ -24,6 +32,11 @@ Meteor.startup(() => {
 	}
 	if (fixturesdb.find().count() == 0) {
 		groupMatches.forEach(fixture => {
+			fixturesInsert(fixture)
+		});
+	}
+	if (fixturesdb.find().count() <=48) {
+		groupMatchesWinners.forEach(fixture => {
 			fixturesInsert(fixture)
 		});
 	}
