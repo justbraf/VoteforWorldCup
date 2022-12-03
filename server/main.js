@@ -4,7 +4,7 @@ import '../lib/collections.js';
 import '../imports/startup/accounts-external.js';
 // import '../imports/startup/groups.js'
 // import '../imports/startup/groupMatches.js'
-import '../imports/startup/groupMatchesWinners.js'
+// import '../imports/startup/groupMatchesWinners.js'
 
 let teamInsert = (args) => {
 	teamsdb.insert(args);
@@ -35,11 +35,11 @@ Meteor.startup(() => {
 	// 		fixturesInsert(fixture)
 	// 	});
 	// }
-	if (fixturesdb.find().count() <= 48) {
-		groupMatchesWinners.forEach(fixture => {
-			fixturesInsert(fixture)
-		});
-	}
+	// if (fixturesdb.find().count() <= 48) {
+	// 	groupMatchesWinners.forEach(fixture => {
+	// 		fixturesInsert(fixture)
+	// 	});
+	// }
 
 	Meteor.publish('teams', function () {
 		return teamsdb.find({});
@@ -138,6 +138,7 @@ Meteor.methods({
 		teams.forEach(team => {
 			if (teamGroups.includes(team.grpName)) {
 				let goalDiff = 0
+				let goalsFor = 0
 				let points = 0
 				let goals = goalsdb.find({ teamID: team._id }).fetch()
 				if (!goals) {
@@ -150,8 +151,9 @@ Meteor.methods({
 							{ teamID: { $ne: team._id } }
 						]
 					})
+					goalsFor += goal.score
 					let gd = goal.score - opponentGoals.score
-					goalDiff += (gd)
+					goalDiff += gd
 					if (gd > 0)
 						points += 3
 					else if (gd == 0)
@@ -161,6 +163,7 @@ Meteor.methods({
 					{ _id: team._id },
 					{
 						$set: {
+							goalsFor: goalsFor,
 							goalDiff: goalDiff,
 							points: points
 						}

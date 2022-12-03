@@ -10,24 +10,35 @@ Template.fixture.helpers({
       Session.set("layout", "Scores")
   },
   WCMatches: function () {
-    // return fixturesdb.find({}, { sort: { matchDate: 1 }, limit: (Number(VFWCdb.findOne({}).matchesAvailable) - (goalsdb.find().count() / 2)), skip: (goalsdb.find().count() / 2) });
     let result
     if (Session.get("layout") == "Scores")
       result = fixturesdb.find({ matchDate: { $lt: Date.now() } }, { sort: { matchDate: -1 } });
     else
-      result = fixturesdb.find({ matchDate: { $gte: Date.now() } }, { sort: { matchDate: 1 } });
+      result = fixturesdb.find({ matchDate: { $gte: Date.now() } }, { sort: { matchDate: 1 }, limit: 8 });
     return result
   },
   teamOneName: function () {
     let team = teamsdb.findOne({ grpName: this.group, groupId: this.teamOne })
     if (!!team)
       return team.team
+    let teamGroups = "ABCDEFGH"
+    if (!teamGroups.includes(this.group)) {
+      if (teamGroups.includes(this.teamOne[1]))
+        team = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
+      return team.team
+    }
     return
   },
   teamTwoName: function () {
     let team = teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo })
     if (!!team)
       return team.team
+    let teamGroups = "ABCDEFGH"
+    if (!teamGroups.includes(this.group)) {
+      if (teamGroups.includes(this.teamTwo[1]))
+        team = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
+      return team.team
+    }
     return
   },
   matchDateFull: function () {
@@ -43,7 +54,14 @@ Template.fixture.helpers({
   userVoted1: function () {
     // set the color of team columns based on user's vote
     let result = votesdb.findOne({ $and: [{ matchID: this._id }, { userID: Meteor.userId() }] })
-    let team = teamsdb.findOne({ grpName: this.group, groupId: this.teamOne })
+    let team
+    let teamGroups = "ABCDEFGH"
+    if (teamGroups.includes(this.group)) {
+      team = teamsdb.findOne({ grpName: this.group, groupId: this.teamOne })
+    }
+    else if (teamGroups.includes(this.teamOne[1])) {
+      team = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
+    }
     if (!!result && !!team) {
       if (result.teamID == team._id) {
         return 1
@@ -54,7 +72,14 @@ Template.fixture.helpers({
   userVoted2: function () {
     // set the color of team columns based on user's vote
     let result = votesdb.findOne({ $and: [{ matchID: this._id }, { userID: Meteor.userId() }] })
-    let team = teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo })
+    let team
+    let teamGroups = "ABCDEFGH"
+    if (teamGroups.includes(this.group)) {
+      team = teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo })
+    }
+    else if (teamGroups.includes(this.teamOne[1])) {
+      team = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
+    }
     if (!!result && !!team) {
       if (result.teamID == team._id) {
         return 1
@@ -70,7 +95,14 @@ Template.fixture.helpers({
     }
   },
   teamOneGoals: function () {
-    let teamOne = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamOne }] })
+    let teamOne
+    let teamGroups = "ABCDEFGH"
+    if (teamGroups.includes(this.group)) {
+      teamOne = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamOne }] })
+    }
+    else if (teamGroups.includes(this.teamOne[1])) {
+      teamOne = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
+    }
     if (!!teamOne) {
       let goals = goalsdb.findOne({ $and: [{ teamID: teamOne._id }, { matchID: this._id }] })
       if (!!goals) {
@@ -80,7 +112,14 @@ Template.fixture.helpers({
     return "?"
   },
   teamTwoGoals: function () {
-    let teamTwo = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamTwo }] })
+    let teamTwo
+    let teamGroups = "ABCDEFGH"
+    if (teamGroups.includes(this.group)) {
+      teamTwo = teamsdb.findOne({ $and: [{ grpName: this.group }, { groupId: this.teamTwo }] })
+    }
+    else if (teamGroups.includes(this.teamTwo[1])) {
+      teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
+    }
     if (!!teamTwo) {
       let goals = goalsdb.findOne({ $and: [{ teamID: teamTwo._id }, { matchID: this._id }] })
       if (!!goals) {
@@ -96,11 +135,19 @@ Template.fixture.events({
     let matchId = e.currentTarget.id;
     let teamData = "ABCDEFGH"
     let fixtureData = fixturesdb.findOne({ _id: matchId });
+    let teamOne
+    let teamTwo
     if (teamData.includes(fixtureData.group)) {
       teamData = teamsdb.find({ grpName: fixtureData.group }).fetch()
+      teamOne = teamData.find(el => el.groupId == fixtureData.teamOne)
+      teamTwo = teamData.find(el => el.groupId == fixtureData.teamTwo)
     }
-    let teamOne = teamData.find(el => el.groupId == fixtureData.teamOne)
-    let teamTwo = teamData.find(el => el.groupId == fixtureData.teamTwo)
+    else {
+      if (teamData.includes(fixtureData.teamOne[1])) {
+        teamOne = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
+        teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
+      }
+    }
     let adm
     if (Meteor.user().profile && Meteor.user().profile.isAdmin)
       adm = Meteor.user().profile.isAdmin
