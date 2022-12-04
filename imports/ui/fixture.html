@@ -6,8 +6,12 @@
       <p class="mb-0 fs-4">{{matchDateFull}}</p>
       <div class="row justify-content-center">
         <div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
+          {{#if teamOneName}}
           <img src="../{{teamOneName}}.png" alt="Flag of {{teamOneName}}" class="w-75 border border-1 mt-3">
           <h5>{{teamOneName}}</h5>
+          {{else}}
+          <p class="fs-1 mt-4">?</p>
+          {{/if}}
         </div>
         <div class="col-md-3 text-center">
           <p class="fs-1 mt-4">
@@ -19,8 +23,12 @@
           </p>
         </div>
         <div class="col-md-4 text-center {{#if userVoted2}}votedForTeam{{/if}}">
+          {{#if teamTwoName}}
           <img src="../{{teamTwoName}}.png" alt="Flag of {{teamTwoName}}" class="w-75 border border-1 mt-3">
           <h5>{{teamTwoName}}</h5>
+          {{else}}
+          <p class="fs-1 mt-4">?</p>
+          {{/if}}
         </div>
       </div>
       <p class="mb-1 fs-4">{{matchTimeFull}}</p>

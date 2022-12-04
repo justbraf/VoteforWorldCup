@@ -2,13 +2,37 @@ import { Template } from 'meteor/templating'
 import { Session } from 'meteor/session'
 import date from 'date-and-time'
 
+// Get final natches team data
+getTeamData = (whichTeam) => {
+  let matchWinner
+  let team
+  if (whichTeam[0] == "W")
+    matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: whichTeam })._id })
+  else
+    matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: "W" + whichTeam.substring(1) })._id })
+  if (matchWinner.count() > 0) {
+    if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
+      if (whichTeam[0] == "W")
+        team = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
+      else
+        team = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
+    else
+      if (whichTeam[0] == "W")
+        team = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
+      else
+        team = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
+    if (!!team)
+      return team
+  }
+}
+
 Template.fixture.helpers({
   mode: (display) => {
     if (display == "List") {
       Session.set("displayMode", 1)
       Session.set("layout", [
         { matchDate: { $gte: Date.now() } },
-        { sort: { matchDate: 1 }, limit: 8 }
+        { sort: { matchDate: 1 }, limit: 0 }
       ])
     }
     else if (display == "Scores") {
@@ -34,8 +58,13 @@ Template.fixture.helpers({
         team = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
       if (!!team)
         return team.team
+      else {
+        team = getTeamData(this.teamOne)
+        if (!!team)
+          return team.team
+      }
     }
-    return
+    return false
   },
   teamTwoName: function () {
     let team = teamsdb.findOne({ grpName: this.group, groupId: this.teamTwo })
@@ -47,8 +76,13 @@ Template.fixture.helpers({
         team = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
       if (!!team)
         return team.team
+      else {
+        team = getTeamData(this.teamTwo)
+        if (!!team)
+          return team.team
+      }
     }
-    return
+    return false
   },
   matchDateFull: function () {
     if (this.matchDate)
@@ -75,6 +109,8 @@ Template.fixture.helpers({
     else if (teamGroups.includes(this.teamOne[1])) {
       team = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
     }
+    else
+      team = getTeamData(this.teamOne)
     if (!!result && !!team) {
       if (result.teamID == team._id) {
         return 1
@@ -93,6 +129,8 @@ Template.fixture.helpers({
     else if (teamGroups.includes(this.teamOne[1])) {
       team = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
     }
+    else
+      team = getTeamData(this.teamTwo)
     if (!!result && !!team) {
       if (result.teamID == team._id) {
         return 1
@@ -116,6 +154,8 @@ Template.fixture.helpers({
     else if (teamGroups.includes(this.teamOne[1])) {
       teamOne = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
     }
+    else
+      teamOne = getTeamData(this.teamOne)
     if (!!teamOne) {
       let goals = goalsdb.findOne({ $and: [{ teamID: teamOne._id }, { matchID: this._id }] })
       if (!!goals) {
@@ -133,6 +173,8 @@ Template.fixture.helpers({
     else if (teamGroups.includes(this.teamTwo[1])) {
       teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
     }
+    else
+      teamTwo = getTeamData(this.teamTwo)
     if (!!teamTwo) {
       let goals = goalsdb.findOne({ $and: [{ teamID: teamTwo._id }, { matchID: this._id }] })
       if (!!goals) {
@@ -159,6 +201,26 @@ Template.fixture.events({
       if (teamData.includes(fixtureData.teamOne[1])) {
         teamOne = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
         teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
+      }
+      else {
+        let matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: this.teamOne })._id })
+        if (matchWinner.count() > 0) {
+          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
+            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
+          else
+            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
+        }
+        else
+          alert("Predicting is currently not available.")
+        matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: this.teamTwo })._id })
+        if (matchWinner.count() > 0) {
+          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
+            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
+          else
+            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
+        }
+        else
+          alert("Predicting is currently not available.")
       }
     }
     let adm
