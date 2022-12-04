@@ -4,17 +4,24 @@ import date from 'date-and-time'
 
 Template.fixture.helpers({
   mode: (display) => {
-    if (display == "List")
-      Session.set("layout", "List")
-    else if (display == "Scores")
-      Session.set("layout", "Scores")
+    if (display == "List") {
+      Session.set("displayMode", 1)
+      Session.set("layout", [
+        { matchDate: { $gte: Date.now() } },
+        { sort: { matchDate: 1 }, limit: 8 }
+      ])
+    }
+    else if (display == "Scores") {
+      Session.set("displayMode", 0)
+      Session.set("layout", [
+        { matchDate: { $lt: Date.now() } },
+        { sort: { matchDate: -1 } }
+      ])
+    }
   },
   WCMatches: function () {
     let result
-    if (Session.get("layout") == "Scores")
-      result = fixturesdb.find({ matchDate: { $lt: Date.now() } }, { sort: { matchDate: -1 } });
-    else
-      result = fixturesdb.find({ matchDate: { $gte: Date.now() } }, { sort: { matchDate: 1 }, limit: 8 });
+    result = fixturesdb.find(Session.get("layout")[0], Session.get("layout")[1]);
     return result
   },
   teamOneName: function () {
@@ -25,7 +32,8 @@ Template.fixture.helpers({
     if (!teamGroups.includes(this.group)) {
       if (teamGroups.includes(this.teamOne[1]))
         team = teamsdb.findOne({ grpName: this.teamOne[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamOne[0] - 1) })
-      return team.team
+      if (!!team)
+        return team.team
     }
     return
   },
@@ -37,18 +45,23 @@ Template.fixture.helpers({
     if (!teamGroups.includes(this.group)) {
       if (teamGroups.includes(this.teamTwo[1]))
         team = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
-      return team.team
+      if (!!team)
+        return team.team
     }
     return
   },
   matchDateFull: function () {
     if (this.matchDate)
-      return date.format(new Date(this.matchDate), 'dddd, MMMM DD YYYY')
+      if (Session.get("displayMode"))
+        return date.format(new Date(this.matchDate), 'dddd, MMMM DD YYYY')
+      else
+        return date.format(new Date(this.matchDate), 'D MMM YY')
     return
   },
   matchTimeFull: function () {
     if (this.matchDate)
-      return date.format(new Date(this.matchDate), 'h:mm A')
+      if (Session.get("displayMode"))
+        return date.format(new Date(this.matchDate), 'h:mm A')
     return
   },
   userVoted1: function () {

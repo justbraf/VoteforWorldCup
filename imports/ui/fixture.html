@@ -1,25 +1,29 @@
 <template name="fixture">
-  <div class="row justify-content-around" id="layout{{displayMode}}">
+  <div class="row justify-content-around">
     {{mode displayMode}}
     {{#each WCMatches}}
-    <div class="col-5 col-sm-5 col-md-8 col-lg-5 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
-      <h4>{{matchDateFull}}</h4>
-      <div class="row justify-content-center mb-3">
+    <div class=" col-5 col-sm-5 col-md-8 col-lg-5 col-xl-5 text-center mt-5 matches js-matchVote" id={{_id}}>
+      <p class="mb-0 fs-4">{{matchDateFull}}</p>
+      <div class="row justify-content-center">
         <div class="col-md-4 text-center {{#if userVoted1}}votedForTeam{{/if}}">
-          {{#if showGoals}}<h3>{{teamOneGoals}}</h3>{{/if}}
-          <img src="../{{teamOneName}}.png" alt="Flag of {{teamOneName}}" class="w-100 border border-1 mt-3">
+          <img src="../{{teamOneName}}.png" alt="Flag of {{teamOneName}}" class="w-75 border border-1 mt-3">
           <h5>{{teamOneName}}</h5>
         </div>
         <div class="col-md-3 text-center">
-          <h2 class="display-3 versus">VS</h2>
+          <p class="fs-1 mt-4">
+            {{#if showGoals}}
+            {{teamOneGoals}} - {{teamTwoGoals}}
+            {{else}}
+            VS
+            {{/if}}
+          </p>
         </div>
         <div class="col-md-4 text-center {{#if userVoted2}}votedForTeam{{/if}}">
-          {{#if showGoals}}<h3>{{teamTwoGoals}}</h3>{{/if}}
-          <img src="../{{teamTwoName}}.png" alt="Flag of {{teamTwoName}}" class="w-100 border border-1 mt-3">
+          <img src="../{{teamTwoName}}.png" alt="Flag of {{teamTwoName}}" class="w-75 border border-1 mt-3">
           <h5>{{teamTwoName}}</h5>
         </div>
       </div>
-      <h4>{{matchTimeFull}}</h4>
+      <p class="mb-1 fs-4">{{matchTimeFull}}</p>
     </div>
     {{/each}}
   </div>

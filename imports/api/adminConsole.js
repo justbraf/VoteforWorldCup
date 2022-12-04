@@ -73,21 +73,21 @@ checkCorrectPredictions = (uId) => {
 matchPoints = (mId) => {
 	let prediPoints
 	let teamGroups = "ABCDEFGH"
-	let group = fixturesdb.findOne({ '_id': mId }).group;
-	if (teamGroups.includes(group)) {
+	let fixtureData = fixturesdb.findOne({ '_id': mId }, { fields: { group: 1, matchNum: 1 } });
+	if (teamGroups.includes(fixtureData.group)) {
 		prediPoints = 2;
 	}
-	// else if (mNum < 57) {
-	// 	prediPoints = 3;
-	// } else if (mNum < 61) {
-	// 	prediPoints = 5;
-	// } else if (mNum < 63) {
-	// 	prediPoints = 8;
-	// } else if (mNum < 64) {
-	// 	prediPoints = 11;
-	// } else if (mNum < 65) {
-	// 	prediPoints = 14;
-	// }
+	else if (parseInt(fixtureData.matchNum.substring(1)) < 57) {
+		prediPoints = 3;
+	} else if (parseInt(fixtureData.matchNum.substring(1)) < 61) {
+		prediPoints = 5;
+	} else if (parseInt(fixtureData.matchNum.substring(1)) < 63) {
+		prediPoints = 8;
+	} else if (parseInt(fixtureData.matchNum.substring(1)) < 64) {
+		prediPoints = 11;
+	} else if (parseInt(fixtureData.matchNum.substring(1)) < 65) {
+		prediPoints = 14;
+	}
 	return prediPoints;
 }
 

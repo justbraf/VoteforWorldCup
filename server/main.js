@@ -136,39 +136,41 @@ Meteor.methods({
 			throw new Meteor.Error("Error Retrieving Data")
 		}
 		teams.forEach(team => {
-			if (teamGroups.includes(team.grpName)) {
-				let goalDiff = 0
-				let goalsFor = 0
-				let points = 0
-				let goals = goalsdb.find({ teamID: team._id }).fetch()
-				if (!goals) {
-					throw new Meteor.Error("Error Retrieving Data")
-				}
-				goals.forEach(goal => {
-					let opponentGoals = goalsdb.findOne({
-						$and: [
-							{ matchID: goal.matchID },
-							{ teamID: { $ne: team._id } }
-						]
-					})
-					goalsFor += goal.score
-					let gd = goal.score - opponentGoals.score
-					goalDiff += gd
-					if (gd > 0)
-						points += 3
-					else if (gd == 0)
-						points += 1
-				})
-				teamsdb.update(
-					{ _id: team._id },
-					{
-						$set: {
-							goalsFor: goalsFor,
-							goalDiff: goalDiff,
-							points: points
-						}
+			if (goalsdb.find({ teamID: team._id }).count() <= 3) {
+				if (teamGroups.includes(team.grpName)) {
+					let goalDiff = 0
+					let goalsFor = 0
+					let points = 0
+					let goals = goalsdb.find({ teamID: team._id }).fetch()
+					if (!goals) {
+						throw new Meteor.Error("Error Retrieving Data")
 					}
-				)
+					goals.forEach(goal => {
+						let opponentGoals = goalsdb.findOne({
+							$and: [
+								{ matchID: goal.matchID },
+								{ teamID: { $ne: team._id } }
+							]
+						})
+						goalsFor += goal.score
+						let gd = goal.score - opponentGoals.score
+						goalDiff += gd
+						if (gd > 0)
+							points += 3
+						else if (gd == 0)
+							points += 1
+					})
+					teamsdb.update(
+						{ _id: team._id },
+						{
+							$set: {
+								goalsFor: goalsFor,
+								goalDiff: goalDiff,
+								points: points
+							}
+						}
+					)
+				}
 			}
 		})
 	}
