@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating'
 
 Template.topRankers.helpers({
   theRankers: function () {
-    return ranksdb.find({}, { sort: { 'ranked': 1 }, limit: 3 });
+    return ranksdb.find({}, { sort: { 'ranked': 1, predictions: 1 }, limit: 3 });
   },
   predictorsName: function () {
     let userData = "Anonymous"
