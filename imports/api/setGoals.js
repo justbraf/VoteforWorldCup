@@ -21,34 +21,21 @@ Template.setGoals.events({
         teamTwo = teamsdb.findOne({ grpName: fixtureData.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (fixtureData.teamTwo[0] - 1) })
       }
       else {
-        let matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: fixtureData.teamOne })._id })
-        if (matchWinner.count() > 0) {
-          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
-            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
-          else
-            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
-        }
-        matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: fixtureData.teamTwo })._id })
-        if (matchWinner.count() > 0) {
-          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
-            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
-          else
-            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
-        }
+        teamOne = getTeamData(fixtureData.teamOne)
+        teamTwo = getTeamData(fixtureData.teamTwo)
       }
     }
-    console.warn(teamOne, teamTwo, fixtureData)
     let result = goalsdb.find({ 'matchID': mId });
     if (result.count() < 1) {
-      // goalsdb.insert({ 'matchID': mId, 'teamID': teamOne._id, 'score': tg1 });
-      // goalsdb.insert({ 'matchID': mId, 'teamID': teamTwo._id, 'score': tg2 });
+      goalsdb.insert({ 'matchID': mId, 'teamID': teamOne._id, 'score': tg1 });
+      goalsdb.insert({ 'matchID': mId, 'teamID': teamTwo._id, 'score': tg2 });
     } else {
       result.forEach(function (goalDocs) {
         if (goalDocs.teamID == teamOne._id) {
-          // goalsdb.update({ _id: goalDocs._id }, { $set: { 'score': tg1 } });
+          goalsdb.update({ _id: goalDocs._id }, { $set: { 'score': tg1 } });
         }
         if (goalDocs.teamID == teamTwo._id) {
-          // goalsdb.update({ _id: goalDocs._id }, { $set: { 'score': tg2 } });
+          goalsdb.update({ _id: goalDocs._id }, { $set: { 'score': tg2 } });
         }
       });
     }
