@@ -189,7 +189,7 @@ Template.fixture.events({
   'click .js-matchVote': function (e) {
     let matchId = e.currentTarget.id;
     let teamData = "ABCDEFGH"
-    let fixtureData = fixturesdb.findOne({ _id: matchId });
+    let fixtureData = fixturesdb.findOne({ _id: matchId })
     let teamOne
     let teamTwo
     if (teamData.includes(fixtureData.group)) {
@@ -203,24 +203,32 @@ Template.fixture.events({
         teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
       }
       else {
-        let matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: this.teamOne })._id })
+        let mNum = this.teamOne
+        mNum = "W" + mNum.substring(1)
+        let matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: mNum })._id })
         if (matchWinner.count() > 0) {
           if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
             teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
           else
             teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
         }
-        else
+        else {
           alert("Predicting is currently not available.")
-        matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: this.teamTwo })._id })
+          return
+        }
+        mNum = this.teamTwo
+        mNum = "W" + mNum.substring(1)
+        matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: mNum })._id })
         if (matchWinner.count() > 0) {
           if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
             teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
           else
             teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
         }
-        else
+        else {
           alert("Predicting is currently not available.")
+          return
+        }
       }
     }
     let adm
