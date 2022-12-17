@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { Session } from 'meteor/session'
 import date from 'date-and-time'
@@ -6,10 +7,20 @@ import date from 'date-and-time'
 getTeamData = (whichTeam) => {
   let matchWinner
   let team
-  if (whichTeam[0] == "W")
-    matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: whichTeam })._id })
-  else
-    matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: "W" + whichTeam.substring(1) })._id })
+  if (whichTeam[0] == "W") {
+    let mId = fixturesdb.findOne({ matchNum: whichTeam })
+    if (!!mId)
+      matchWinner = goalsdb.find({ matchID: mId._id })
+    else
+      return
+  }
+  else {
+    let mId = fixturesdb.findOne({ matchNum: "W" + whichTeam.substring(1) })
+    if (!!mId)
+      matchWinner = goalsdb.find({ matchID: mId._id })
+    else
+      return
+  }
   if (matchWinner.count() > 0) {
     if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
       if (whichTeam[0] == "W")
@@ -24,6 +35,7 @@ getTeamData = (whichTeam) => {
     if (!!team)
       return team
   }
+
 }
 
 Template.fixture.helpers({
@@ -203,29 +215,13 @@ Template.fixture.events({
         teamTwo = teamsdb.findOne({ grpName: this.teamTwo[1] }, { sort: { points: -1, goalDiff: -1, goalsFor: -1 }, limit: 1, skip: (this.teamTwo[0] - 1) })
       }
       else {
-        let mNum = this.teamOne
-        mNum = "W" + mNum.substring(1)
-        let matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: mNum })._id })
-        if (matchWinner.count() > 0) {
-          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
-            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
-          else
-            teamOne = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
-        }
-        else {
+        teamOne = getTeamData(this.teamOne)
+        if (!teamOne) {
           alert("Predicting is currently not available.")
           return
         }
-        mNum = this.teamTwo
-        mNum = "W" + mNum.substring(1)
-        matchWinner = goalsdb.find({ matchID: fixturesdb.findOne({ matchNum: mNum })._id })
-        if (matchWinner.count() > 0) {
-          if (matchWinner.fetch()[0].score > matchWinner.fetch()[1].score)
-            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[0].teamID })
-          else
-            teamTwo = teamsdb.findOne({ _id: matchWinner.fetch()[1].teamID })
-        }
-        else {
+        teamTwo = getTeamData(this.teamTwo)
+        if (!teamTwo) {
           alert("Predicting is currently not available.")
           return
         }
