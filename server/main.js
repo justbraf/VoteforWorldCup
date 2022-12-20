@@ -98,6 +98,22 @@ Meteor.methods({
 	// 	// console.info(Meteor.users.find().fetch())
 	// 	return Meteor.users.find().fetch()
 	// },
+	'legendUser'(lId) {
+		let userData = "Anonymous"
+		let result = Meteor.users.findOne({ "_id": lId })
+		if (!!result) {
+			if (!!result.profile && !!result.profile.name) {
+				userData = result.profile.name
+			}
+			else if (!!result.username) {
+				userData = result.username
+			}
+			else if (!!result.emails) {
+				userData = result.emails[0].address
+			}
+		}
+		return userData
+	},
 	'usersRegistered'() {
 		let numUsers = Meteor.users.find().count()
 		if (numUsers > 0)
